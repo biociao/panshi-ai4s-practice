@@ -50,6 +50,7 @@
   var menuBtn = document.querySelector('[data-menu-toggle]');
   var toTop = document.querySelector('[data-to-top]');
   var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav-links a[href^="#"]'));
+  var menuLinks = Array.prototype.slice.call(document.querySelectorAll('.nav-links a'));
   var sections = ['path', 'lectures', 'progress', 'notes', 'resources']
     .map(function (id) { return document.getElementById(id); })
     .filter(Boolean);
@@ -69,7 +70,7 @@
       menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
       menuBtn.setAttribute('aria-label', open ? '关闭导航菜单' : '打开导航菜单');
     });
-    navLinks.forEach(function (a) { a.addEventListener('click', closeMenu); });
+    menuLinks.forEach(function (a) { a.addEventListener('click', closeMenu); });
     document.addEventListener('keydown', function (event) {
       if (event.key === 'Escape') closeMenu();
     });
@@ -82,6 +83,7 @@
   }
 
   function updateActive() {
+    if (!sections.length) return;
     var y = window.scrollY + 130;
     var current = null;
     sections.forEach(function (section) {

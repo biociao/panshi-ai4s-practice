@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>从模型到可复现的科研智能体 · 磐石 AI4S</title>
+  <meta name="description" content="03 + 04 两讲的结构化精读：Harness 的六件事、一次文献检索的时序、ReAct 与 Workflow 的分工、Skill 的三段结构与调用机制。">
+  <meta name="theme-color" content="#17130f">
+  <meta name="author" content="biociao">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/style.css">
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('ai4s-theme');
+        var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        document.documentElement.dataset.theme = theme;
+      } catch (e) {
+        document.documentElement.dataset.theme = 'dark';
+      }
+      document.documentElement.classList.add('js');
+    })();
+  </script>
+</head>
+<body class="page-note">
+  <a class="skip-link" href="#main">跳到正文</a>
+  <header class="nav" id="site-nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="../index.html" aria-label="磐石 AI4S 学习笔记，回到首页">
+        <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
+          <defs>
+            <linearGradient id="brandGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#d9b28c"/><stop offset="1" stop-color="#b08463"/>
+            </linearGradient>
+          </defs>
+          <rect width="64" height="64" rx="12" fill="#231f1a"/>
+          <rect x="1" y="1" width="62" height="62" rx="11" fill="none" stroke="url(#brandGrad)" stroke-opacity=".55"/>
+          <circle cx="32" cy="32" r="14.5" fill="none" stroke="url(#brandGrad)" stroke-width="2.5"/>
+          <circle cx="32" cy="32" r="4" fill="#f6f1e7"/>
+          <circle cx="46" cy="18" r="3.2" fill="url(#brandGrad)"/>
+        </svg>
+        <span class="brand-text"><strong>磐石 AI4S</strong><em>学习笔记</em></span>
+      </a>
+
+      <nav class="nav-links" id="site-menu" aria-label="页面导航">
+        <a href="../index.html#path">学习路线</a>
+        <a href="../index.html#lectures">课程目录</a>
+        <a href="../index.html#progress">学习进度</a>
+        <a href="index.html" class="active" aria-current="page">笔记</a>
+        <a href="../index.html#resources">资料</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a class="repo-link" href="https://github.com/biociao/panshi-ai4s-practice" target="_blank" rel="noopener">GitHub<span aria-hidden="true">↗</span></a>
+        <button class="icon-btn theme-btn" type="button" data-theme-toggle aria-label="切换深浅色主题">
+          <svg class="ico-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a7 7 0 1 0 10.5 10.5Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+          <svg class="ico-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 2v2.4M12 19.6V22M2 12h2.4M19.6 12H22M4.9 4.9l1.7 1.7M17.4 17.4l1.7 1.7M19.1 4.9l-1.7 1.7M6.6 17.4l-1.7 1.7" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+        </button>
+        <button class="icon-btn menu-btn" type="button" data-menu-toggle aria-expanded="false" aria-controls="site-menu" aria-label="打开导航菜单">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+  <main id="main" class="article-main">
+    <div class="wrap article-wrap">
+      <nav class="breadcrumb" aria-label="面包屑">
+      <a href="../index.html">首页</a><span class="sep">/</span>
+      <a href="index.html">笔记</a><span class="sep">/</span>
+      <span aria-current="page">Task1 图文</span>
+    </nav><header class="article-head">
+      <p class="eyebrow">Task 01 · 03 + 04 · 图文笔记</p>
+      <h1>从模型到可复现的科研智能体</h1>
+      <p class="article-meta"><span>更新于 2026 年 11 月 16 日</span><span>约 4,730 字</span><span>约 12 分钟</span><span>9 张图</span></p>
+      <p class="article-source">源文件：<a href="https://github.com/biociao/panshi-ai4s-practice/blob/study/learning/notes/task1/illustrated-notes.md" target="_blank" rel="noopener">GitHub</a> · <a href="index.html">全部笔记</a></p>
+    </header><details class="toc-mobile"><summary>目录</summary><nav class="toc" aria-label="本页目录"><ol><li><a href="#一模型的边界两个硬约束">一、模型的边界：两个硬约束</a></li><li><a href="#二harness把一次对话变成持续的行动">二、Harness：把一次对话变成持续的行动</a></li><li><a href="#三一次行动如何发生时序与循环">三、一次行动如何发生：时序与循环</a></li><li><a href="#四workflow-与-agent一个管保证一个管应变">四、Workflow 与 Agent：一个管保证，一个管应变</a></li><li><a href="#五六个概念的分工">五、六个概念的分工</a></li><li><a href="#六skill把一次成功变成可复用方法">六、Skill：把一次成功变成可复用方法</a></li><li><a href="#七skill-的结构与写法">七、Skill 的结构与写法</a></li><li><a href="#八skill-如何被调用先匹配再加载">八、Skill 如何被调用：先匹配，再加载</a></li><li><a href="#九知识从哪里来凭什么信">九、知识从哪里来，凭什么信</a></li><li><a href="#十把概念串起来deep-research-的一条完整链路">十、把概念串起来：Deep Research 的一条完整链路</a></li><li><a href="#十一总结一套系统的七条原则">十一、总结：一套系统的七条原则</a></li><li><a href="#资料出处与引用声明">资料出处与引用声明</a><ol><li><a href="#1-课件">1. 课件</a></li><li><a href="#2-关键原文引用">2. 关键原文引用</a></li><li><a href="#3-图片出处">3. 图片出处</a></li><li><a href="#4-使用声明">4. 使用声明</a></li><li><a href="#5-参考与引用">5. 参考与引用</a></li></ol></li></ol></nav></details><div class="article-layout"><nav class="toc" aria-label="本页目录"><p class="toc-title">目录</p><ol><li><a href="#一模型的边界两个硬约束">一、模型的边界：两个硬约束</a></li><li><a href="#二harness把一次对话变成持续的行动">二、Harness：把一次对话变成持续的行动</a></li><li><a href="#三一次行动如何发生时序与循环">三、一次行动如何发生：时序与循环</a></li><li><a href="#四workflow-与-agent一个管保证一个管应变">四、Workflow 与 Agent：一个管保证，一个管应变</a></li><li><a href="#五六个概念的分工">五、六个概念的分工</a></li><li><a href="#六skill把一次成功变成可复用方法">六、Skill：把一次成功变成可复用方法</a></li><li><a href="#七skill-的结构与写法">七、Skill 的结构与写法</a></li><li><a href="#八skill-如何被调用先匹配再加载">八、Skill 如何被调用：先匹配，再加载</a></li><li><a href="#九知识从哪里来凭什么信">九、知识从哪里来，凭什么信</a></li><li><a href="#十把概念串起来deep-research-的一条完整链路">十、把概念串起来：Deep Research 的一条完整链路</a></li><li><a href="#十一总结一套系统的七条原则">十一、总结：一套系统的七条原则</a></li><li><a href="#资料出处与引用声明">资料出处与引用声明</a><ol><li><a href="#1-课件">1. 课件</a></li><li><a href="#2-关键原文引用">2. 关键原文引用</a></li><li><a href="#3-图片出处">3. 图片出处</a></li><li><a href="#4-使用声明">4. 使用声明</a></li><li><a href="#5-参考与引用">5. 参考与引用</a></li></ol></li></ol></nav><article class="article-body"><blockquote>
+<p>学习课件：<a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/03_%E7%A7%91%E7%A0%94%E6%99%BA%E8%83%BD%E4%BD%93%E5%AE%9E%E8%AE%AD%EF%BC%88%E4%B8%80%EF%BC%89_%E9%99%88%E5%B8%8C%E9%B8%BF.pdf" rel="noopener" target="_blank">03 讲 PDF</a> · <a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/04_%E7%A7%91%E7%A0%94%E6%99%BA%E8%83%BD%E4%BD%93%E5%AE%9E%E8%AE%AD%EF%BC%88%E4%BA%8C%EF%BC%89_%E5%88%98%E5%AD%90%E7%AC%91.pdf" rel="noopener" target="_blank">04 讲 PDF</a>；原文、图片出处与版权声明见文末「资料出处与引用声明」。</p>
+</blockquote>
+<p>大模型能写、能推理，但它本身并不能持续做事：每次调用都是一次性的，不记事，也不对事实负责。</p>
+<p>而科研任务要求连续、可核查、可复现。把LLM放进科研语境，我们需要的不仅仅是更强的模型，还需要一套运行系统——Harness；而让这套系统越做越稳的，是把成功做法固化而成的Skill。</p>
+<p>理解这两个概念，以及它们与工具、工作流、知识来源的关系，就理解了这本次课程的主干。</p>
+<h2 id="一模型的边界两个硬约束">一、模型的边界：两个硬约束<a aria-label="链接到本节" class="heading-anchor" href="#一模型的边界两个硬约束">#</a></h2>
+<figure class="note-figure"><img alt="模型的两个硬约束：上下文限制与幻觉" decoding="async" height="675" loading="lazy" src="../assets/notes/task1/03-p05.webp" width="1200"/><figcaption>上下文会截断，知识会编造。这两条不是模型的“缺点”，而是它的工作方式。</figcaption></figure>
+
+<p><strong>上下文限制。</strong> 模型每次只看到这次调用拼进去的内容。对话历史、工具说明、检索结果，都要重新拼；拼不下就截断。所以长任务不能指望模型“记住”，必须把状态外置：整理上下文、保存运行记录、把中间结果写成文件。所谓“智能体有记忆”，本质上是 Harness 在每次调用前，把该带的信息重新带进来（03-P5）。</p>
+<p><strong>幻觉。</strong> 大模型的本质是在预测下一个词，而不是在检索数据库。知识有截止时间，但没见过的东西照样答得流畅，所以真假不能靠“读起来像”，必须靠工具取回证据：检索、读文件、跑代码、查数据库。工具的意义不是让模型更聪明，而是让它能接触到自己无法凭空知道的事实（03-P5）。</p>
+<p>这两条分别对应 Harness 的两类职责：一类管上下文，一类管工具与核验。后面的所有设计，几乎都可以从这里推出来。</p>
+<h2 id="二harness把一次对话变成持续的行动">二、Harness：把一次对话变成持续的行动<a aria-label="链接到本节" class="heading-anchor" href="#二harness把一次对话变成持续的行动">#</a></h2>
+<p>Harness（驾驭层）是“承担运行调度、能力扩展、安全约束和效果保障的工程化支持框架”（03-P3）。它做六件事：整理上下文、调用模型、调用工具、保存运行记录、检查权限、控制运行流程（03-P15）。</p>
+<figure class="note-figure"><img alt="Agent = Model + Harness" decoding="async" height="675" loading="lazy" src="../assets/notes/task1/03-p15.webp" width="1200"/><figcaption>用户指令进入 Harness，Harness 把任务与上下文交给模型；模型只回“回答”或“工具请求”，由 Harness 去调工具。</figcaption></figure>
+
+<p>这张图有一个关键约束：<strong>模型不直接碰工具，中间永远隔着 Harness</strong>（据 03-P15 图示）。这不是多此一举。工具调用有副作用，参数可能错，权限可能越界，失败需要重试或降级，过程需要留痕——这些都必须发生在“被约束者”之外。把权限交给模型自检，等于没有权限；把错误处理交给模型即兴发挥，等于没有错误处理。</p>
+<p>可以借用操作系统的类比：模型是 CPU，负责计算；Harness 是操作系统，负责调度、系统调用、权限、日志和中断。CPU 很快，但没有操作系统，它什么任务也完不成。<code>Agent = Model + Harness</code> 说的就是这件事。</p>
+<h2 id="三一次行动如何发生时序与循环">三、一次行动如何发生：时序与循环<a aria-label="链接到本节" class="heading-anchor" href="#三一次行动如何发生时序与循环">#</a></h2>
+<figure class="note-figure"><img alt="一次文献检索的六步时序" decoding="async" height="675" loading="lazy" src="../assets/notes/task1/03-p16.webp" width="1200"/><figcaption>模型发请求，Harness 查权限并调用工具，工具返回结果或错误，结果再回到上下文。</figcaption></figure>
+
+<p>一次工具调用可以拆成六步（03-P16）：</p>
+<pre><code class="language-text">Harness → Model    输入：任务、工具说明、已有记录
+Model   → Harness  生成检索请求：主题、关键词
+Harness → Tool     检查参数和权限，调用检索工具
+Tool    → Harness  返回检索结果，或错误信息
+Harness → Model    将检索结果加入上下文
+Model   → …        生成回答，或继续提出检索请求
+</code></pre>
+<p>三个细节决定了系统好不好用：</p>
+<ul>
+<li><strong>工具说明每次都重新输入。</strong> 模型不记忆工具列表，工具描述写得好不好，直接决定它会不会调、调得对不对。</li>
+<li><strong>权限检查发生在 Harness。</strong> 不在模型，也不在工具内部。</li>
+<li><strong>错误信息也是正常返回值。</strong> 它进入上下文，模型才有机会换路；工具静默失败，模型就可能编一个结果出来。</li>
+</ul>
+<p>这六步循环起来，就是 ReAct（03-P24）：</p>
+<figure class="note-figure"><img alt="ReAct：推理、行动与观察" decoding="async" height="675" loading="lazy" src="../assets/notes/task1/03-p24.webp" width="1200"/><figcaption>推理 → 行动 → 观察 → 再推理。关键不是三个框，而是“观察”回到“推理”的那条回边。</figcaption></figure>
+
+<p>Agent 的“思考”不是一条连续的意识流，而是每一轮根据当前上下文重新构造的判断。下一步做什么，取决于上一轮工具返回了什么。这也是 Agent 与固定流水线的不同之处。</p>
+<p>Harness 在外层给这个循环加三道保险（03-P23）：<strong>有边界</strong>（权限、次数、时间上限，防止死循环和失控成本）、<strong>可中断</strong>（需要人工处理时暂停，并说明原因）、<strong>可恢复</strong>（达到限制时停止并报告进度，而不是静默失败）。</p>
+<h2 id="四workflow-与-agent一个管保证一个管应变">四、Workflow 与 Agent：一个管保证，一个管应变<a aria-label="链接到本节" class="heading-anchor" href="#四workflow-与-agent一个管保证一个管应变">#</a></h2>
+<figure class="note-figure"><img alt="Workflow 与 Agent 运行循环" decoding="async" height="675" loading="lazy" src="../assets/notes/task1/03-p26.webp" width="1200"/><figcaption>左边预先规定步骤与分支，右边在运行时选择下一步。</figcaption></figure>
+
+<p>两者的差别可以压成一张表（03-P26）：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th></th>
+<th>Workflow</th>
+<th>Agent 运行循环</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>决策方式</td>
+<td>预先规定步骤与分支</td>
+<td>运行中选择下一步</td>
+</tr>
+<tr>
+<td>优点</td>
+<td>可控、可测、可复现</td>
+<td>灵活，能处理没预料到的情况</td>
+</tr>
+<tr>
+<td>代价</td>
+<td>预料之外的失败没法绕</td>
+<td>不可预测，可能绕远或发散</td>
+</tr>
+</tbody>
+</table></div>
+<p>两者不是二选一，而是嵌套关系：<strong>外层用 Workflow 固定“必须经过哪几步”，内层每一步用 Agent 循环处理“这一步具体怎么做到”。</strong> 比如文献综述，外层固定“检索 → 筛选 → 阅读 → 写作 → 核验”，内层让 Agent 自己决定用什么关键词、先读哪篇、要不要换数据库。</p>
+<p>可靠性则来自失败设计：关键能力至少留两条路径（搜索工具 ↔ API / 数据库接口）；失败要显式暴露给模型，让它有机会换「备用路线」；Harness 要能降级——先试 A，A 不可用改 B，都不行才报人工。好的 Agent 不是“从不失败”，而是“失败也不怕”（03-P20~P22）。</p>
+<div class="page-break"></div>
+<h2 id="五六个概念的分工">五、六个概念的分工<a aria-label="链接到本节" class="heading-anchor" href="#五六个概念的分工">#</a></h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>概念</th>
+<th>回答的问题</th>
+<th>在系统里的位置</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>模型 Model</td>
+<td>谁在想？</td>
+<td>理解信息、推理、生成内容</td>
+</tr>
+<tr>
+<td>工具 Tool</td>
+<td>能做什么？</td>
+<td>检索、读写文件、运行代码等有副作用的操作</td>
+</tr>
+<tr>
+<td>技能 Skill</td>
+<td>该怎么做？</td>
+<td>完成一类任务的方法、脚本、规则与资源</td>
+</tr>
+<tr>
+<td>工作流 Workflow</td>
+<td>按什么顺序？</td>
+<td>规定步骤与分支，保证必经环节</td>
+</tr>
+<tr>
+<td>Harness</td>
+<td>谁来管？</td>
+<td>整理上下文、调用模型与工具、检查权限、保存记录</td>
+</tr>
+<tr>
+<td>智能体 Agent</td>
+<td>在哪运行？</td>
+<td>感知环境并作用于环境的实体</td>
+</tr>
+</tbody>
+</table></div>
+<p><em>表：六个概念的分工（据 03-P19 整理）。</em></p>
+<p>最容易混的三组：</p>
+<ul>
+<li><strong>Skill ≠ Tool。</strong> Tool 是“能做什么”，Skill 是“该怎么做”。</li>
+<li><strong>Skill ≠ Workflow。</strong> Workflow 管顺序，Skill 管每一步的做法。</li>
+<li><strong>Harness ≠ Agent。</strong> Harness 是设备与制度，Agent 是那个实体。</li>
+</ul>
+<h2 id="六skill把一次成功变成可复用方法">六、Skill：把一次成功变成可复用方法<a aria-label="链接到本节" class="heading-anchor" href="#六skill把一次成功变成可复用方法">#</a></h2>
+<p>一次成功的 Agent 运行，留下的是一条轨迹：用过哪些关键词、筛掉了什么、怎么核验引用。如果轨迹只存在于这次上下文里，下次开新会话就没了。Skill 要做的，就是把这类“做法”从一次性的轨迹里抽出来，写成下次可以直接加载复用的经验。</p>
+<figure class="note-figure"><img alt="MCP 与 Skill：接得上 vs 做得稳" decoding="async" height="675" loading="lazy" src="../assets/notes/task1/04-p12.webp" width="1200"/><figcaption>MCP 让智能体接得上外部服务，Skill 让智能体做得稳。两者都挂在 Harness 下面，是并列的能力来源。</figcaption></figure>
+
+<p><strong>MCP 解决“接得上”。</strong> 课件把它定义为“让智能体以规范的方式接入外部的工具或数据库”（04-P12）。它用规范化的接口，把外部工具、数据库、学术服务接进来。没有 MCP，模型只能靠训练记忆和网页搜索；有了 MCP，它可以查 OpenAlex、Crossref、内部数据库。</p>
+<p><strong>Skill 解决“做得稳”。</strong> 课件把它定义为“把完成任务的步骤、规则和资料，沉淀为可以重复调用的工作流”（04-P12）。它让下一次不必重新摸索。MCP 扩展的是触达范围，Skill 提供的是可复现性。两者不能互相替代：接得上的东西，不一定知道该怎么用；知道该怎么用，也不一定接得上。</p>
+<p>需要注意的是，Skill 也不是单纯的文档，而是给模型的一套 SOP （有时也会加上可执行附件）。举个例子，skill应该确保换一个模型，照着skill也能做出同样质量的结果。如果做不到，那它就还只是一篇说明文档。</p>
+<h2 id="七skill-的结构与写法">七、Skill 的结构与写法<a aria-label="链接到本节" class="heading-anchor" href="#七skill-的结构与写法">#</a></h2>
+<figure class="note-figure"><img alt="SKILL.md 三段解剖" decoding="async" height="675" loading="lazy" src="../assets/notes/task1/04-p14.webp" width="1200"/><figcaption>左边是真实的 SKILL.md，右边是它跑出来的结果。红字标出三段：元数据、工作流程、输出格式。</figcaption></figure>
+
+<p>一个 Skill 就是一个目录，核心只有一个文件：</p>
+<pre><code class="language-text">skills/&lt;skill-name&gt;/
+├── SKILL.md          # 元数据 + 工作流程；唯一且必需的入口
+├── scripts/          # 辅助脚本
+├── references/       # 参考资料
+└── assets/           # 模板、图片等素材
+</code></pre>
+<p>课件原文：“最小可用 Skill 只需要一个 SKILL.md；其余目录随任务需求增加。”（04-P13）</p>
+<p><strong>元数据</strong>是调用时的唯一入口。模型先看到的只有 <code>name</code> 和 <code>description</code>，所以 description 要同时写清三件事：做什么、什么时候用、不做什么。比如（据 04-P14 截图整理）：</p>
+<pre><code class="language-yaml">---
+name: research-question-decomposer
+description: 保留用户的原始科研问题，转述并对齐其真实研究需求，再推荐可用于后续文献检索的子问题；用于文献调研开始前的问题澄清；不生成文献综述。
+---
+</code></pre>
+<p><strong>工作流程</strong>是做法本身。以问题拆解为例：先把用户原话记为 <code>Q0</code>，再转述并对齐需求，重点识别“研究对象 / 想了解或判断什么 / 已给出的时间、场景或范围”，最后推荐 3~5 个可检索子问题，每个只关注一个方面，彼此尽量不重复，合起来能回答原始问题（04-P14）。</p>
+<p>这里有三个可复用的设计手法：</p>
+<ul>
+<li><strong>编号锚点</strong>（<code>Q0</code>、<code>A1</code>）：让后续输出可引用，也让用户能指着说“这条不对”。</li>
+<li><strong><code>[待确认]</code> 分级</strong>：小歧义先标记，只有不同答案会导向完全不同研究方向时，才请求用户介入。</li>
+<li><strong>量化的产出标准</strong>：把“好”写成可检查的约束，而不是“请给出高质量的结果”。</li>
+</ul>
+<p><strong>输出格式</strong>要求给出固定的章节、表格或字段，输出才能被机器检查，也才能被下游消费（04-P14）。一个 Skill 其实是一个接口：<code>description</code> 是索引，<code>workflow</code> 是实现，<code>output format</code> 是契约。</p>
+<h2 id="八skill-如何被调用先匹配再加载">八、Skill 如何被调用：先匹配，再加载<a aria-label="链接到本节" class="heading-anchor" href="#八skill-如何被调用先匹配再加载">#</a></h2>
+<figure class="note-figure"><img alt="Skill 的调用机制" decoding="async" height="675" loading="lazy" src="../assets/notes/task1/04-p15.webp" width="1200"/><figcaption>Harness 只把 name + description 发给模型；命中后才按需加载 SKILL.md 与所需资源。</figcaption></figure>
+
+<p>调用分三步（04-P15）：</p>
+<pre><code class="language-text">用户提出任务
+  → Harness 把任务 + Available Skills（只读 name + description）发给模型
+  → 模型只凭 description 选一个 Skill
+  → Harness 加载 SKILL.md，必要时再加载 scripts/、references/、assets/
+  → 模型按 Skill 执行，输出结果
+</code></pre>
+<p>课件把这套机制叫“自动发现、渐进式披露”（04-P15，原文）。它对写 Skill 有三条直接推论：</p>
+<ol>
+<li><strong>description 是检索键。</strong> 写含糊，永远不会被命中；写过宽，会被无关任务误命中。</li>
+<li><strong>SKILL.md 要短。</strong> 它每次命中都进上下文，大段资料应放进 <code>references/</code>，让模型按需读。</li>
+<li><strong>首屏信息要够用。</strong> 命中后模型只加载 SKILL.md，关键约束如果埋在 references 深处，很可能不会被读到。</li>
+</ol>
+<p>这不是魔法，是检索加上下文预算管理：用最少的 token 找到对的 Skill，再用最少的 token 把做法说清楚。</p>
+<h2 id="九知识从哪里来凭什么信">九、知识从哪里来，凭什么信<a aria-label="链接到本节" class="heading-anchor" href="#九知识从哪里来凭什么信">#</a></h2>
+<p>智能体的知识有三种来源，各有各的边界（04-P28）：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>来源</th>
+<th>强项</th>
+<th>边界</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>模型本身知识</td>
+<td>广、快、无需外部依赖</td>
+<td>有截止时间；会记错题名、作者、年份、DOI；无法保证覆盖率</td>
+</tr>
+<tr>
+<td>联网搜索</td>
+<td>能发现近期论文，可直接打开来源</td>
+<td>片段可能不完整；批量处理能力有限</td>
+</tr>
+<tr>
+<td>MCP（OpenAlex、Crossref、内部库）</td>
+<td>字段规范，适合批量查询与自动化</td>
+<td>数据库也可能缺失或冲突；取决于更新频率</td>
+</tr>
+</tbody>
+</table></div>
+<p>课件留了两个问题：<strong>来源是否真实？从哪里接受的信息？</strong>（04-P30，原文）</p>
+<ul>
+<li><strong>OpenAlex</strong> 是学术知识图谱，适合文献发现、引用分析、趋势分析——像地图，帮你找路。</li>
+<li><strong>Crossref</strong> 是以 DOI 为核心的元数据服务，适合核验文献身份、补全规范题录——像身份证，帮你确认“文献就是这篇”。（两条定义见 04-P31）</li>
+</ul>
+<p>但两者都不等于读过全文。所以虽然工具能降低幻觉，但不能消除错误；核验必须是一个独立步骤，最好还是独立角色。生成的和检查的LLM共享同一个上下文，检查很可能就会变成一种自我确认。</p>
+<h2 id="十把概念串起来deep-research-的一条完整链路">十、把概念串起来：Deep Research 的一条完整链路<a aria-label="链接到本节" class="heading-anchor" href="#十把概念串起来deep-research-的一条完整链路">#</a></h2>
+<figure class="note-figure"><img alt="Deep Research 的三段流程" decoding="async" height="675" loading="lazy" src="../assets/notes/task1/04-p33.webp" width="1200"/><figcaption>明确需求 → 收集信息 → 完成报告；每一段内部都有回路，报告生成还留了人工审核点。</figcaption></figure>
+
+<p>把前面的概念放进一条真实流程，系统就活了（04-P33）：</p>
+<ul>
+<li><strong>需求确认</strong>：把模糊问题变成可检索问题。对话确认、问题发散、确认意图；意图不对就回到发散。这一步对应“问题拆解”Skill。</li>
+<li><strong>信息收集</strong>：当前需求加已有信息，判断缺口，决定是拓宽还是深挖，查询后保存回已有信息。这一步对应检索与筛选 Skill，工具和 MCP 在这里起作用。</li>
+<li><strong>报告生成</strong>：已有信息 → 制定计划 → 人工审核 → 按章节写 → 完成。计划阶段留了人工确认点，这是“核验独立”的具体落点。</li>
+</ul>
+<p>一条链路里，各种东西各就各位：Workflow 规定三段顺序，Skill 提供每段做法，Tool/MCP 取回证据，Harness 管上下文、权限与记录，人负责判断。缺任何一层，流程都会退化成“问模型要一份看起来像样的报告”。</p>
+<div class="page-break"></div>
+<h2 id="十一总结一套系统的七条原则">十一、总结：一套系统的七条原则<a aria-label="链接到本节" class="heading-anchor" href="#十一总结一套系统的七条原则">#</a></h2>
+<p>把整套系统压成一个式子：</p>
+<pre><code class="language-text">可复现的科研智能体
+= 模型
++ Harness（上下文 / 工具 / 权限 / 记录 / 循环）
++ Workflow（必须经过的步骤）
++ Skill（每一步的做法）
++ 核验（来源与结果）
+</code></pre>
+<p>七条原则：</p>
+<ol>
+<li><strong>模型不是系统。</strong> 模型负责想，Harness 负责让“想”变成可约束、可记录、可重复的行动。</li>
+<li><strong>上下文是稀缺资源。</strong> 长任务必须外置状态：整理上下文、保存记录、把中间结果写成文件。</li>
+<li><strong>工具是事实的来源。</strong> 错误信息也是观察，要让模型看见；工具静默失败，模型就会开始瞎编。</li>
+<li><strong>Workflow 管保证，Agent 管应变。</strong> 外层固定必经步骤，内层允许运行时选择。</li>
+<li><strong>Skill 是一种「经验资产」。</strong> description 是索引，workflow 是实现，output format 是契约；判据是别人照着能做对。</li>
+<li><strong>MCP 实现「度量衡」，Skill 确保「鲁棒性」。</strong> 一个解决“够得着”，一个解决“做得好”，不能互相替代。</li>
+<li><strong>信任来自独立核验。</strong> 来源要可指认（DOI、页码、URL），生成与检查不能是同一个上下文。</li>
+</ol>
+<p>再压缩成一句话：<strong>用 Harness 管住模型，用 Workflow 管住顺序，用 Skill 管住方法，用工具和核验管住事实。</strong> 这四件事做到，智能体才从“只能演示”变成“真能干活”。</p>
+<hr/>
+<h2 id="资料出处与引用声明">资料出处与引用声明<a aria-label="链接到本节" class="heading-anchor" href="#资料出处与引用声明">#</a></h2>
+<h3 id="1-课件">1. 课件<a aria-label="链接到本节" class="heading-anchor" href="#1-课件">#</a></h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: center;">讲次</th>
+<th>课件</th>
+<th>讲师</th>
+<th>本文引用页</th>
+<th>出处</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">03</td>
+<td>科研智能体实训（一）：从零开始构建智能体</td>
+<td>陈希鸿</td>
+<td>P3、P5、P12、P15、P16、P19、P20~P26</td>
+<td><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/03_%E7%A7%91%E7%A0%94%E6%99%BA%E8%83%BD%E4%BD%93%E5%AE%9E%E8%AE%AD%EF%BC%88%E4%B8%80%EF%BC%89_%E9%99%88%E5%B8%8C%E9%B8%BF.pdf" rel="noopener" target="_blank">03 讲 PDF</a></td>
+</tr>
+<tr>
+<td style="text-align: center;">04</td>
+<td>科研智能体实训（二）：Skill 的设计与应用</td>
+<td>刘子笑</td>
+<td>P5、P12、P13、P14、P15、P28、P30、P31、P33</td>
+<td><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/04_%E7%A7%91%E7%A0%94%E6%99%BA%E8%83%BD%E4%BD%93%E5%AE%9E%E8%AE%AD%EF%BC%88%E4%BA%8C%EF%BC%89_%E5%88%98%E5%AD%90%E7%AC%91.pdf" rel="noopener" target="_blank">04 讲 PDF</a></td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p>课程：磐石·科学智能（AI for Science）实训营；课程仓库：<a href="https://github.com/TashanGKD/panshi-ai4s-practice" rel="noopener" target="_blank">TashanGKD/panshi-ai4s-practice</a>。
+页码口径：<code>03-P15</code> = 第 03 讲 PDF 第 15 页；与课件页脚印刷页码可能差 1。</p>
+</blockquote>
+<h3 id="2-关键原文引用">2. 关键原文引用<a aria-label="链接到本节" class="heading-anchor" href="#2-关键原文引用">#</a></h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: center;">#</th>
+<th>原文（课件节选）</th>
+<th style="text-align: center;">出处</th>
+<th>链接</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">1</td>
+<td>“Harness（驾驭层）：承担运行调度、能力扩展、安全约束和效果保障的工程化支持框架。”</td>
+<td style="text-align: center;">03-P3</td>
+<td><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/03_%E7%A7%91%E7%A0%94%E6%99%BA%E8%83%BD%E4%BD%93%E5%AE%9E%E8%AE%AD%EF%BC%88%E4%B8%80%EF%BC%89_%E9%99%88%E5%B8%8C%E9%B8%BF.pdf" rel="noopener" target="_blank">03 讲</a></td>
+</tr>
+<tr>
+<td style="text-align: center;">2</td>
+<td>“Agent=Model+Harness（非学术定义）”</td>
+<td style="text-align: center;">03-P12</td>
+<td><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/03_%E7%A7%91%E7%A0%94%E6%99%BA%E8%83%BD%E4%BD%93%E5%AE%9E%E8%AE%AD%EF%BC%88%E4%B8%80%EF%BC%89_%E9%99%88%E5%B8%8C%E9%B8%BF.pdf" rel="noopener" target="_blank">03 讲</a></td>
+</tr>
+<tr>
+<td style="text-align: center;">3</td>
+<td>“整理上下文、调用模型、调用工具、保存运行记录、检查权限、控制运行流程”</td>
+<td style="text-align: center;">03-P15</td>
+<td><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/03_%E7%A7%91%E7%A0%94%E6%99%BA%E8%83%BD%E4%BD%93%E5%AE%9E%E8%AE%AD%EF%BC%88%E4%B8%80%EF%BC%89_%E9%99%88%E5%B8%8C%E9%B8%BF.pdf" rel="noopener" target="_blank">03 讲</a></td>
+</tr>
+<tr>
+<td style="text-align: center;">4</td>
+<td>“检查参数和权限，调用检索工具”</td>
+<td style="text-align: center;">03-P16</td>
+<td><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/03_%E7%A7%91%E7%A0%94%E6%99%BA%E8%83%BD%E4%BD%93%E5%AE%9E%E8%AE%AD%EF%BC%88%E4%B8%80%EF%BC%89_%E9%99%88%E5%B8%8C%E9%B8%BF.pdf" rel="noopener" target="_blank">03 讲</a></td>
+</tr>
+<tr>
+<td style="text-align: center;">5</td>
+<td>“推理、行动与观察（ReAct）”</td>
+<td style="text-align: center;">03-P24</td>
+<td><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/03_%E7%A7%91%E7%A0%94%E6%99%BA%E8%83%BD%E4%BD%93%E5%AE%9E%E8%AE%AD%EF%BC%88%E4%B8%80%EF%BC%89_%E9%99%88%E5%B8%8C%E9%B8%BF.pdf" rel="noopener" target="_blank">03 讲</a></td>
+</tr>
+<tr>
+<td style="text-align: center;">6</td>
+<td>“预先规定步骤与分支” / “运行中选择下一步操作”</td>
+<td style="text-align: center;">03-P26</td>
+<td><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/03_%E7%A7%91%E7%A0%94%E6%99%BA%E8%83%BD%E4%BD%93%E5%AE%9E%E8%AE%AD%EF%BC%88%E4%B8%80%EF%BC%89_%E9%99%88%E5%B8%8C%E9%B8%BF.pdf" rel="noopener" target="_blank">03 讲</a></td>
+</tr>
+<tr>
+<td style="text-align: center;">7</td>
+<td>“AI 来干活，人来判断”</td>
+<td style="text-align: center;">04-P5</td>
+<td><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/04_%E7%A7%91%E7%A0%94%E6%99%BA%E8%83%BD%E4%BD%93%E5%AE%9E%E8%AE%AD%EF%BC%88%E4%BA%8C%EF%BC%89_%E5%88%98%E5%AD%90%E7%AC%91.pdf" rel="noopener" target="_blank">04 讲</a></td>
+</tr>
+<tr>
+<td style="text-align: center;">8</td>
+<td>“MCP 模型上下文协议｜让智能体‘接得上’” / “Skill 技能｜让智能体‘做得稳’”</td>
+<td style="text-align: center;">04-P12</td>
+<td><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/04_%E7%A7%91%E7%A0%94%E6%99%BA%E8%83%BD%E4%BD%93%E5%AE%9E%E8%AE%AD%EF%BC%88%E4%BA%8C%EF%BC%89_%E5%88%98%E5%AD%90%E7%AC%91.pdf" rel="noopener" target="_blank">04 讲</a></td>
+</tr>
+<tr>
+<td style="text-align: center;">9</td>
+<td>“最小可用 Skill 只需要一个 SKILL.md；其余目录随任务需求增加。”</td>
+<td style="text-align: center;">04-P13</td>
+<td><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/04_%E7%A7%91%E7%A0%94%E6%99%BA%E8%83%BD%E4%BD%93%E5%AE%9E%E8%AE%AD%EF%BC%88%E4%BA%8C%EF%BC%89_%E5%88%98%E5%AD%90%E7%AC%91.pdf" rel="noopener" target="_blank">04 讲</a></td>
+</tr>
+<tr>
+<td style="text-align: center;">10</td>
+<td>“先匹配，再加载，再执行” / “自动发现、渐进式披露”</td>
+<td style="text-align: center;">04-P15</td>
+<td><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/04_%E7%A7%91%E7%A0%94%E6%99%BA%E8%83%BD%E4%BD%93%E5%AE%9E%E8%AE%AD%EF%BC%88%E4%BA%8C%EF%BC%89_%E5%88%98%E5%AD%90%E7%AC%91.pdf" rel="noopener" target="_blank">04 讲</a></td>
+</tr>
+<tr>
+<td style="text-align: center;">11</td>
+<td>“来源是否真实？从哪里接受的信息？”</td>
+<td style="text-align: center;">04-P30</td>
+<td><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/04_%E7%A7%91%E7%A0%94%E6%99%BA%E8%83%BD%E4%BD%93%E5%AE%9E%E8%AE%AD%EF%BC%88%E4%BA%8C%EF%BC%89_%E5%88%98%E5%AD%90%E7%AC%91.pdf" rel="noopener" target="_blank">04 讲</a></td>
+</tr>
+<tr>
+<td style="text-align: center;">12</td>
+<td>“OpenAlex：开放的学术知识图谱，用于检索论文、作者、机构、期刊、主题及其引用关系。”</td>
+<td style="text-align: center;">04-P31</td>
+<td><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/04_%E7%A7%91%E7%A0%94%E6%99%BA%E8%83%BD%E4%BD%93%E5%AE%9E%E8%AE%AD%EF%BC%88%E4%BA%8C%EF%BC%89_%E5%88%98%E5%AD%90%E7%AC%91.pdf" rel="noopener" target="_blank">04 讲</a></td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p>表中引文为课件原文节选；分行、标点按阅读需要做了最小整理，语义未改。正文中未加引号的段落为依据相应页码的改写或笔者判断。</p>
+</blockquote>
+<h3 id="3-图片出处">3. 图片出处<a aria-label="链接到本节" class="heading-anchor" href="#3-图片出处">#</a></h3>
+<p>按正文出现顺序：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: center;">图</th>
+<th>内容</th>
+<th style="text-align: center;">出处</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">1</td>
+<td>模型的两个硬约束</td>
+<td style="text-align: center;">03-P5</td>
+</tr>
+<tr>
+<td style="text-align: center;">2</td>
+<td>Agent = Model + Harness</td>
+<td style="text-align: center;">03-P15</td>
+</tr>
+<tr>
+<td style="text-align: center;">3</td>
+<td>文献检索六步时序</td>
+<td style="text-align: center;">03-P16</td>
+</tr>
+<tr>
+<td style="text-align: center;">4</td>
+<td>ReAct 循环</td>
+<td style="text-align: center;">03-P24</td>
+</tr>
+<tr>
+<td style="text-align: center;">5</td>
+<td>Workflow 与 Agent 运行循环</td>
+<td style="text-align: center;">03-P26</td>
+</tr>
+<tr>
+<td style="text-align: center;">6</td>
+<td>MCP 与 Skill</td>
+<td style="text-align: center;">04-P12</td>
+</tr>
+<tr>
+<td style="text-align: center;">7</td>
+<td>SKILL.md 三段解剖</td>
+<td style="text-align: center;">04-P14</td>
+</tr>
+<tr>
+<td style="text-align: center;">8</td>
+<td>Skill 调用机制</td>
+<td style="text-align: center;">04-P15</td>
+</tr>
+<tr>
+<td style="text-align: center;">9</td>
+<td>Deep Research 三段流程</td>
+<td style="text-align: center;">04-P33</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p>以上图片均为上述课件对应页面的截图，仅用于个人学习记录。</p>
+</blockquote>
+<h3 id="4-使用声明">4. 使用声明<a aria-label="链接到本节" class="heading-anchor" href="#4-使用声明">#</a></h3>
+<ul>
+<li>本文为个人学习笔记，不是课程官方材料；课程内容与课件版权归磐石·科学智能实训营及各讲讲师所有。</li>
+<li>文中第三方图表、论文、软件等材料的权利归相应权利人所有。</li>
+<li>本文不转载、不商用；如需引用，请同时标注课程、讲次、讲师与页码。</li>
+<li>本地副本：仓库根目录 <code>pdf/</code> 下的 03、04 讲 PDF（文件名见上方课件表）。</li>
+</ul>
+<h3 id="5-参考与引用">5. 参考与引用<a aria-label="链接到本节" class="heading-anchor" href="#5-参考与引用">#</a></h3>
+<blockquote>
+<p>陈希鸿.《科研智能体实训（一）：从零开始构建智能体》. 磐石·科学智能（AI for Science）实训营课件, 2026.</p>
+<p>刘子笑.《科研智能体实训（二）：Skill 的设计与应用》. 磐石·科学智能（AI for Science）实训营课件, 2026.</p>
+</blockquote></article></div><nav class="article-nav" aria-label="笔记翻页"><a class="next" href="task1-text.html"><span class="label">下一篇</span>Task1 文字</a></nav>
+    </div>
+  </main>
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <div class="footer-brand">
+        <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
+          <defs>
+            <linearGradient id="footGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#d9b28c"/><stop offset="1" stop-color="#b08463"/>
+            </linearGradient>
+          </defs>
+          <rect width="64" height="64" rx="12" fill="#231f1a"/>
+          <rect x="1" y="1" width="62" height="62" rx="11" fill="none" stroke="url(#footGrad)" stroke-opacity=".55"/>
+          <circle cx="32" cy="32" r="14.5" fill="none" stroke="url(#footGrad)" stroke-width="2.5"/>
+          <circle cx="32" cy="32" r="4" fill="#f6f1e7"/>
+          <circle cx="46" cy="18" r="3.2" fill="url(#footGrad)"/>
+        </svg>
+        <div>
+          <strong>磐石 AI4S · 学习笔记</strong>
+          <span>11 讲课程索引与个人学习记录</span>
+        </div>
+      </div>
+      <nav class="footer-links" aria-label="页脚链接">
+        <a href="../index.html#lectures">课程目录</a>
+        <a href="../index.html#progress">学习进度</a>
+        <a href="index.html">笔记</a>
+        <a href="https://github.com/biociao/panshi-ai4s-practice" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+    <div class="wrap footer-bottom">
+      <span>整理 biociao · 更新于 2026-11-16 · 数据来源 learning/progress.md</span>
+      <span>排版 原生 HTML / CSS · 无第三方依赖</span>
+    </div>
+  </footer>
+  <button class="to-top" type="button" data-to-top aria-label="回到页面顶部">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <script src="../assets/app.js" defer></script>
+</body>
+</html>

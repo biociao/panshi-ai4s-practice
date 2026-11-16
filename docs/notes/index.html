@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>学习笔记 · 磐石 AI4S</title>
+  <meta name="description" content="磐石 AI4S 课程笔记索引：Task1 图文/文字笔记、第 11 讲图文资料与学习进度。">
+  <meta name="theme-color" content="#17130f">
+  <meta name="author" content="biociao">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/style.css">
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('ai4s-theme');
+        var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        document.documentElement.dataset.theme = theme;
+      } catch (e) {
+        document.documentElement.dataset.theme = 'dark';
+      }
+      document.documentElement.classList.add('js');
+    })();
+  </script>
+</head>
+<body class="page-note notes-index">
+  <a class="skip-link" href="#main">跳到正文</a>
+  <header class="nav" id="site-nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="../index.html" aria-label="磐石 AI4S 学习笔记，回到首页">
+        <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
+          <defs>
+            <linearGradient id="brandGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#d9b28c"/><stop offset="1" stop-color="#b08463"/>
+            </linearGradient>
+          </defs>
+          <rect width="64" height="64" rx="12" fill="#231f1a"/>
+          <rect x="1" y="1" width="62" height="62" rx="11" fill="none" stroke="url(#brandGrad)" stroke-opacity=".55"/>
+          <circle cx="32" cy="32" r="14.5" fill="none" stroke="url(#brandGrad)" stroke-width="2.5"/>
+          <circle cx="32" cy="32" r="4" fill="#f6f1e7"/>
+          <circle cx="46" cy="18" r="3.2" fill="url(#brandGrad)"/>
+        </svg>
+        <span class="brand-text"><strong>磐石 AI4S</strong><em>学习笔记</em></span>
+      </a>
+
+      <nav class="nav-links" id="site-menu" aria-label="页面导航">
+        <a href="../index.html#path">学习路线</a>
+        <a href="../index.html#lectures">课程目录</a>
+        <a href="../index.html#progress">学习进度</a>
+        <a href="index.html" class="active" aria-current="page">笔记</a>
+        <a href="../index.html#resources">资料</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a class="repo-link" href="https://github.com/biociao/panshi-ai4s-practice" target="_blank" rel="noopener">GitHub<span aria-hidden="true">↗</span></a>
+        <button class="icon-btn theme-btn" type="button" data-theme-toggle aria-label="切换深浅色主题">
+          <svg class="ico-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a7 7 0 1 0 10.5 10.5Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+          <svg class="ico-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 2v2.4M12 19.6V22M2 12h2.4M19.6 12H22M4.9 4.9l1.7 1.7M17.4 17.4l1.7 1.7M19.1 4.9l-1.7 1.7M6.6 17.4l-1.7 1.7" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+        </button>
+        <button class="icon-btn menu-btn" type="button" data-menu-toggle aria-expanded="false" aria-controls="site-menu" aria-label="打开导航菜单">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+  <main id="main" class="article-main">
+    <div class="wrap article-wrap">
+      <nav class="breadcrumb" aria-label="面包屑">
+      <a href="../index.html">首页</a><span class="sep">/</span>
+      <span aria-current="page">笔记</span>
+    </nav>
+
+    <header class="article-head">
+      <p class="eyebrow">笔记索引</p>
+      <h1>学习笔记</h1>
+      <p class="article-lede">每讲一页，只写自己的理解，不抄原文。长文带目录与配图，文末可回到索引；源文件都在 <code>learning/notes</code>，课程原文与课件不在这里重复。</p>
+      <p class="article-meta"><span>4 篇</span><span>2 讲已整理</span><span>更新于 2026 年 11 月 16 日</span></p>
+      <p class="article-source">源目录：<a href="https://github.com/biociao/panshi-ai4s-practice/tree/study/learning/notes" target="_blank" rel="noopener">learning/notes</a> · <a href="../index.html">返回首页</a></p>
+    </header>
+
+    <div class="note-list">
+      <article class="note-entry">
+        <p class="note-entry-kicker">Task 01 · 03 + 04 · 图文笔记</p>
+        <h2><a href="task1-illustrated.html">从模型到可复现的科研智能体</a></h2>
+        <p>03 + 04 两讲的结构化精读：Harness 的六件事、一次文献检索的时序、ReAct 与 Workflow 的分工、Skill 的三段结构与调用机制。</p>
+        <p class="note-entry-meta">约 4,730 字 · 9 张图 · 更新于 2026 年 11 月 16 日 · <a href="https://github.com/biociao/panshi-ai4s-practice/blob/study/learning/notes/task1/task1-illustrated-notes.pdf" target="_blank" rel="noopener">PDF</a></p>
+      </article><article class="note-entry">
+        <p class="note-entry-kicker">Task 01 · 03 + 04 · 文字版</p>
+        <h2><a href="task1-text.html">Task1 学习笔记：科研智能体与 Skill 入门</a></h2>
+        <p>同一份笔记的文字版：表格、页码索引、速查与自测题，适合检索、复制和打印。</p>
+        <p class="note-entry-meta">约 6,258 字 · 更新于 2026 年 11 月 16 日 · <a href="https://github.com/biociao/panshi-ai4s-practice/blob/study/learning/notes/task1/task1-illustrated-notes.pdf" target="_blank" rel="noopener">PDF</a></p>
+      </article><article class="note-entry">
+        <p class="note-entry-kicker">第 11 讲 · 科学智能进阶</p>
+        <h2><a href="11.html">如何构建领域基座模型与 AI Scientist 系统</a></h2>
+        <p>29 节图文资料：领域基座模型、光变序列、SN Clock、StarWhisper 望远镜与 AI Scientist 的实验闭环。</p>
+        <p class="note-entry-meta">约 11,284 字 · 29 张图 · 更新于 2026 年 10 月 9 日 · <a href="https://github.com/biociao/panshi-ai4s-practice/blob/study/pdf/11_%E7%A7%91%E5%AD%A6%E6%99%BA%E8%83%BD%E8%BF%9B%E9%98%B6_%E6%9D%8E%E7%91%80%E6%97%B8.pdf" target="_blank" rel="noopener">PDF</a></p>
+      </article><article class="note-entry">
+        <p class="note-entry-kicker">课程进度</p>
+        <h2><a href="progress.html">学习进度 · 磐石·科学智能实训营</a></h2>
+        <p>11 讲的状态、页码、起止日期与笔记入口，随学习进度更新。</p>
+        <p class="note-entry-meta">约 515 字 · 更新于 2026 年 11 月 16 日</p>
+      </article>
+    </div>
+
+    <div class="article-body">
+      <h2 id="lecture-notes">各讲笔记状态</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>讲次</th><th>课程</th><th>笔记</th></tr></thead>
+          <tbody><tr><td>01</td><td>科学模型实训（一）</td><td><span class="todo">待补</span></td></tr><tr><td>02</td><td>科学模型实训（二）</td><td><span class="todo">待补</span></td></tr><tr><td>03</td><td>科研智能体实训（一）</td><td><a href="task1-illustrated.html">Task1 图文</a> · <a href="task1-text.html">文字版</a></td></tr><tr><td>04</td><td>科研智能体实训（二）</td><td><a href="task1-illustrated.html">Task1 图文</a> · <a href="task1-text.html">文字版</a></td></tr><tr><td>05</td><td>科研智能体实训（三）</td><td><span class="todo">待补</span></td></tr><tr><td>06</td><td>智能体记忆与知识库</td><td><span class="todo">待补</span></td></tr><tr><td>07</td><td>Harness 实训</td><td><span class="todo">待补</span></td></tr><tr><td>08</td><td>磐石应用实训</td><td><span class="todo">待补</span></td></tr><tr><td>09</td><td>端到端闭环（一）</td><td><span class="todo">待补</span></td></tr><tr><td>10</td><td>端到端闭环（二）</td><td><span class="todo">待补</span></td></tr><tr><td>11</td><td>科学智能进阶</td><td><a href="11.html">图文资料</a></td></tr></tbody>
+        </table>
+      </div>
+      <div class="article-callout">
+        <strong>关于生成：</strong>笔记页由 <code>tools/build_notes.py</code> 从 Markdown 生成。修改 <code>learning/notes</code> 或 <code>courses/11-li-yuyang/README.md</code> 后，重新运行脚本并提交 <code>docs/notes</code> 与 <code>docs/assets/notes</code>。尚未动笔的讲次保留模板，不生成空页。
+      </div>
+    </div>
+    </div>
+  </main>
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <div class="footer-brand">
+        <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
+          <defs>
+            <linearGradient id="footGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#d9b28c"/><stop offset="1" stop-color="#b08463"/>
+            </linearGradient>
+          </defs>
+          <rect width="64" height="64" rx="12" fill="#231f1a"/>
+          <rect x="1" y="1" width="62" height="62" rx="11" fill="none" stroke="url(#footGrad)" stroke-opacity=".55"/>
+          <circle cx="32" cy="32" r="14.5" fill="none" stroke="url(#footGrad)" stroke-width="2.5"/>
+          <circle cx="32" cy="32" r="4" fill="#f6f1e7"/>
+          <circle cx="46" cy="18" r="3.2" fill="url(#footGrad)"/>
+        </svg>
+        <div>
+          <strong>磐石 AI4S · 学习笔记</strong>
+          <span>11 讲课程索引与个人学习记录</span>
+        </div>
+      </div>
+      <nav class="footer-links" aria-label="页脚链接">
+        <a href="../index.html#lectures">课程目录</a>
+        <a href="../index.html#progress">学习进度</a>
+        <a href="index.html">笔记</a>
+        <a href="https://github.com/biociao/panshi-ai4s-practice" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+    <div class="wrap footer-bottom">
+      <span>整理 biociao · 更新于 2026-11-16 · 数据来源 learning/progress.md</span>
+      <span>排版 原生 HTML / CSS · 无第三方依赖</span>
+    </div>
+  </footer>
+  <button class="to-top" type="button" data-to-top aria-label="回到页面顶部">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <script src="../assets/app.js" defer></script>
+</body>
+</html>
