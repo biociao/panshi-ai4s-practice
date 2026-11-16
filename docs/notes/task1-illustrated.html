@@ -43,10 +43,9 @@
       </a>
 
       <nav class="nav-links" id="site-menu" aria-label="页面导航">
-        <a href="../index.html#path">学习路线</a>
-        <a href="../index.html#lectures">课程目录</a>
-        <a href="../index.html#progress">学习进度</a>
         <a href="index.html" class="active" aria-current="page">笔记</a>
+        <a href="../index.html#progress">进度</a>
+        <a href="../index.html#sources">课程来源</a>
         <a href="../index.html#resources">资料</a>
       </nav>
 
@@ -71,28 +70,28 @@
     </nav><header class="article-head">
       <p class="eyebrow">Task 01 · 03 + 04 · 图文笔记</p>
       <h1>从模型到可复现的科研智能体</h1>
-      <p class="article-meta"><span>更新于 2026 年 11 月 16 日</span><span>约 4,730 字</span><span>约 12 分钟</span><span>9 张图</span></p>
+      <p class="article-meta"><span>更新于 2026 年 11 月 16 日</span><span>约 4,793 字</span><span>约 12 分钟</span><span>9 处图注</span></p>
       <p class="article-source">源文件：<a href="https://github.com/biociao/panshi-ai4s-practice/blob/study/learning/notes/task1/illustrated-notes.md" target="_blank" rel="noopener">GitHub</a> · <a href="index.html">全部笔记</a></p>
-    </header><details class="toc-mobile"><summary>目录</summary><nav class="toc" aria-label="本页目录"><ol><li><a href="#一模型的边界两个硬约束">一、模型的边界：两个硬约束</a></li><li><a href="#二harness把一次对话变成持续的行动">二、Harness：把一次对话变成持续的行动</a></li><li><a href="#三一次行动如何发生时序与循环">三、一次行动如何发生：时序与循环</a></li><li><a href="#四workflow-与-agent一个管保证一个管应变">四、Workflow 与 Agent：一个管保证，一个管应变</a></li><li><a href="#五六个概念的分工">五、六个概念的分工</a></li><li><a href="#六skill把一次成功变成可复用方法">六、Skill：把一次成功变成可复用方法</a></li><li><a href="#七skill-的结构与写法">七、Skill 的结构与写法</a></li><li><a href="#八skill-如何被调用先匹配再加载">八、Skill 如何被调用：先匹配，再加载</a></li><li><a href="#九知识从哪里来凭什么信">九、知识从哪里来，凭什么信</a></li><li><a href="#十把概念串起来deep-research-的一条完整链路">十、把概念串起来：Deep Research 的一条完整链路</a></li><li><a href="#十一总结一套系统的七条原则">十一、总结：一套系统的七条原则</a></li><li><a href="#资料出处与引用声明">资料出处与引用声明</a><ol><li><a href="#1-课件">1. 课件</a></li><li><a href="#2-关键原文引用">2. 关键原文引用</a></li><li><a href="#3-图片出处">3. 图片出处</a></li><li><a href="#4-使用声明">4. 使用声明</a></li><li><a href="#5-参考与引用">5. 参考与引用</a></li></ol></li></ol></nav></details><div class="article-layout"><nav class="toc" aria-label="本页目录"><p class="toc-title">目录</p><ol><li><a href="#一模型的边界两个硬约束">一、模型的边界：两个硬约束</a></li><li><a href="#二harness把一次对话变成持续的行动">二、Harness：把一次对话变成持续的行动</a></li><li><a href="#三一次行动如何发生时序与循环">三、一次行动如何发生：时序与循环</a></li><li><a href="#四workflow-与-agent一个管保证一个管应变">四、Workflow 与 Agent：一个管保证，一个管应变</a></li><li><a href="#五六个概念的分工">五、六个概念的分工</a></li><li><a href="#六skill把一次成功变成可复用方法">六、Skill：把一次成功变成可复用方法</a></li><li><a href="#七skill-的结构与写法">七、Skill 的结构与写法</a></li><li><a href="#八skill-如何被调用先匹配再加载">八、Skill 如何被调用：先匹配，再加载</a></li><li><a href="#九知识从哪里来凭什么信">九、知识从哪里来，凭什么信</a></li><li><a href="#十把概念串起来deep-research-的一条完整链路">十、把概念串起来：Deep Research 的一条完整链路</a></li><li><a href="#十一总结一套系统的七条原则">十一、总结：一套系统的七条原则</a></li><li><a href="#资料出处与引用声明">资料出处与引用声明</a><ol><li><a href="#1-课件">1. 课件</a></li><li><a href="#2-关键原文引用">2. 关键原文引用</a></li><li><a href="#3-图片出处">3. 图片出处</a></li><li><a href="#4-使用声明">4. 使用声明</a></li><li><a href="#5-参考与引用">5. 参考与引用</a></li></ol></li></ol></nav><article class="article-body"><blockquote>
+    </header><div class="article-callout article-callout--top">本文为个人学习笔记；文中「图注」指官方课件的对应页，原图与课件请以官方发布为准。本站不转载课件图片。</div><details class="toc-mobile"><summary>目录</summary><nav class="toc" aria-label="本页目录"><ol><li><a href="#一模型的边界两个硬约束">一、模型的边界：两个硬约束</a></li><li><a href="#二harness把一次对话变成持续的行动">二、Harness：把一次对话变成持续的行动</a></li><li><a href="#三一次行动如何发生时序与循环">三、一次行动如何发生：时序与循环</a></li><li><a href="#四workflow-与-agent一个管保证一个管应变">四、Workflow 与 Agent：一个管保证，一个管应变</a></li><li><a href="#五六个概念的分工">五、六个概念的分工</a></li><li><a href="#六skill把一次成功变成可复用方法">六、Skill：把一次成功变成可复用方法</a></li><li><a href="#七skill-的结构与写法">七、Skill 的结构与写法</a></li><li><a href="#八skill-如何被调用先匹配再加载">八、Skill 如何被调用：先匹配，再加载</a></li><li><a href="#九知识从哪里来凭什么信">九、知识从哪里来，凭什么信</a></li><li><a href="#十把概念串起来deep-research-的一条完整链路">十、把概念串起来：Deep Research 的一条完整链路</a></li><li><a href="#十一总结一套系统的七条原则">十一、总结：一套系统的七条原则</a></li><li><a href="#资料出处与引用声明">资料出处与引用声明</a><ol><li><a href="#1-课件">1. 课件</a></li><li><a href="#2-关键原文引用">2. 关键原文引用</a></li><li><a href="#3-图片出处">3. 图片出处</a></li><li><a href="#4-使用声明">4. 使用声明</a></li><li><a href="#5-参考与引用">5. 参考与引用</a></li></ol></li></ol></nav></details><div class="article-layout"><nav class="toc" aria-label="本页目录"><p class="toc-title">目录</p><ol><li><a href="#一模型的边界两个硬约束">一、模型的边界：两个硬约束</a></li><li><a href="#二harness把一次对话变成持续的行动">二、Harness：把一次对话变成持续的行动</a></li><li><a href="#三一次行动如何发生时序与循环">三、一次行动如何发生：时序与循环</a></li><li><a href="#四workflow-与-agent一个管保证一个管应变">四、Workflow 与 Agent：一个管保证，一个管应变</a></li><li><a href="#五六个概念的分工">五、六个概念的分工</a></li><li><a href="#六skill把一次成功变成可复用方法">六、Skill：把一次成功变成可复用方法</a></li><li><a href="#七skill-的结构与写法">七、Skill 的结构与写法</a></li><li><a href="#八skill-如何被调用先匹配再加载">八、Skill 如何被调用：先匹配，再加载</a></li><li><a href="#九知识从哪里来凭什么信">九、知识从哪里来，凭什么信</a></li><li><a href="#十把概念串起来deep-research-的一条完整链路">十、把概念串起来：Deep Research 的一条完整链路</a></li><li><a href="#十一总结一套系统的七条原则">十一、总结：一套系统的七条原则</a></li><li><a href="#资料出处与引用声明">资料出处与引用声明</a><ol><li><a href="#1-课件">1. 课件</a></li><li><a href="#2-关键原文引用">2. 关键原文引用</a></li><li><a href="#3-图片出处">3. 图片出处</a></li><li><a href="#4-使用声明">4. 使用声明</a></li><li><a href="#5-参考与引用">5. 参考与引用</a></li></ol></li></ol></nav><article class="article-body"><blockquote>
 <p>学习课件：<a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/03_%E7%A7%91%E7%A0%94%E6%99%BA%E8%83%BD%E4%BD%93%E5%AE%9E%E8%AE%AD%EF%BC%88%E4%B8%80%EF%BC%89_%E9%99%88%E5%B8%8C%E9%B8%BF.pdf" rel="noopener" target="_blank">03 讲 PDF</a> · <a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/04_%E7%A7%91%E7%A0%94%E6%99%BA%E8%83%BD%E4%BD%93%E5%AE%9E%E8%AE%AD%EF%BC%88%E4%BA%8C%EF%BC%89_%E5%88%98%E5%AD%90%E7%AC%91.pdf" rel="noopener" target="_blank">04 讲 PDF</a>；原文、图片出处与版权声明见文末「资料出处与引用声明」。</p>
 </blockquote>
 <p>大模型能写、能推理，但它本身并不能持续做事：每次调用都是一次性的，不记事，也不对事实负责。</p>
 <p>而科研任务要求连续、可核查、可复现。把LLM放进科研语境，我们需要的不仅仅是更强的模型，还需要一套运行系统——Harness；而让这套系统越做越稳的，是把成功做法固化而成的Skill。</p>
 <p>理解这两个概念，以及它们与工具、工作流、知识来源的关系，就理解了这本次课程的主干。</p>
 <h2 id="一模型的边界两个硬约束">一、模型的边界：两个硬约束<a aria-label="链接到本节" class="heading-anchor" href="#一模型的边界两个硬约束">#</a></h2>
-<figure class="note-figure"><img alt="模型的两个硬约束：上下文限制与幻觉" decoding="async" height="675" loading="lazy" src="../assets/notes/task1/03-p05.webp" width="1200"/><figcaption>上下文会截断，知识会编造。这两条不是模型的“缺点”，而是它的工作方式。</figcaption></figure>
+<div class="figure-ref"><span class="ref-label">图注</span><span class="ref-text">上下文会截断，知识会编造。这两条不是模型的“缺点”，而是它的工作方式。</span><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/03_%E7%A7%91%E7%A0%94%E6%99%BA%E8%83%BD%E4%BD%93%E5%AE%9E%E8%AE%AD%EF%BC%88%E4%B8%80%EF%BC%89_%E9%99%88%E5%B8%8C%E9%B8%BF.pdf" rel="noopener" target="_blank">官方课件 03 ↗</a></div>
 
 <p><strong>上下文限制。</strong> 模型每次只看到这次调用拼进去的内容。对话历史、工具说明、检索结果，都要重新拼；拼不下就截断。所以长任务不能指望模型“记住”，必须把状态外置：整理上下文、保存运行记录、把中间结果写成文件。所谓“智能体有记忆”，本质上是 Harness 在每次调用前，把该带的信息重新带进来（03-P5）。</p>
 <p><strong>幻觉。</strong> 大模型的本质是在预测下一个词，而不是在检索数据库。知识有截止时间，但没见过的东西照样答得流畅，所以真假不能靠“读起来像”，必须靠工具取回证据：检索、读文件、跑代码、查数据库。工具的意义不是让模型更聪明，而是让它能接触到自己无法凭空知道的事实（03-P5）。</p>
 <p>这两条分别对应 Harness 的两类职责：一类管上下文，一类管工具与核验。后面的所有设计，几乎都可以从这里推出来。</p>
 <h2 id="二harness把一次对话变成持续的行动">二、Harness：把一次对话变成持续的行动<a aria-label="链接到本节" class="heading-anchor" href="#二harness把一次对话变成持续的行动">#</a></h2>
 <p>Harness（驾驭层）是“承担运行调度、能力扩展、安全约束和效果保障的工程化支持框架”（03-P3）。它做六件事：整理上下文、调用模型、调用工具、保存运行记录、检查权限、控制运行流程（03-P15）。</p>
-<figure class="note-figure"><img alt="Agent = Model + Harness" decoding="async" height="675" loading="lazy" src="../assets/notes/task1/03-p15.webp" width="1200"/><figcaption>用户指令进入 Harness，Harness 把任务与上下文交给模型；模型只回“回答”或“工具请求”，由 Harness 去调工具。</figcaption></figure>
+<div class="figure-ref"><span class="ref-label">图注</span><span class="ref-text">用户指令进入 Harness，Harness 把任务与上下文交给模型；模型只回“回答”或“工具请求”，由 Harness 去调工具。</span><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/03_%E7%A7%91%E7%A0%94%E6%99%BA%E8%83%BD%E4%BD%93%E5%AE%9E%E8%AE%AD%EF%BC%88%E4%B8%80%EF%BC%89_%E9%99%88%E5%B8%8C%E9%B8%BF.pdf" rel="noopener" target="_blank">官方课件 03 ↗</a></div>
 
 <p>这张图有一个关键约束：<strong>模型不直接碰工具，中间永远隔着 Harness</strong>（据 03-P15 图示）。这不是多此一举。工具调用有副作用，参数可能错，权限可能越界，失败需要重试或降级，过程需要留痕——这些都必须发生在“被约束者”之外。把权限交给模型自检，等于没有权限；把错误处理交给模型即兴发挥，等于没有错误处理。</p>
 <p>可以借用操作系统的类比：模型是 CPU，负责计算；Harness 是操作系统，负责调度、系统调用、权限、日志和中断。CPU 很快，但没有操作系统，它什么任务也完不成。<code>Agent = Model + Harness</code> 说的就是这件事。</p>
 <h2 id="三一次行动如何发生时序与循环">三、一次行动如何发生：时序与循环<a aria-label="链接到本节" class="heading-anchor" href="#三一次行动如何发生时序与循环">#</a></h2>
-<figure class="note-figure"><img alt="一次文献检索的六步时序" decoding="async" height="675" loading="lazy" src="../assets/notes/task1/03-p16.webp" width="1200"/><figcaption>模型发请求，Harness 查权限并调用工具，工具返回结果或错误，结果再回到上下文。</figcaption></figure>
+<div class="figure-ref"><span class="ref-label">图注</span><span class="ref-text">模型发请求，Harness 查权限并调用工具，工具返回结果或错误，结果再回到上下文。</span><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/03_%E7%A7%91%E7%A0%94%E6%99%BA%E8%83%BD%E4%BD%93%E5%AE%9E%E8%AE%AD%EF%BC%88%E4%B8%80%EF%BC%89_%E9%99%88%E5%B8%8C%E9%B8%BF.pdf" rel="noopener" target="_blank">官方课件 03 ↗</a></div>
 
 <p>一次工具调用可以拆成六步（03-P16）：</p>
 <pre><code class="language-text">Harness → Model    输入：任务、工具说明、已有记录
@@ -109,12 +108,12 @@ Model   → …        生成回答，或继续提出检索请求
 <li><strong>错误信息也是正常返回值。</strong> 它进入上下文，模型才有机会换路；工具静默失败，模型就可能编一个结果出来。</li>
 </ul>
 <p>这六步循环起来，就是 ReAct（03-P24）：</p>
-<figure class="note-figure"><img alt="ReAct：推理、行动与观察" decoding="async" height="675" loading="lazy" src="../assets/notes/task1/03-p24.webp" width="1200"/><figcaption>推理 → 行动 → 观察 → 再推理。关键不是三个框，而是“观察”回到“推理”的那条回边。</figcaption></figure>
+<div class="figure-ref"><span class="ref-label">图注</span><span class="ref-text">推理 → 行动 → 观察 → 再推理。关键不是三个框，而是“观察”回到“推理”的那条回边。</span><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/03_%E7%A7%91%E7%A0%94%E6%99%BA%E8%83%BD%E4%BD%93%E5%AE%9E%E8%AE%AD%EF%BC%88%E4%B8%80%EF%BC%89_%E9%99%88%E5%B8%8C%E9%B8%BF.pdf" rel="noopener" target="_blank">官方课件 03 ↗</a></div>
 
 <p>Agent 的“思考”不是一条连续的意识流，而是每一轮根据当前上下文重新构造的判断。下一步做什么，取决于上一轮工具返回了什么。这也是 Agent 与固定流水线的不同之处。</p>
 <p>Harness 在外层给这个循环加三道保险（03-P23）：<strong>有边界</strong>（权限、次数、时间上限，防止死循环和失控成本）、<strong>可中断</strong>（需要人工处理时暂停，并说明原因）、<strong>可恢复</strong>（达到限制时停止并报告进度，而不是静默失败）。</p>
 <h2 id="四workflow-与-agent一个管保证一个管应变">四、Workflow 与 Agent：一个管保证，一个管应变<a aria-label="链接到本节" class="heading-anchor" href="#四workflow-与-agent一个管保证一个管应变">#</a></h2>
-<figure class="note-figure"><img alt="Workflow 与 Agent 运行循环" decoding="async" height="675" loading="lazy" src="../assets/notes/task1/03-p26.webp" width="1200"/><figcaption>左边预先规定步骤与分支，右边在运行时选择下一步。</figcaption></figure>
+<div class="figure-ref"><span class="ref-label">图注</span><span class="ref-text">左边预先规定步骤与分支，右边在运行时选择下一步。</span><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/03_%E7%A7%91%E7%A0%94%E6%99%BA%E8%83%BD%E4%BD%93%E5%AE%9E%E8%AE%AD%EF%BC%88%E4%B8%80%EF%BC%89_%E9%99%88%E5%B8%8C%E9%B8%BF.pdf" rel="noopener" target="_blank">官方课件 03 ↗</a></div>
 
 <p>两者的差别可以压成一张表（03-P26）：</p>
 <div class="table-wrap"><table>
@@ -197,13 +196,13 @@ Model   → …        生成回答，或继续提出检索请求
 </ul>
 <h2 id="六skill把一次成功变成可复用方法">六、Skill：把一次成功变成可复用方法<a aria-label="链接到本节" class="heading-anchor" href="#六skill把一次成功变成可复用方法">#</a></h2>
 <p>一次成功的 Agent 运行，留下的是一条轨迹：用过哪些关键词、筛掉了什么、怎么核验引用。如果轨迹只存在于这次上下文里，下次开新会话就没了。Skill 要做的，就是把这类“做法”从一次性的轨迹里抽出来，写成下次可以直接加载复用的经验。</p>
-<figure class="note-figure"><img alt="MCP 与 Skill：接得上 vs 做得稳" decoding="async" height="675" loading="lazy" src="../assets/notes/task1/04-p12.webp" width="1200"/><figcaption>MCP 让智能体接得上外部服务，Skill 让智能体做得稳。两者都挂在 Harness 下面，是并列的能力来源。</figcaption></figure>
+<div class="figure-ref"><span class="ref-label">图注</span><span class="ref-text">MCP 让智能体接得上外部服务，Skill 让智能体做得稳。两者都挂在 Harness 下面，是并列的能力来源。</span><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/04_%E7%A7%91%E7%A0%94%E6%99%BA%E8%83%BD%E4%BD%93%E5%AE%9E%E8%AE%AD%EF%BC%88%E4%BA%8C%EF%BC%89_%E5%88%98%E5%AD%90%E7%AC%91.pdf" rel="noopener" target="_blank">官方课件 04 ↗</a></div>
 
 <p><strong>MCP 解决“接得上”。</strong> 课件把它定义为“让智能体以规范的方式接入外部的工具或数据库”（04-P12）。它用规范化的接口，把外部工具、数据库、学术服务接进来。没有 MCP，模型只能靠训练记忆和网页搜索；有了 MCP，它可以查 OpenAlex、Crossref、内部数据库。</p>
 <p><strong>Skill 解决“做得稳”。</strong> 课件把它定义为“把完成任务的步骤、规则和资料，沉淀为可以重复调用的工作流”（04-P12）。它让下一次不必重新摸索。MCP 扩展的是触达范围，Skill 提供的是可复现性。两者不能互相替代：接得上的东西，不一定知道该怎么用；知道该怎么用，也不一定接得上。</p>
 <p>需要注意的是，Skill 也不是单纯的文档，而是给模型的一套 SOP （有时也会加上可执行附件）。举个例子，skill应该确保换一个模型，照着skill也能做出同样质量的结果。如果做不到，那它就还只是一篇说明文档。</p>
 <h2 id="七skill-的结构与写法">七、Skill 的结构与写法<a aria-label="链接到本节" class="heading-anchor" href="#七skill-的结构与写法">#</a></h2>
-<figure class="note-figure"><img alt="SKILL.md 三段解剖" decoding="async" height="675" loading="lazy" src="../assets/notes/task1/04-p14.webp" width="1200"/><figcaption>左边是真实的 SKILL.md，右边是它跑出来的结果。红字标出三段：元数据、工作流程、输出格式。</figcaption></figure>
+<div class="figure-ref"><span class="ref-label">图注</span><span class="ref-text">左边是真实的 SKILL.md，右边是它跑出来的结果。红字标出三段：元数据、工作流程、输出格式。</span><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/04_%E7%A7%91%E7%A0%94%E6%99%BA%E8%83%BD%E4%BD%93%E5%AE%9E%E8%AE%AD%EF%BC%88%E4%BA%8C%EF%BC%89_%E5%88%98%E5%AD%90%E7%AC%91.pdf" rel="noopener" target="_blank">官方课件 04 ↗</a></div>
 
 <p>一个 Skill 就是一个目录，核心只有一个文件：</p>
 <pre><code class="language-text">skills/&lt;skill-name&gt;/
@@ -228,7 +227,7 @@ description: 保留用户的原始科研问题，转述并对齐其真实研究�
 </ul>
 <p><strong>输出格式</strong>要求给出固定的章节、表格或字段，输出才能被机器检查，也才能被下游消费（04-P14）。一个 Skill 其实是一个接口：<code>description</code> 是索引，<code>workflow</code> 是实现，<code>output format</code> 是契约。</p>
 <h2 id="八skill-如何被调用先匹配再加载">八、Skill 如何被调用：先匹配，再加载<a aria-label="链接到本节" class="heading-anchor" href="#八skill-如何被调用先匹配再加载">#</a></h2>
-<figure class="note-figure"><img alt="Skill 的调用机制" decoding="async" height="675" loading="lazy" src="../assets/notes/task1/04-p15.webp" width="1200"/><figcaption>Harness 只把 name + description 发给模型；命中后才按需加载 SKILL.md 与所需资源。</figcaption></figure>
+<div class="figure-ref"><span class="ref-label">图注</span><span class="ref-text">Harness 只把 name + description 发给模型；命中后才按需加载 SKILL.md 与所需资源。</span><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/04_%E7%A7%91%E7%A0%94%E6%99%BA%E8%83%BD%E4%BD%93%E5%AE%9E%E8%AE%AD%EF%BC%88%E4%BA%8C%EF%BC%89_%E5%88%98%E5%AD%90%E7%AC%91.pdf" rel="noopener" target="_blank">官方课件 04 ↗</a></div>
 
 <p>调用分三步（04-P15）：</p>
 <pre><code class="language-text">用户提出任务
@@ -279,7 +278,7 @@ description: 保留用户的原始科研问题，转述并对齐其真实研究�
 </ul>
 <p>但两者都不等于读过全文。所以虽然工具能降低幻觉，但不能消除错误；核验必须是一个独立步骤，最好还是独立角色。生成的和检查的LLM共享同一个上下文，检查很可能就会变成一种自我确认。</p>
 <h2 id="十把概念串起来deep-research-的一条完整链路">十、把概念串起来：Deep Research 的一条完整链路<a aria-label="链接到本节" class="heading-anchor" href="#十把概念串起来deep-research-的一条完整链路">#</a></h2>
-<figure class="note-figure"><img alt="Deep Research 的三段流程" decoding="async" height="675" loading="lazy" src="../assets/notes/task1/04-p33.webp" width="1200"/><figcaption>明确需求 → 收集信息 → 完成报告；每一段内部都有回路，报告生成还留了人工审核点。</figcaption></figure>
+<div class="figure-ref"><span class="ref-label">图注</span><span class="ref-text">明确需求 → 收集信息 → 完成报告；每一段内部都有回路，报告生成还留了人工审核点。</span><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/04_%E7%A7%91%E7%A0%94%E6%99%BA%E8%83%BD%E4%BD%93%E5%AE%9E%E8%AE%AD%EF%BC%88%E4%BA%8C%EF%BC%89_%E5%88%98%E5%AD%90%E7%AC%91.pdf" rel="noopener" target="_blank">官方课件 04 ↗</a></div>
 
 <p>把前面的概念放进一条真实流程，系统就活了（04-P33）：</p>
 <ul>
@@ -523,18 +522,18 @@ description: 保留用户的原始科研问题，转述并对齐其真实研究�
         </svg>
         <div>
           <strong>磐石 AI4S · 学习笔记</strong>
-          <span>11 讲课程索引与个人学习记录</span>
+          <span>个人学习记录与课程引用</span>
         </div>
       </div>
       <nav class="footer-links" aria-label="页脚链接">
-        <a href="../index.html#lectures">课程目录</a>
-        <a href="../index.html#progress">学习进度</a>
         <a href="index.html">笔记</a>
+        <a href="../index.html#progress">进度</a>
+        <a href="../index.html#sources">课程来源</a>
         <a href="https://github.com/biociao/panshi-ai4s-practice" target="_blank" rel="noopener">GitHub</a>
       </nav>
     </div>
     <div class="wrap footer-bottom">
-      <span>整理 biociao · 更新于 2026-11-16 · 数据来源 learning/progress.md</span>
+      <span>整理 biociao · 更新于 2026-11-16 · 个人学习记录</span>
       <span>排版 原生 HTML / CSS · 无第三方依赖</span>
     </div>
   </footer>

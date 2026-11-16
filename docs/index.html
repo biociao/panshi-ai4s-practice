@@ -3,13 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>磐石 AI4S · 科学智能实训营学习笔记</title>
-  <meta name="description" content="磐石·科学智能（AI for Science）实训营 11 讲实操课程索引与个人学习笔记：科学模型、科研智能体、Skill、记忆与 RAG、端到端闭环、领域基座模型与 AI Scientist。">
+  <title>AI4S 学习笔记 · 磐石实训营</title>
+  <meta name="description" content="个人学习笔记：读磐石·科学智能实训营 11 讲课程的理解、动手记录与问题；课程内容只引用官方资料。">
   <meta name="theme-color" content="#17130f">
   <meta name="author" content="biociao">
-  <meta property="og:title" content="磐石 AI4S · 科学智能实训营学习笔记">
-  <meta property="og:description" content="11 讲实操课程索引与个人学习笔记：从科学模型、科研智能体到端到端闭环与 AI Scientist。">
-  <meta property="og:type" content="website">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/style.css">
   <script>
@@ -39,7 +36,7 @@
           </defs>
           <rect width="64" height="64" rx="12" fill="#231f1a"/>
           <rect x="1" y="1" width="62" height="62" rx="11" fill="none" stroke="url(#brandGrad)" stroke-opacity=".55"/>
-          <circle cx="32" cy="32" r="14.5" fill="none" stroke="url(#brandGrad)" stroke-width="3"/>
+          <circle cx="32" cy="32" r="14.5" fill="none" stroke="url(#brandGrad)" stroke-width="2.5"/>
           <circle cx="32" cy="32" r="4" fill="#f6f1e7"/>
           <circle cx="46" cy="18" r="3.2" fill="url(#brandGrad)"/>
         </svg>
@@ -47,10 +44,9 @@
       </a>
 
       <nav class="nav-links" id="site-menu" aria-label="页面导航">
-        <a href="#path">学习路线</a>
-        <a href="#lectures">课程目录</a>
-        <a href="#progress">学习进度</a>
         <a href="#notes">笔记</a>
+        <a href="#progress">进度</a>
+        <a href="#sources">课程来源</a>
         <a href="#resources">资料</a>
       </nav>
 
@@ -68,564 +64,203 @@
   </header>
 
   <main id="main">
-    <!-- ============ HERO ============ -->
     <section class="hero" id="top">
       <div class="wrap hero-grid">
         <div class="hero-copy">
-          <p class="eyebrow">磐石 · 科学智能（AI for Science）实训营</p>
-          <h1>把 AI 放进<br><span class="grad">真实的科研流程</span></h1>
+          <p class="eyebrow">个人学习博客 · AI for Science</p>
+          <h1>把课程读成<br><span class="grad">自己的笔记</span></h1>
           <div class="abstract">
             <p class="abstract-label">摘要</p>
-            <p class="lede">11 讲实操课程，两条主线——<strong>科学模型</strong>与<strong>科研智能体</strong>；从神经网络、数据选型，到 Agent、Skill、记忆与端到端闭环，最后落到领域基座模型与 AI Scientist。</p>
+            <p class="lede">这里记录我读磐石·科学智能实训营 11 讲课程时的理解、动手记录与没想通的问题。课程内容不在这里重复，只在引用处链到官方资料。</p>
             <p class="keywords"><span>关键词</span>科学模型 · 科研智能体 · Skill · 记忆与 RAG · 端到端闭环</p>
           </div>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#lectures">浏览课程目录</a>
-            <a class="btn btn-ghost" href="#path">学习路线</a>
+            <a class="btn btn-primary" href="#notes">读最新笔记</a>
+            <a class="btn btn-ghost" href="notes/index.html">笔记索引</a>
           </div>
           <ul class="hero-meta">
             <li>2026 年秋</li>
-            <li>11 讲</li>
-            <li>334 页</li>
-            <li>9 位讲师</li>
-            <li>个人学习索引</li>
+            <li>4 篇笔记</li>
+            <li>2 讲已整理</li>
+            <li>更新于 2026-11-16</li>
           </ul>
         </div>
 
-        <aside class="panel" aria-label="学习概况">
+        <aside class="panel" aria-label="写作概况">
           <div class="panel-top">
-            <span class="panel-title">学习概况</span>
+            <span class="panel-title">写作概况</span>
             <span class="panel-date">2026 年 11 月 16 日</span>
           </div>
           <div class="snap">
-            <span class="snap-num">74<small>/334</small></span>
-            <span class="snap-label">页课件已过</span>
+            <span class="snap-num">4<small>篇</small></span>
+            <span class="snap-label">笔记 · 2 讲已整理</span>
           </div>
-          <div class="segbar" role="img" aria-label="11 讲中已过课件 2 讲，第 11 讲有图文资料">
+          <div class="segbar" role="img" aria-label="11 讲中 2 讲已整理，第 11 讲有图文资料">
             <i class="is-todo" title="01 未开始"></i>
             <i class="is-todo" title="02 未开始"></i>
-            <i class="is-done" title="03 已过课件"></i>
-            <i class="is-done" title="04 已过课件"></i>
+            <i class="is-done" title="03 已整理"></i>
+            <i class="is-done" title="04 已整理"></i>
             <i class="is-todo" title="05 未开始"></i>
             <i class="is-todo" title="06 未开始"></i>
             <i class="is-todo" title="07 未开始"></i>
             <i class="is-todo" title="08 未开始"></i>
             <i class="is-todo" title="09 未开始"></i>
             <i class="is-todo" title="10 未开始"></i>
-            <i class="is-ready" title="11 附图文资料"></i>
+            <i class="is-ready" title="11 有图文资料"></i>
           </div>
-          <div class="segbar-legend"><span>2 / 11 讲</span><span>待读 9 讲</span></div>
+          <div class="segbar-legend"><span>2 / 11 讲</span><span>9 讲待补</span></div>
           <ul class="snap-list">
-            <li><span class="s-ic ok" aria-hidden="true">✓</span><span class="s-t">03 从零开始构建智能体</span><span class="s-m">已过</span></li>
-            <li><span class="s-ic ok" aria-hidden="true">✓</span><span class="s-t">04 Skill 的设计与应用</span><span class="s-m">已过</span></li>
-            <li><span class="s-ic ok" aria-hidden="true">✓</span><span class="s-t">Task1 图文学习笔记</span><span class="s-m">已整理</span></li>
-            <li><span class="s-ic next" aria-hidden="true">→</span><span class="s-t">05 AI 嵌入的可解释模型</span><span class="s-m">待读</span></li>
+            <li><span class="s-ic ok" aria-hidden="true">✓</span><span class="s-t">Task1 图文 · 2026-11-16</span><span class="s-m">图文</span></li>
+            <li><span class="s-ic ok" aria-hidden="true">✓</span><span class="s-t">Task1 文字 · 2026-11-16</span><span class="s-m">文字</span></li>
+            <li><span class="s-ic ok" aria-hidden="true">✓</span><span class="s-t">学习进度 · 2026-11-16</span><span class="s-m">索引</span></li>
+            <li><span class="s-ic ok" aria-hidden="true">✓</span><span class="s-t">第 11 讲 · 2026-10-09</span><span class="s-m">资料</span></li>
           </ul>
-          <div class="panel-foot">按 <a href="notes/progress.html">学习进度</a> 同步 · 每讲一页笔记</div>
+          <div class="panel-foot">每读完一讲写一页 · <a href="notes/index.html">笔记索引</a></div>
         </aside>
       </div>
-
-      <div class="wrap">
-        <div class="thread" aria-label="课程主线">
-          <span class="thread-label">课程主线</span>
-          <ol>
-            <li>科学问题</li>
-            <li>数据</li>
-            <li>模型</li>
-            <li>智能体</li>
-            <li>工具 / Skill</li>
-            <li>验证</li>
-            <li>闭环</li>
-          </ol>
-        </div>
-      </div>
     </section>
 
-    <!-- ============ PRINCIPLES ============ -->
-    <section class="section" id="principles" aria-labelledby="principles-title">
-      <div class="wrap">
-        <div class="section-head" data-reveal>
-          <p class="eyebrow">一、课程理念</p>
-          <h2 id="principles-title">不是学一个工具，<br>而是把 AI 接进科研</h2>
-          <p>课程沿着科研智能体与科学模型两条主线展开，再通过科研数据、工具调用和端到端工作流把两者连接起来。</p>
-        </div>
-        <div class="principles">
-          <article class="p-card" data-reveal>
-            <span class="p-no">01</span>
-            <h3>从科研问题出发</h3>
-            <p>先理解研究目标、数据条件和任务边界，再讨论适用的方法、模型与工具；不为用 AI 而用 AI。</p>
-          </article>
-          <article class="p-card" data-reveal>
-            <span class="p-no">02</span>
-            <h3>先动手，再理解原理</h3>
-            <p>用可运行的案例建立直观认识，再拆解数据处理、训练、知识库、记忆与执行；实操要懂为什么。</p>
-          </article>
-          <article class="p-card" data-reveal>
-            <span class="p-no">03</span>
-            <h3>把 AI 融入科研过程</h3>
-            <p>把编程智能体、科研工具和专业模型用于调研、分析、开发与验证，从单项操作走向可衔接的工作流。</p>
-          </article>
-          <article class="p-card" data-reveal>
-            <span class="p-no">04</span>
-            <h3>重视验证与迁移</h3>
-            <p>工具输出不等于科学结论；关注结果核验、可复现性与适用边界，把案例方法迁移到自己的研究问题。</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ PATH ============ -->
-    <section class="section" id="path" aria-labelledby="path-title">
-      <div class="wrap">
-        <div class="section-head" data-reveal>
-          <p class="eyebrow">二、学习路线</p>
-          <h2 id="path-title">四段路线，从模型打底到 AI Scientist</h2>
-          <p>编号只用于资料索引，不必严格按顺序；建议先打模型基础，再进智能体与工程闭环，最后看综合进阶。</p>
-        </div>
-        <div class="tracks">
-          <article class="track" style="--c: var(--track-model)" data-reveal>
-            <div class="track-top"><span class="track-range">01 — 02</span><span class="track-pages">69 页</span></div>
-            <h3>科学模型</h3>
-            <p>神经网络的前向 / 反向与训练流程；科学场景下的数据理解、任务定义与模型选型。</p>
-            <div class="track-stat"><span>0 / 2 讲</span><span>0 页已过</span></div>
-            <div class="mini"><i data-fill="0"></i></div>
-            <a class="track-link" href="#lectures" data-jump-filter="model">查看这两讲<span aria-hidden="true">→</span></a>
-          </article>
-          <article class="track" style="--c: var(--track-agent)" data-reveal>
-            <div class="track-top"><span class="track-range">03 — 06</span><span class="track-pages">163 页</span></div>
-            <h3>科研智能体</h3>
-            <p>Agent = Model + Harness；Skill 的设计与调用；可解释模型；跨会话记忆与 RAG。</p>
-            <div class="track-stat"><span>2 / 4 讲</span><span>74 页已过</span></div>
-            <div class="mini"><i data-fill="50"></i></div>
-            <a class="track-link" href="#lectures" data-jump-filter="agent">查看这四讲<span aria-hidden="true">→</span></a>
-          </article>
-          <article class="track" style="--c: var(--track-eng)" data-reveal>
-            <div class="track-top"><span class="track-range">07 — 10</span><span class="track-pages">73 页</span></div>
-            <h3>工程与闭环</h3>
-            <p>科研数据 Harness、应用生态、CLI &amp; Skill 集成，以及 Loop / Autoresearch 长程保障。</p>
-            <div class="track-stat"><span>0 / 4 讲</span><span>0 页已过</span></div>
-            <div class="mini"><i data-fill="0"></i></div>
-            <a class="track-link" href="#lectures" data-jump-filter="eng">查看这四讲<span aria-hidden="true">→</span></a>
-          </article>
-          <article class="track" style="--c: var(--track-adv)" data-reveal>
-            <div class="track-top"><span class="track-range">11</span><span class="track-pages">29 页</span></div>
-            <h3>综合进阶</h3>
-            <p>领域基座模型的预训练与迁移，AI Scientist 的实验闭环与天文观测案例。</p>
-            <div class="track-stat"><span>0 / 1 讲</span><span>29 节图文</span></div>
-            <div class="mini"><i data-fill="0"></i></div>
-            <a class="track-link" href="#lectures" data-jump-filter="adv">查看这一讲<span aria-hidden="true">→</span></a>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ LECTURES ============ -->
-    <section class="section" id="lectures" aria-labelledby="lectures-title">
-      <div class="wrap">
-        <div class="section-head" data-reveal>
-          <p class="eyebrow">三、课程目录</p>
-          <h2 id="lectures-title">11 讲课件，随时回看</h2>
-          <p>每讲 PDF 均可预览或下载；已通读的 03、04 两讲另附合并笔记。封面取自各讲 PDF 首页，仅作索引识别。</p>
-        </div>
-
-        <div class="filters" role="group" aria-label="按方向筛选课程">
-          <button class="chip" type="button" data-filter="all" aria-pressed="true">全部 <span>11</span></button>
-          <button class="chip" type="button" data-filter="model" aria-pressed="false">科学模型 <span>2</span></button>
-          <button class="chip" type="button" data-filter="agent" aria-pressed="false">科研智能体 <span>4</span></button>
-          <button class="chip" type="button" data-filter="eng" aria-pressed="false">工程与闭环 <span>4</span></button>
-          <button class="chip" type="button" data-filter="adv" aria-pressed="false">综合进阶 <span>1</span></button>
-          <span class="filter-count" data-result-count aria-live="polite">共 11 讲</span>
-        </div>
-
-        <div class="lectures">
-          <article class="lec" data-track="model" data-reveal>
-            <div class="lec-cover">
-              <img src="assets/covers/01.webp" alt="01 讲课件封面：科学模型实训（一）" loading="lazy" width="1100" height="619">
-              <span class="badge todo">未开始</span>
-            </div>
-            <div class="lec-body">
-              <div class="lec-kicker"><span class="lec-no">01</span><span>科学模型实训（一）</span><span class="lec-pages">27 页</span></div>
-              <h3>深入理解神经网络原理与模型训练</h3>
-              <p>神经网络的基本结构、前向与反向传播、训练循环；先把模型原理和训练流程走通。</p>
-              <div class="lec-foot">
-                <span class="lec-speaker">李文毅</span>
-                <span class="lec-actions">
-                  <a href="https://github.com/biociao/panshi-ai4s-practice/blob/study/pdf/01_%E7%A7%91%E5%AD%A6%E6%A8%A1%E5%9E%8B%E5%AE%9E%E8%AE%AD%EF%BC%88%E4%B8%80%EF%BC%89_%E6%9D%8E%E6%96%87%E6%AF%85.pdf" target="_blank" rel="noopener">预览</a>
-                  <a href="https://github.com/biociao/panshi-ai4s-practice/raw/study/pdf/01_%E7%A7%91%E5%AD%A6%E6%A8%A1%E5%9E%8B%E5%AE%9E%E8%AE%AD%EF%BC%88%E4%B8%80%EF%BC%89_%E6%9D%8E%E6%96%87%E6%AF%85.pdf" target="_blank" rel="noopener">下载</a>
-                </span>
-              </div>
-            </div>
-          </article>
-
-          <article class="lec" data-track="model" data-reveal>
-            <div class="lec-cover">
-              <img src="assets/covers/02.webp" alt="02 讲课件封面：科学模型实训（二）" loading="lazy" width="1100" height="619">
-              <span class="badge todo">未开始</span>
-            </div>
-            <div class="lec-body">
-              <div class="lec-kicker"><span class="lec-no">02</span><span>科学模型实训（二）</span><span class="lec-pages">42 页</span></div>
-              <h3>面向科学场景的数据理解与模型选型</h3>
-              <p>科学数据的特点、任务定义与评价标准，以及如何据此选择合适的模型。</p>
-              <div class="lec-foot">
-                <span class="lec-speaker">李文毅</span>
-                <span class="lec-actions">
-                  <a href="https://github.com/biociao/panshi-ai4s-practice/blob/study/pdf/02_%E7%A7%91%E5%AD%A6%E6%A8%A1%E5%9E%8B%E5%AE%9E%E8%AE%AD%EF%BC%88%E4%BA%8C%EF%BC%89_%E6%9D%8E%E6%96%87%E6%AF%85.pdf" target="_blank" rel="noopener">预览</a>
-                  <a href="https://github.com/biociao/panshi-ai4s-practice/raw/study/pdf/02_%E7%A7%91%E5%AD%A6%E6%A8%A1%E5%9E%8B%E5%AE%9E%E8%AE%AD%EF%BC%88%E4%BA%8C%EF%BC%89_%E6%9D%8E%E6%96%87%E6%AF%85.pdf" target="_blank" rel="noopener">下载</a>
-                </span>
-              </div>
-            </div>
-          </article>
-
-          <article class="lec" data-track="agent" data-reveal>
-            <div class="lec-cover">
-              <img src="assets/covers/03.webp" alt="03 讲课件封面：从零搭建智能体" loading="lazy" width="1100" height="619">
-              <span class="badge done">已过课件</span>
-            </div>
-            <div class="lec-body">
-              <div class="lec-kicker"><span class="lec-no">03</span><span>科研智能体实训（一）</span><span class="lec-pages">33 页</span></div>
-              <h3>从零开始构建智能体</h3>
-              <p>Agent = Model + Harness：LLM 的两个硬缺陷、Harness 的六件事，以及 ReAct 运行循环。</p>
-              <a class="lec-note" href="notes/task1-illustrated.html">Task1 图文笔记 <span aria-hidden="true">→</span></a>
-              <div class="lec-foot">
-                <span class="lec-speaker">陈希鸿</span>
-                <span class="lec-actions">
-                  <a href="https://github.com/biociao/panshi-ai4s-practice/blob/study/pdf/03_%E7%A7%91%E7%A0%94%E6%99%BA%E8%83%BD%E4%BD%93%E5%AE%9E%E8%AE%AD%EF%BC%88%E4%B8%80%EF%BC%89_%E9%99%88%E5%B8%8C%E9%B8%BF.pdf" target="_blank" rel="noopener">预览</a>
-                  <a href="https://github.com/biociao/panshi-ai4s-practice/raw/study/pdf/03_%E7%A7%91%E7%A0%94%E6%99%BA%E8%83%BD%E4%BD%93%E5%AE%9E%E8%AE%AD%EF%BC%88%E4%B8%80%EF%BC%89_%E9%99%88%E5%B8%8C%E9%B8%BF.pdf" target="_blank" rel="noopener">下载</a>
-                </span>
-              </div>
-            </div>
-          </article>
-
-          <article class="lec" data-track="agent" data-reveal>
-            <div class="lec-cover">
-              <img src="assets/covers/04.webp" alt="04 讲课件封面：Skill 的设计与应用" loading="lazy" width="1100" height="619">
-              <span class="badge done">已过课件</span>
-            </div>
-            <div class="lec-body">
-              <div class="lec-kicker"><span class="lec-no">04</span><span>科研智能体实训（二）</span><span class="lec-pages">41 页</span></div>
-              <h3>Skill 的设计与应用</h3>
-              <p>把一次成功的做法固化成 Skill：SKILL.md 的结构、调用路径与知识来源的可信度。</p>
-              <a class="lec-note" href="notes/task1-illustrated.html">Task1 图文笔记 <span aria-hidden="true">→</span></a>
-              <div class="lec-foot">
-                <span class="lec-speaker">刘子笑</span>
-                <span class="lec-actions">
-                  <a href="https://github.com/biociao/panshi-ai4s-practice/blob/study/pdf/04_%E7%A7%91%E7%A0%94%E6%99%BA%E8%83%BD%E4%BD%93%E5%AE%9E%E8%AE%AD%EF%BC%88%E4%BA%8C%EF%BC%89_%E5%88%98%E5%AD%90%E7%AC%91.pdf" target="_blank" rel="noopener">预览</a>
-                  <a href="https://github.com/biociao/panshi-ai4s-practice/raw/study/pdf/04_%E7%A7%91%E7%A0%94%E6%99%BA%E8%83%BD%E4%BD%93%E5%AE%9E%E8%AE%AD%EF%BC%88%E4%BA%8C%EF%BC%89_%E5%88%98%E5%AD%90%E7%AC%91.pdf" target="_blank" rel="noopener">下载</a>
-                </span>
-              </div>
-            </div>
-          </article>
-
-          <article class="lec" data-track="agent" data-reveal>
-            <div class="lec-cover">
-              <img src="assets/covers/05.webp" alt="05 讲课件封面：AI 嵌入的可解释模型设计" loading="lazy" width="1100" height="619">
-              <span class="badge todo">未开始</span>
-            </div>
-            <div class="lec-body">
-              <div class="lec-kicker"><span class="lec-no">05</span><span>科研智能体实训（三）</span><span class="lec-pages">36 页</span></div>
-              <h3>AI 嵌入的可解释模型设计</h3>
-              <p>让模型输出能支撑科学解释与决策：可解释性如何进入模型与流程的设计。</p>
-              <div class="lec-foot">
-                <span class="lec-speaker">巩泽钊</span>
-                <span class="lec-actions">
-                  <a href="https://github.com/biociao/panshi-ai4s-practice/blob/study/pdf/05_%E7%A7%91%E7%A0%94%E6%99%BA%E8%83%BD%E4%BD%93%E5%AE%9E%E8%AE%AD%EF%BC%88%E4%B8%89%EF%BC%89_%E5%B7%A9%E6%B3%BD%E9%92%8A.pdf" target="_blank" rel="noopener">预览</a>
-                  <a href="https://github.com/biociao/panshi-ai4s-practice/raw/study/pdf/05_%E7%A7%91%E7%A0%94%E6%99%BA%E8%83%BD%E4%BD%93%E5%AE%9E%E8%AE%AD%EF%BC%88%E4%B8%89%EF%BC%89_%E5%B7%A9%E6%B3%BD%E9%92%8A.pdf" target="_blank" rel="noopener">下载</a>
-                </span>
-              </div>
-            </div>
-          </article>
-
-          <article class="lec" data-track="agent" data-reveal>
-            <div class="lec-cover">
-              <img src="assets/covers/06.webp" alt="06 讲课件封面：智能体记忆与知识库" loading="lazy" width="1100" height="619">
-              <span class="badge todo">未开始</span>
-            </div>
-            <div class="lec-body">
-              <div class="lec-kicker"><span class="lec-no">06</span><span>智能体记忆与知识库</span><span class="lec-pages">53 页</span></div>
-              <h3>跨会话记忆管理与 RAG 检索</h3>
-              <p>知识库、检索与记忆的工程化实现：智能体如何记住上下文并取用外部知识。</p>
-              <div class="lec-foot">
-                <span class="lec-speaker">余宣庆</span>
-                <span class="lec-actions">
-                  <a href="https://github.com/biociao/panshi-ai4s-practice/blob/study/pdf/06_%E6%99%BA%E8%83%BD%E4%BD%93%E8%AE%B0%E5%BF%86%E4%B8%8E%E7%9F%A5%E8%AF%86%E5%BA%93_%E4%BD%99%E5%AE%A3%E5%BA%86.pdf" target="_blank" rel="noopener">预览</a>
-                  <a href="https://github.com/biociao/panshi-ai4s-practice/raw/study/pdf/06_%E6%99%BA%E8%83%BD%E4%BD%93%E8%AE%B0%E5%BF%86%E4%B8%8E%E7%9F%A5%E8%AF%86%E5%BA%93_%E4%BD%99%E5%AE%A3%E5%BA%86.pdf" target="_blank" rel="noopener">下载</a>
-                </span>
-              </div>
-            </div>
-          </article>
-
-          <article class="lec" data-track="eng" data-reveal>
-            <div class="lec-cover">
-              <img src="assets/covers/07.webp" alt="07 讲课件封面：Harness 实训" loading="lazy" width="1100" height="619">
-              <span class="badge todo">未开始</span>
-            </div>
-            <div class="lec-body">
-              <div class="lec-kicker"><span class="lec-no">07</span><span>Harness 实训</span><span class="lec-pages">10 页</span></div>
-              <h3>构建科研数据 Harness</h3>
-              <p>从科研文献到可信的 AI-Ready 数据集：数据整理、校验与可复用接口。</p>
-              <div class="lec-foot">
-                <span class="lec-speaker">张健</span>
-                <span class="lec-actions">
-                  <a href="https://github.com/biociao/panshi-ai4s-practice/blob/study/pdf/07_Harness%E5%AE%9E%E8%AE%AD_%E5%BC%A0%E5%81%A5.pdf" target="_blank" rel="noopener">预览</a>
-                  <a href="https://github.com/biociao/panshi-ai4s-practice/raw/study/pdf/07_Harness%E5%AE%9E%E8%AE%AD_%E5%BC%A0%E5%81%A5.pdf" target="_blank" rel="noopener">下载</a>
-                </span>
-              </div>
-            </div>
-          </article>
-
-          <article class="lec" data-track="eng" data-reveal>
-            <div class="lec-cover">
-              <img src="assets/covers/08.webp" alt="08 讲课件封面：磐石应用实训" loading="lazy" width="1100" height="619">
-              <span class="badge todo">未开始</span>
-            </div>
-            <div class="lec-body">
-              <div class="lec-kicker"><span class="lec-no">08</span><span>磐石应用实训</span><span class="lec-pages">36 页</span></div>
-              <h3>工具、技能与应用生态分享</h3>
-              <p>磐石平台上的落地经验：工具与技能如何组合，应用生态如何协作。</p>
-              <div class="lec-foot">
-                <span class="lec-speaker">王正帅</span>
-                <span class="lec-actions">
-                  <a href="https://github.com/biociao/panshi-ai4s-practice/blob/study/pdf/08_%E7%A3%90%E7%9F%B3%E5%BA%94%E7%94%A8%E5%AE%9E%E8%AE%AD_%E7%8E%8B%E6%AD%A3%E5%B8%85.pdf" target="_blank" rel="noopener">预览</a>
-                  <a href="https://github.com/biociao/panshi-ai4s-practice/raw/study/pdf/08_%E7%A3%90%E7%9F%B3%E5%BA%94%E7%94%A8%E5%AE%9E%E8%AE%AD_%E7%8E%8B%E6%AD%A3%E5%B8%85.pdf" target="_blank" rel="noopener">下载</a>
-                </span>
-              </div>
-            </div>
-          </article>
-
-          <article class="lec" data-track="eng" data-reveal>
-            <div class="lec-cover">
-              <img src="assets/covers/09.webp" alt="09 讲课件封面：端到端闭环（一）" loading="lazy" width="1100" height="619">
-              <span class="badge todo">未开始</span>
-            </div>
-            <div class="lec-body">
-              <div class="lec-kicker"><span class="lec-no">09</span><span>端到端闭环（一）</span><span class="lec-pages">23 页</span></div>
-              <h3>科研智能体的能力集成：CLI &amp; Skill</h3>
-              <p>把命令行工具与 Skill 串成可复用的端到端闭环，让智能体真正跑起流程。</p>
-              <div class="lec-foot">
-                <span class="lec-speaker">欧仕刚</span>
-                <span class="lec-actions">
-                  <a href="https://github.com/biociao/panshi-ai4s-practice/blob/study/pdf/09_%E7%AB%AF%E5%88%B0%E7%AB%AF%E9%97%AD%E7%8E%AF%EF%BC%88%E4%B8%80%EF%BC%89_%E6%AC%A7%E4%BB%95%E5%88%9A.pdf" target="_blank" rel="noopener">预览</a>
-                  <a href="https://github.com/biociao/panshi-ai4s-practice/raw/study/pdf/09_%E7%AB%AF%E5%88%B0%E7%AB%AF%E9%97%AD%E7%8E%AF%EF%BC%88%E4%B8%80%EF%BC%89_%E6%AC%A7%E4%BB%95%E5%88%9A.pdf" target="_blank" rel="noopener">下载</a>
-                </span>
-              </div>
-            </div>
-          </article>
-
-          <article class="lec" data-track="eng" data-reveal>
-            <div class="lec-cover">
-              <img src="assets/covers/10.webp" alt="10 讲课件封面：端到端闭环（二）" loading="lazy" width="1100" height="619">
-              <span class="badge todo">未开始</span>
-            </div>
-            <div class="lec-body">
-              <div class="lec-kicker"><span class="lec-no">10</span><span>端到端闭环（二）</span><span class="lec-pages">4 页</span></div>
-              <h3>长程任务的保障机制：Loop &amp; Autoresearch</h3>
-              <p>让智能体在长任务中持续工作：循环控制、自动研究与失败恢复。</p>
-              <div class="lec-foot">
-                <span class="lec-speaker">欧仕刚</span>
-                <span class="lec-actions">
-                  <a href="https://github.com/biociao/panshi-ai4s-practice/blob/study/pdf/10_%E7%AB%AF%E5%88%B0%E7%AB%AF%E9%97%AD%E7%8E%AF%EF%BC%88%E4%BA%8C%EF%BC%89_%E6%AC%A7%E4%BB%95%E5%88%9A.pdf" target="_blank" rel="noopener">预览</a>
-                  <a href="https://github.com/biociao/panshi-ai4s-practice/raw/study/pdf/10_%E7%AB%AF%E5%88%B0%E7%AB%AF%E9%97%AD%E7%8E%AF%EF%BC%88%E4%BA%8C%EF%BC%89_%E6%AC%A7%E4%BB%95%E5%88%9A.pdf" target="_blank" rel="noopener">下载</a>
-                </span>
-              </div>
-            </div>
-          </article>
-
-          <article class="lec" data-track="adv" data-reveal>
-            <div class="lec-cover">
-              <img src="assets/covers/11.webp" alt="11 讲课件封面：如何构建领域基座模型与 AI Scientist 系统" loading="lazy" width="1100" height="619">
-              <span class="badge reading">图文资料</span>
-            </div>
-            <div class="lec-body">
-              <div class="lec-kicker"><span class="lec-no">11</span><span>科学智能进阶</span><span class="lec-pages">29 页</span></div>
-              <h3>如何构建领域基座模型与 AI Scientist 系统</h3>
-              <p>从预训练表示与任务适配，到 SN Clock、StarWhisper 望远镜与 AI Scientist 的实验闭环。</p>
-              <a class="lec-note" href="notes/11.html">29 节图文资料 <span aria-hidden="true">→</span></a>
-              <div class="lec-foot">
-                <span class="lec-speaker">李瑀旸</span>
-                <span class="lec-actions">
-                  <a href="https://github.com/biociao/panshi-ai4s-practice/blob/study/pdf/11_%E7%A7%91%E5%AD%A6%E6%99%BA%E8%83%BD%E8%BF%9B%E9%98%B6_%E6%9D%8E%E7%91%80%E6%97%B8.pdf" target="_blank" rel="noopener">预览</a>
-                  <a href="https://github.com/biociao/panshi-ai4s-practice/raw/study/pdf/11_%E7%A7%91%E5%AD%A6%E6%99%BA%E8%83%BD%E8%BF%9B%E9%98%B6_%E6%9D%8E%E7%91%80%E6%97%B8.pdf" target="_blank" rel="noopener">下载</a>
-                </span>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ PROGRESS ============ -->
-    <section class="section" id="progress" aria-labelledby="progress-title">
-      <div class="wrap">
-        <div class="section-head" data-reveal>
-          <p class="eyebrow">四、学习进度</p>
-          <h2 id="progress-title">已过 2 讲、74 页；笔记从 Task1 开始</h2>
-          <p>进度按「未开始 → 学习中 → 已过课件 → 已完成（笔记 + 习题）」记录，每讲学完补一页笔记。</p>
-        </div>
-
-        <div class="progress-grid">
-          <div class="ring-card" data-reveal>
-            <div class="ring-wrap">
-              <svg class="ring" viewBox="0 0 200 200" role="img" aria-label="课件页完成度 22%">
-                <defs>
-                  <linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0" stop-color="#38bdf8"/><stop offset=".55" stop-color="#6366f1"/><stop offset="1" stop-color="#a855f7"/>
-                  </linearGradient>
-                </defs>
-                <circle class="ring-track" cx="100" cy="100" r="78"/>
-                <circle class="ring-value" cx="100" cy="100" r="78" data-ring="22"/>
-              </svg>
-              <div class="ring-label"><strong>22%</strong><span>74 / 334 页</span></div>
-            </div>
-            <div class="ring-copy">
-              <h3>课件页完成度</h3>
-              <p>03、04 两讲已通读并整理成 Task1 笔记；第 11 讲附 29 节图文资料，可先读后看课件。</p>
-              <ul class="ring-facts">
-                <li><b>2</b><span>已过课件</span></li>
-                <li><b>9</b><span>待读讲次</span></li>
-                <li><b>1</b><span>已整理笔记</span></li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="bars-card" data-reveal>
-            <div class="bars-head"><span>分轨进度</span><span>讲 / 页</span></div>
-            <div class="bar-row" style="--c: var(--track-model)">
-              <div class="bar-top"><span class="bar-name">科学模型</span><span class="bar-meta">0 / 2 讲 · 0 / 69 页</span></div>
-              <div class="bar"><i data-fill="0"></i></div>
-            </div>
-            <div class="bar-row" style="--c: var(--track-agent)">
-              <div class="bar-top"><span class="bar-name">科研智能体</span><span class="bar-meta">2 / 4 讲 · 74 / 163 页</span></div>
-              <div class="bar"><i data-fill="50"></i></div>
-            </div>
-            <div class="bar-row" style="--c: var(--track-eng)">
-              <div class="bar-top"><span class="bar-name">工程与闭环</span><span class="bar-meta">0 / 4 讲 · 0 / 73 页</span></div>
-              <div class="bar"><i data-fill="0"></i></div>
-            </div>
-            <div class="bar-row" style="--c: var(--track-adv)">
-              <div class="bar-top"><span class="bar-name">综合进阶</span><span class="bar-meta">0 / 1 讲 · 0 / 29 页</span></div>
-              <div class="bar"><i data-fill="0"></i></div>
-            </div>
-            <p class="bars-note">按讲次完成度计；页码口径与课件总页数一致。</p>
-          </div>
-        </div>
-
-        <p class="progress-note" data-reveal>数据截至 2026-11-16，来源 <a href="notes/progress.html">learning/progress.md</a>。已过课件不等于已完成：习题与复现记录仍待补齐。</p>
-      </div>
-    </section>
-
-    <!-- ============ NOTES ============ -->
     <section class="section" id="notes" aria-labelledby="notes-title">
       <div class="wrap">
         <div class="section-head" data-reveal>
-          <p class="eyebrow">五、学习笔记</p>
-          <h2 id="notes-title">每讲一页：关键概念、动手记录、待解问题</h2>
-          <p>只写自己的理解，不抄原文。当前已整理 Task1（03 + 04 合并笔记）与第 11 讲图文资料索引，其余 9 讲模板待填。</p>
+          <p class="eyebrow">一、笔记更新</p>
+          <h2 id="notes-title">最近写下的笔记</h2>
+          <p>按更新时间排列；长文带目录与图注，文末回到笔记索引。课程内容不在站内重复，只保留必要引用。</p>
         </div>
 
-        <div class="notes-grid">
-          <article class="note note-lg" data-reveal>
-            <a class="note-cover" href="notes/task1-illustrated.html" aria-label="阅读 Task1 图文笔记">
-              <img src="assets/notes/task1-map.webp" alt="Task1 学习地图：03 与 04 两讲的结构关系" loading="lazy" width="1200" height="698">
-            </a>
-            <div class="note-body">
-              <p class="note-kicker">Task 01 · 覆盖 03 + 04</p>
-              <h3>从模型到可复现的科研智能体</h3>
-              <p>从 Agent = Model + Harness 讲起：两个硬缺陷如何逼出 Harness 的六件事，一次文献检索在内部怎么走，以及 Skill 怎样把一次成功固化成可复用流程。</p>
-              <ul class="note-meta"><li>9 张课件截图</li><li>一页速查</li><li>自测 10 题</li></ul>
-              <div class="note-links">
-                <a class="btn btn-small btn-primary" href="notes/task1-illustrated.html">读图文版</a>
-                <a class="btn btn-small btn-ghost" href="notes/task1-text.html">文字版</a>
-                <a class="btn btn-small btn-ghost" href="https://github.com/biociao/panshi-ai4s-practice/raw/study/learning/notes/task1/task1-illustrated-notes.pdf" target="_blank" rel="noopener">PDF</a>
-              </div>
-            </div>
+        <div class="post-list">
+          <article class="post" data-reveal>
+            <p class="post-date">2026-11-16</p>
+            <p class="post-kicker">Task 01 · 图文笔记</p>
+            <h3><a href="notes/task1-illustrated.html">从模型到可复现的科研智能体</a></h3>
+            <p class="post-excerpt">03 + 04 两讲的结构化精读：Harness 的六件事、一次文献检索的时序、ReAct 与 Workflow 的分工、Skill 的三段结构与调用机制。</p>
+            <p class="post-meta">约 4,793 字 · 9 处图注 · 12 分钟 · <a href="notes/task1-illustrated.html">阅读 →</a></p>
           </article>
 
-          <div class="note-col">
-            <article class="note" data-reveal>
-              <div class="note-art" aria-hidden="true">
-                <span class="note-art-num">11</span>
-                <span class="note-art-lines"></span>
-                <span class="note-art-tag">29 节 · 图文</span>
-              </div>
-              <div class="note-body">
-                <p class="note-kicker">第 11 讲 · 科学智能进阶</p>
-                <h3>领域基座模型与 AI Scientist</h3>
-                <p>从预训练表示与任务适配，到 SN Clock、StarWhisper 望远镜，再到 AI Scientist 的实验闭环与树搜索。</p>
-                <div class="note-links">
-                  <a class="btn btn-small btn-ghost" href="notes/11.html">阅读全文</a>
-                  <a class="btn btn-small btn-ghost" href="https://github.com/biociao/panshi-ai4s-practice/raw/study/pdf/11_%E7%A7%91%E5%AD%A6%E6%99%BA%E8%83%BD%E8%BF%9B%E9%98%B6_%E6%9D%8E%E7%91%80%E6%97%B8.pdf" target="_blank" rel="noopener">PDF</a>
-                </div>
-              </div>
-            </article>
+          <article class="post" data-reveal>
+            <p class="post-date">2026-11-16</p>
+            <p class="post-kicker">Task 01 · 文字版</p>
+            <h3><a href="notes/task1-text.html">Task1 学习笔记：科研智能体与 Skill 入门</a></h3>
+            <p class="post-excerpt">同一份笔记的文字版：表格、页码索引、速查与自测题，适合检索、复制和打印。</p>
+            <p class="post-meta">约 6,258 字 · 16 分钟 · <a href="notes/task1-text.html">阅读 →</a></p>
+          </article>
 
-            <article class="note note-slim" data-reveal>
-              <div class="note-body">
-                <p class="note-kicker">学习进度总表</p>
-                <h3>11 讲状态与笔记索引</h3>
-                <p>每讲的状态、开始 / 完成日期、页码与笔记入口，随学随更新。</p>
-                <a class="lec-note" href="notes/progress.html">查看进度页 <span aria-hidden="true">→</span></a>
-              </div>
-            </article>
+          <article class="post" data-reveal>
+            <p class="post-date">2026-11-16</p>
+            <p class="post-kicker">课程进度</p>
+            <h3><a href="notes/progress.html">学习进度 · 磐石·科学智能实训营</a></h3>
+            <p class="post-excerpt">11 讲的状态、页码、起止日期与笔记入口；只记录自己的阅读，不代表课程完成度。</p>
+            <p class="post-meta">约 515 字 · 1 分钟 · <a href="notes/progress.html">查看 →</a></p>
+          </article>
 
-            <article class="note note-slim" data-reveal>
-              <div class="note-body">
-                <p class="note-kicker">笔记覆盖</p>
-                <h3>2 讲已整理 · 9 讲待补</h3>
-                <ul class="coverage" aria-label="各讲笔记状态">
-                  <li>01</li><li>02</li>
-                  <li class="is-note">03</li><li class="is-note">04</li>
-                  <li>05</li><li>06</li><li>07</li><li>08</li><li>09</li><li>10</li>
-                  <li class="is-read">11</li>
-                </ul>
-                <p class="coverage-note">03 / 04 已合并为 Task1；11 附图文资料；01、02、05–10 仍为模板。</p>
-              </div>
-            </article>
-          </div>
+          <article class="post" data-reveal>
+            <p class="post-date">2026-10-09</p>
+            <p class="post-kicker">第 11 讲 · 图文资料</p>
+            <h3><a href="notes/11.html">如何构建领域基座模型与 AI Scientist 系统</a></h3>
+            <p class="post-excerpt">29 节图文资料：领域基座模型、光变序列、SN Clock、StarWhisper 望远镜与 AI Scientist 的实验闭环。</p>
+            <p class="post-meta">约 11,487 字 · 29 处图注 · 29 分钟 · <a href="notes/11.html">阅读 →</a></p>
+          </article>
         </div>
 
-        <p class="section-more" data-reveal><a href="notes/index.html">进入笔记索引 <span aria-hidden="true">→</span></a></p>
+        <p class="section-more" data-reveal><a href="notes/index.html">全部笔记与各讲状态 →</a></p>
       </div>
     </section>
 
-    <!-- ============ RESOURCES ============ -->
-    <section class="section" id="resources" aria-labelledby="resources-title">
+    <section class="section" id="progress" aria-labelledby="progress-title">
       <div class="wrap">
         <div class="section-head" data-reveal>
-          <p class="eyebrow">六、资料与仓库</p>
-          <h2 id="resources-title">课件、进度与原始笔记都在仓库里</h2>
-          <p>上游仓库提供官方课件，个人 fork 的 study 分支放学习笔记；main 保持与上游一致。</p>
+          <p class="eyebrow">二、学习进度</p>
+          <h2 id="progress-title">已通读 2 讲，74 页；4 篇笔记</h2>
+          <p>只记录自己的阅读与笔记，不代表课程完成度。详细页码、日期与笔记入口见进度页。</p>
         </div>
 
-        <div class="links" data-reveal>
+        <div class="progress-compact" data-reveal>
+          <div class="progress-number"><strong>22%</strong><span>74 / 334 页</span></div>
+          <div class="progress-copy">
+            <p>03、04 已通读并整理成 Task1；第 11 讲有图文资料；其余 8 讲未开始。</p>
+            <div class="progress-line"><i data-fill="22"></i></div>
+            <ul class="progress-facts">
+              <li><b>2</b><span>已过课件</span></li>
+              <li><b>9</b><span>待读讲次</span></li>
+              <li><b>4</b><span>篇笔记</span></li>
+            </ul>
+          </div>
+          <a class="progress-link" href="notes/progress.html">查看进度页 <span aria-hidden="true">→</span></a>
+        </div>
+
+        <div class="coverage-block" data-reveal>
+          <p class="coverage-label">笔记覆盖</p>
+          <ul class="coverage" aria-label="各讲笔记状态">
+            <li>01</li><li>02</li>
+            <li class="is-note">03</li><li class="is-note">04</li>
+            <li>05</li><li>06</li><li>07</li><li>08</li><li>09</li><li>10</li>
+            <li class="is-read">11</li>
+          </ul>
+          <p class="coverage-note">03 / 04 已合并为 Task1；11 附图文资料；01、02、05–10 仍为模板。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="sources" aria-labelledby="sources-title">
+      <div class="wrap">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow">三、课程来源</p>
+          <h2 id="sources-title">课程与课件，引用自官方发布</h2>
+          <p>本站只记录个人笔记，不转载课件正文、图片与封面。课程内容、课件与图表版权归磐石·科学智能实训营及各讲讲师所有。</p>
+        </div>
+
+        <div class="links" id="resources" data-reveal>
           <a class="link-row" href="https://github.com/TashanGKD/panshi-ai4s-practice" target="_blank" rel="noopener">
-            <span class="link-main"><span class="link-t">上游课件仓库</span><span class="link-d">TashanGKD / panshi-ai4s-practice · 官方 README、11 讲 PDF 与第 11 讲图文资料</span></span>
+            <span class="link-main"><span class="link-t">官方课程仓库</span><span class="link-d">TashanGKD / panshi-ai4s-practice · 课程说明与课件</span></span>
+            <span class="link-arrow" aria-hidden="true">↗</span>
+          </a>
+          <a class="link-row" href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/README.md" target="_blank" rel="noopener">
+            <span class="link-main"><span class="link-t">官方课程说明</span><span class="link-d">README · 课程目标、目录与课件入口</span></span>
+            <span class="link-arrow" aria-hidden="true">↗</span>
+          </a>
+          <a class="link-row" href="https://github.com/TashanGKD/panshi-ai4s-practice/tree/main/pdf" target="_blank" rel="noopener">
+            <span class="link-main"><span class="link-t">官方课件 PDF 目录</span><span class="link-d">11 讲原始课件，按讲次编号</span></span>
             <span class="link-arrow" aria-hidden="true">↗</span>
           </a>
           <a class="link-row" href="https://github.com/biociao/panshi-ai4s-practice" target="_blank" rel="noopener">
-            <span class="link-main"><span class="link-t">我的 fork</span><span class="link-d">biociao / panshi-ai4s-practice · 学习笔记在 study 分支</span></span>
-            <span class="link-arrow" aria-hidden="true">↗</span>
-          </a>
-          <a class="link-row" href="notes/progress.html">
-            <span class="link-main"><span class="link-t">学习进度总表</span><span class="link-d">站内进度页 · 11 讲状态、页码、日期与笔记入口</span></span>
+            <span class="link-main"><span class="link-t">我的 fork / 笔记源文件</span><span class="link-d">biociao / panshi-ai4s-practice · study 分支</span></span>
             <span class="link-arrow" aria-hidden="true">↗</span>
           </a>
           <a class="link-row" href="notes/index.html">
-            <span class="link-main"><span class="link-t">笔记索引</span><span class="link-d">站内笔记索引 · Task1 图文/文字、第 11 讲、进度页</span></span>
+            <span class="link-main"><span class="link-t">站内笔记索引</span><span class="link-d">Task1 图文/文字、第 11 讲、进度页</span></span>
             <span class="link-arrow" aria-hidden="true">↗</span>
           </a>
-          <a class="link-row" href="https://github.com/biociao/panshi-ai4s-practice/tree/study/pdf" target="_blank" rel="noopener">
-            <span class="link-main"><span class="link-t">课件 PDF 目录</span><span class="link-d">pdf/ · 11 讲原始课件，按讲次编号</span></span>
-            <span class="link-arrow" aria-hidden="true">↗</span>
-          </a>
-          <a class="link-row" href="notes/11.html">
-            <span class="link-main"><span class="link-t">第 11 讲图文资料</span><span class="link-d">站内笔记 · 29 节图文资料，含配图与案例</span></span>
+          <a class="link-row" href="notes/progress.html">
+            <span class="link-main"><span class="link-t">学习进度页</span><span class="link-d">11 讲状态、页码、日期与笔记入口</span></span>
             <span class="link-arrow" aria-hidden="true">↗</span>
           </a>
         </div>
 
+        <details class="source-details" data-reveal>
+          <summary>11 讲官方课件与主讲 <span>展开 / 收起</span></summary>
+          <div class="source-table-wrap">
+            <table class="source-table">
+              <thead><tr><th>讲次</th><th>主题</th><th>主讲</th><th>官方课件</th></tr></thead>
+              <tbody>
+                <tr><td>01</td><td>深入理解神经网络原理与模型训练</td><td>李文毅</td><td><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/01_%E7%A7%91%E5%AD%A6%E6%A8%A1%E5%9E%8B%E5%AE%9E%E8%AE%AD%EF%BC%88%E4%B8%80%EF%BC%89_%E6%9D%8E%E6%96%87%E6%AF%85.pdf" target="_blank" rel="noopener">PDF ↗</a></td></tr>
+                <tr><td>02</td><td>面向科学场景的数据理解与模型选型</td><td>李文毅</td><td><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/02_%E7%A7%91%E5%AD%A6%E6%A8%A1%E5%9E%8B%E5%AE%9E%E8%AE%AD%EF%BC%88%E4%BA%8C%EF%BC%89_%E6%9D%8E%E6%96%87%E6%AF%85.pdf" target="_blank" rel="noopener">PDF ↗</a></td></tr>
+                <tr><td>03</td><td>从零开始构建智能体</td><td>陈希鸿</td><td><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/03_%E7%A7%91%E7%A0%94%E6%99%BA%E8%83%BD%E4%BD%93%E5%AE%9E%E8%AE%AD%EF%BC%88%E4%B8%80%EF%BC%89_%E9%99%88%E5%B8%8C%E9%B8%BF.pdf" target="_blank" rel="noopener">PDF ↗</a></td></tr>
+                <tr><td>04</td><td>Skill 的设计与应用</td><td>刘子笑</td><td><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/04_%E7%A7%91%E7%A0%94%E6%99%BA%E8%83%BD%E4%BD%93%E5%AE%9E%E8%AE%AD%EF%BC%88%E4%BA%8C%EF%BC%89_%E5%88%98%E5%AD%90%E7%AC%91.pdf" target="_blank" rel="noopener">PDF ↗</a></td></tr>
+                <tr><td>05</td><td>AI 嵌入的可解释模型设计</td><td>巩泽钊</td><td><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/05_%E7%A7%91%E7%A0%94%E6%99%BA%E8%83%BD%E4%BD%93%E5%AE%9E%E8%AE%AD%EF%BC%88%E4%B8%89%EF%BC%89_%E5%B7%A9%E6%B3%BD%E9%92%8A.pdf" target="_blank" rel="noopener">PDF ↗</a></td></tr>
+                <tr><td>06</td><td>跨会话记忆管理与 RAG 检索</td><td>余宣庆</td><td><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/06_%E6%99%BA%E8%83%BD%E4%BD%93%E8%AE%B0%E5%BF%86%E4%B8%8E%E7%9F%A5%E8%AF%86%E5%BA%93_%E4%BD%99%E5%AE%A3%E5%BA%86.pdf" target="_blank" rel="noopener">PDF ↗</a></td></tr>
+                <tr><td>07</td><td>构建科研数据 Harness</td><td>张健</td><td><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/07_Harness%E5%AE%9E%E8%AE%AD_%E5%BC%A0%E5%81%A5.pdf" target="_blank" rel="noopener">PDF ↗</a></td></tr>
+                <tr><td>08</td><td>工具、技能与应用生态分享</td><td>王正帅</td><td><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/08_%E7%A3%90%E7%9F%B3%E5%BA%94%E7%94%A8%E5%AE%9E%E8%AE%AD_%E7%8E%8B%E6%AD%A3%E5%B8%85.pdf" target="_blank" rel="noopener">PDF ↗</a></td></tr>
+                <tr><td>09</td><td>科研智能体的能力集成：CLI &amp; Skill</td><td>欧仕刚</td><td><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/09_%E7%AB%AF%E5%88%B0%E7%AB%AF%E9%97%AD%E7%8E%AF%EF%BC%88%E4%B8%80%EF%BC%89_%E6%AC%A7%E4%BB%95%E5%88%9A.pdf" target="_blank" rel="noopener">PDF ↗</a></td></tr>
+                <tr><td>10</td><td>科研智能体长程任务的保障机制：Loop &amp; Autoresearch</td><td>欧仕刚</td><td><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/10_%E7%AB%AF%E5%88%B0%E7%AB%AF%E9%97%AD%E7%8E%AF%EF%BC%88%E4%BA%8C%EF%BC%89_%E6%AC%A7%E4%BB%95%E5%88%9A.pdf" target="_blank" rel="noopener">PDF ↗</a></td></tr>
+                <tr><td>11</td><td>如何构建领域基座模型与 AI Scientist 系统</td><td>李瑀旸</td><td><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/11_%E7%A7%91%E5%AD%A6%E6%99%BA%E8%83%BD%E8%BF%9B%E9%98%B6_%E6%9D%8E%E7%91%80%E6%97%B8.pdf" target="_blank" rel="noopener">PDF ↗</a></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+
         <div class="fineprint" data-reveal>
-          <p><strong>关于版权：</strong>课程内容与课件版权归磐石·科学智能实训营及各讲讲师所有。本页是个人学习索引，只摘录课程标题、页码与自己的理解，不转载课件正文；封面图取自公开 PDF 首页，仅用于讲次识别。</p>
-          <p><strong>关于状态：</strong>进度与页码来自 <code>learning/progress.md</code>；笔记正文由 <code>tools/build_notes.py</code> 从 Markdown 生成，源文件以 study 分支为准。页面为静态版本，更新笔记后需重新运行脚本并部署。</p>
+          <p><strong>关于引用：</strong>课程内容、课件、封面与图表版权归磐石·科学智能实训营及各讲讲师所有。本站不转载课件正文与图片；笔记中的「图注」仅引用官方课件的标题与页码，并链接到官方 PDF。</p>
+          <p><strong>关于笔记：</strong>笔记为个人理解，可能与官方表述有出入；以官方课件为准。进度与页码来自 <code>learning/progress.md</code>，笔记正文由 <code>tools/build_notes.py</code> 从 Markdown 生成。</p>
         </div>
         <p class="citation" data-reveal>引用格式：biociao. 磐石·科学智能（AI for Science）实训营学习笔记[EB/OL]. 2026-11-16.</p>
       </div>
@@ -643,24 +278,24 @@
           </defs>
           <rect width="64" height="64" rx="12" fill="#231f1a"/>
           <rect x="1" y="1" width="62" height="62" rx="11" fill="none" stroke="url(#footGrad)" stroke-opacity=".55"/>
-          <circle cx="32" cy="32" r="14.5" fill="none" stroke="url(#footGrad)" stroke-width="3"/>
+          <circle cx="32" cy="32" r="14.5" fill="none" stroke="url(#footGrad)" stroke-width="2.5"/>
           <circle cx="32" cy="32" r="4" fill="#f6f1e7"/>
           <circle cx="46" cy="18" r="3.2" fill="url(#footGrad)"/>
         </svg>
         <div>
           <strong>磐石 AI4S · 学习笔记</strong>
-          <span>11 讲课程索引与个人学习记录</span>
+          <span>个人学习记录与课程引用</span>
         </div>
       </div>
       <nav class="footer-links" aria-label="页脚链接">
-        <a href="#lectures">课程目录</a>
-        <a href="#progress">学习进度</a>
-        <a href="#notes">笔记</a>
+        <a href="notes/index.html">笔记</a>
+        <a href="#progress">进度</a>
+        <a href="#sources">课程来源</a>
         <a href="https://github.com/biociao/panshi-ai4s-practice" target="_blank" rel="noopener">GitHub</a>
       </nav>
     </div>
     <div class="wrap footer-bottom">
-      <span>整理 biociao · 更新于 2026-11-16 · 数据来源 learning/progress.md</span>
+      <span>整理 biociao · 更新于 2026-11-16 · 个人学习记录</span>
       <span>排版 原生 HTML / CSS · 无第三方依赖</span>
     </div>
   </footer>

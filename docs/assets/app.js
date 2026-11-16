@@ -51,7 +51,7 @@
   var toTop = document.querySelector('[data-to-top]');
   var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav-links a[href^="#"]'));
   var menuLinks = Array.prototype.slice.call(document.querySelectorAll('.nav-links a'));
-  var sections = ['path', 'lectures', 'progress', 'notes', 'resources']
+  var sections = ['notes', 'progress', 'sources']
     .map(function (id) { return document.getElementById(id); })
     .filter(Boolean);
 

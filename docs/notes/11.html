@@ -43,10 +43,9 @@
       </a>
 
       <nav class="nav-links" id="site-menu" aria-label="页面导航">
-        <a href="../index.html#path">学习路线</a>
-        <a href="../index.html#lectures">课程目录</a>
-        <a href="../index.html#progress">学习进度</a>
         <a href="index.html" class="active" aria-current="page">笔记</a>
+        <a href="../index.html#progress">进度</a>
+        <a href="../index.html#sources">课程来源</a>
         <a href="../index.html#resources">资料</a>
       </nav>
 
@@ -71,23 +70,23 @@
     </nav><header class="article-head">
       <p class="eyebrow">第 11 讲 · 科学智能进阶</p>
       <h1>如何构建领域基座模型与 AI Scientist 系统</h1>
-      <p class="article-meta"><span>更新于 2026 年 10 月 9 日</span><span>约 11,284 字</span><span>约 28 分钟</span><span>29 张图</span></p>
+      <p class="article-meta"><span>更新于 2026 年 10 月 9 日</span><span>约 11,487 字</span><span>约 29 分钟</span><span>29 处图注</span></p>
       <p class="article-source">源文件：<a href="https://github.com/biociao/panshi-ai4s-practice/blob/study/courses/11-li-yuyang/README.md" target="_blank" rel="noopener">GitHub</a> · <a href="index.html">全部笔记</a></p>
-    </header><details class="toc-mobile"><summary>目录</summary><nav class="toc" aria-label="本页目录"><ol><li><a href="#01-领域基座模型负责数据建模ai-scientist-负责组织科研过程">01 领域基座模型负责数据建模，AI Scientist 负责组织科研过程</a></li><li><a href="#02-人工智能正在从数据预测扩展到科研过程的组织">02 人工智能正在从数据预测扩展到科研过程的组织</a></li><li><a href="#03-科学问题需要先明确输入输出与评价标准再进入建模">03 科学问题需要先明确输入、输出与评价标准，再进入建模</a></li><li><a href="#04-无标签数据可以用于预训练有标签数据可以用于任务适配">04 无标签数据可以用于预训练，有标签数据可以用于任务适配</a></li><li><a href="#05-预训练学习数据关系微调使模型适应具体任务">05 预训练学习数据关系，微调使模型适应具体任务</a></li><li><a href="#06-光变序列的片段表示可以衔接自监督预训练与分类任务">06 光变序列的片段表示可以衔接自监督预训练与分类任务</a></li><li><a href="#07-基座模型通过预训练形成可复用的表示再适配下游任务">07 基座模型通过预训练形成可复用的表示，再适配下游任务</a></li><li><a href="#08-预训练表示的迁移效果取决于数据与目标任务的关联">08 预训练表示的迁移效果取决于数据与目标任务的关联</a></li><li><a href="#09-序列中的前后关系可以构成自监督训练的学习目标">09 序列中的前后关系可以构成自监督训练的学习目标</a></li><li><a href="#10-任务标签将预训练表示与具体科学量的预测联系起来">10 任务标签将预训练表示与具体科学量的预测联系起来</a></li><li><a href="#11-专用任务中学到的表示为跨任务复用提供了研究起点">11 专用任务中学到的表示为跨任务复用提供了研究起点</a></li><li><a href="#12-同一套预训练表示可以通过任务适配服务多个科学任务">12 同一套预训练表示可以通过任务适配服务多个科学任务</a></li><li><a href="#13-生成模型提出的科学候选需要通过计算或实验验证">13 生成模型提出的科学候选需要通过计算或实验验证</a></li><li><a href="#14-跨模态跨分布与跨对象建模需要明确数据之间的对齐关系">14 跨模态、跨分布与跨对象建模需要明确数据之间的对齐关系</a></li><li><a href="#15-公开报告整合形成信息时间序列硬件协同决定实际观测节奏">15 公开报告整合形成信息时间序列，硬件协同决定实际观测节奏</a></li><li><a href="#16-观测事件序列需要保留时间波段来源与探测状态">16 观测事件序列需要保留时间、波段、来源与探测状态</a></li><li><a href="#17-历史观测报告可以用于学习服务下游任务的证据表示">17 历史观测报告可以用于学习服务下游任务的证据表示</a></li><li><a href="#18-sn-clock-方案通过观测表示估计爆发年龄的分位数">18 SN Clock 方案通过观测表示估计爆发年龄的分位数</a></li><li><a href="#19-智能体可以把模型改进组织成提出方案运行实验和比较结果的循环">19 智能体可以把模型改进组织成提出方案、运行实验和比较结果的循环</a></li><li><a href="#20-ai-scientist-将计算实验与假设生成结果分析和写作连接起来">20 AI Scientist 将计算实验与假设生成、结果分析和写作连接起来</a></li><li><a href="#21-树搜索让科研系统能够比较并选择多条实验路线">21 树搜索让科研系统能够比较并选择多条实验路线</a></li><li><a href="#22-实验反馈需要参与下一轮决策才能形成持续迭代的研究流程">22 实验反馈需要参与下一轮决策，才能形成持续迭代的研究流程</a></li><li><a href="#23-语言模型接入实验工具时需要同时定义科学目标与验证标准">23 语言模型接入实验工具时，需要同时定义科学目标与验证标准</a></li><li><a href="#24-固定工作流与动态规划应依据稳定性和探索需求配合使用">24 固定工作流与动态规划应依据稳定性和探索需求配合使用</a></li><li><a href="#25-望远镜通过指向观测和状态调整执行科研系统的行动">25 望远镜通过指向、观测和状态调整执行科研系统的行动</a></li><li><a href="#26-观测任务中的具体瓶颈决定应改进模型还是科研流程">26 观测任务中的具体瓶颈决定应改进模型还是科研流程</a></li><li><a href="#27-starwhisper-telescope-将观测计划设备状态与结果分析连接起来">27 StarWhisper Telescope 将观测计划、设备状态与结果分析连接起来</a></li><li><a href="#28-科学问题的解决常常需要数据模型与科研流程共同改进">28 科学问题的解决常常需要数据模型与科研流程共同改进</a></li><li><a href="#29-跨学科实践需要围绕清晰的问题组织领域方法与工程能力">29 跨学科实践需要围绕清晰的问题组织领域、方法与工程能力</a></li><li><a href="#数据条件任务目标和资源约束共同决定方法选择">数据条件、任务目标和资源约束共同决定方法选择</a><ol><li><a href="#一-输入数据与目标任务决定应使用语言模型还是领域基座模型">一 输入数据与目标任务决定应使用语言模型还是领域基座模型</a></li><li><a href="#二-天文观测世界模型通过环境与目标信息支持望远镜行动学习">二 天文观测世界模型通过环境与目标信息支持望远镜行动学习</a></li><li><a href="#三-编程智能体的运行机制需要兼顾探索能力与执行稳定性">三 编程智能体的运行机制需要兼顾探索能力与执行稳定性</a></li><li><a href="#四-二维到三维重建需要先定义输出表示并检查监督信息">四 二维到三维重建需要先定义输出表示并检查监督信息</a></li><li><a href="#五-多层次生物数据整合需要明确对象关系与可检验的建模目标">五 多层次生物数据整合需要明确对象关系与可检验的建模目标</a></li><li><a href="#六-资源有限时应先用小规模实验检验方法再扩大训练">六 资源有限时，应先用小规模实验检验方法，再扩大训练</a></li></ol></li><li><a href="#参考资料">参考资料</a></li></ol></nav></details><div class="article-layout"><nav class="toc" aria-label="本页目录"><p class="toc-title">目录</p><ol><li><a href="#01-领域基座模型负责数据建模ai-scientist-负责组织科研过程">01 领域基座模型负责数据建模，AI Scientist 负责组织科研过程</a></li><li><a href="#02-人工智能正在从数据预测扩展到科研过程的组织">02 人工智能正在从数据预测扩展到科研过程的组织</a></li><li><a href="#03-科学问题需要先明确输入输出与评价标准再进入建模">03 科学问题需要先明确输入、输出与评价标准，再进入建模</a></li><li><a href="#04-无标签数据可以用于预训练有标签数据可以用于任务适配">04 无标签数据可以用于预训练，有标签数据可以用于任务适配</a></li><li><a href="#05-预训练学习数据关系微调使模型适应具体任务">05 预训练学习数据关系，微调使模型适应具体任务</a></li><li><a href="#06-光变序列的片段表示可以衔接自监督预训练与分类任务">06 光变序列的片段表示可以衔接自监督预训练与分类任务</a></li><li><a href="#07-基座模型通过预训练形成可复用的表示再适配下游任务">07 基座模型通过预训练形成可复用的表示，再适配下游任务</a></li><li><a href="#08-预训练表示的迁移效果取决于数据与目标任务的关联">08 预训练表示的迁移效果取决于数据与目标任务的关联</a></li><li><a href="#09-序列中的前后关系可以构成自监督训练的学习目标">09 序列中的前后关系可以构成自监督训练的学习目标</a></li><li><a href="#10-任务标签将预训练表示与具体科学量的预测联系起来">10 任务标签将预训练表示与具体科学量的预测联系起来</a></li><li><a href="#11-专用任务中学到的表示为跨任务复用提供了研究起点">11 专用任务中学到的表示为跨任务复用提供了研究起点</a></li><li><a href="#12-同一套预训练表示可以通过任务适配服务多个科学任务">12 同一套预训练表示可以通过任务适配服务多个科学任务</a></li><li><a href="#13-生成模型提出的科学候选需要通过计算或实验验证">13 生成模型提出的科学候选需要通过计算或实验验证</a></li><li><a href="#14-跨模态跨分布与跨对象建模需要明确数据之间的对齐关系">14 跨模态、跨分布与跨对象建模需要明确数据之间的对齐关系</a></li><li><a href="#15-公开报告整合形成信息时间序列硬件协同决定实际观测节奏">15 公开报告整合形成信息时间序列，硬件协同决定实际观测节奏</a></li><li><a href="#16-观测事件序列需要保留时间波段来源与探测状态">16 观测事件序列需要保留时间、波段、来源与探测状态</a></li><li><a href="#17-历史观测报告可以用于学习服务下游任务的证据表示">17 历史观测报告可以用于学习服务下游任务的证据表示</a></li><li><a href="#18-sn-clock-方案通过观测表示估计爆发年龄的分位数">18 SN Clock 方案通过观测表示估计爆发年龄的分位数</a></li><li><a href="#19-智能体可以把模型改进组织成提出方案运行实验和比较结果的循环">19 智能体可以把模型改进组织成提出方案、运行实验和比较结果的循环</a></li><li><a href="#20-ai-scientist-将计算实验与假设生成结果分析和写作连接起来">20 AI Scientist 将计算实验与假设生成、结果分析和写作连接起来</a></li><li><a href="#21-树搜索让科研系统能够比较并选择多条实验路线">21 树搜索让科研系统能够比较并选择多条实验路线</a></li><li><a href="#22-实验反馈需要参与下一轮决策才能形成持续迭代的研究流程">22 实验反馈需要参与下一轮决策，才能形成持续迭代的研究流程</a></li><li><a href="#23-语言模型接入实验工具时需要同时定义科学目标与验证标准">23 语言模型接入实验工具时，需要同时定义科学目标与验证标准</a></li><li><a href="#24-固定工作流与动态规划应依据稳定性和探索需求配合使用">24 固定工作流与动态规划应依据稳定性和探索需求配合使用</a></li><li><a href="#25-望远镜通过指向观测和状态调整执行科研系统的行动">25 望远镜通过指向、观测和状态调整执行科研系统的行动</a></li><li><a href="#26-观测任务中的具体瓶颈决定应改进模型还是科研流程">26 观测任务中的具体瓶颈决定应改进模型还是科研流程</a></li><li><a href="#27-starwhisper-telescope-将观测计划设备状态与结果分析连接起来">27 StarWhisper Telescope 将观测计划、设备状态与结果分析连接起来</a></li><li><a href="#28-科学问题的解决常常需要数据模型与科研流程共同改进">28 科学问题的解决常常需要数据模型与科研流程共同改进</a></li><li><a href="#29-跨学科实践需要围绕清晰的问题组织领域方法与工程能力">29 跨学科实践需要围绕清晰的问题组织领域、方法与工程能力</a></li><li><a href="#数据条件任务目标和资源约束共同决定方法选择">数据条件、任务目标和资源约束共同决定方法选择</a><ol><li><a href="#一-输入数据与目标任务决定应使用语言模型还是领域基座模型">一 输入数据与目标任务决定应使用语言模型还是领域基座模型</a></li><li><a href="#二-天文观测世界模型通过环境与目标信息支持望远镜行动学习">二 天文观测世界模型通过环境与目标信息支持望远镜行动学习</a></li><li><a href="#三-编程智能体的运行机制需要兼顾探索能力与执行稳定性">三 编程智能体的运行机制需要兼顾探索能力与执行稳定性</a></li><li><a href="#四-二维到三维重建需要先定义输出表示并检查监督信息">四 二维到三维重建需要先定义输出表示并检查监督信息</a></li><li><a href="#五-多层次生物数据整合需要明确对象关系与可检验的建模目标">五 多层次生物数据整合需要明确对象关系与可检验的建模目标</a></li><li><a href="#六-资源有限时应先用小规模实验检验方法再扩大训练">六 资源有限时，应先用小规模实验检验方法，再扩大训练</a></li></ol></li><li><a href="#参考资料">参考资料</a></li></ol></nav><article class="article-body"><p><a href="../index.html#lectures">返回课程目录</a> · <a href="https://github.com/biociao/panshi-ai4s-practice/blob/study/pdf/11_%E7%A7%91%E5%AD%A6%E6%99%BA%E8%83%BD%E8%BF%9B%E9%98%B6_%E6%9D%8E%E7%91%80%E6%97%B8.pdf" rel="noopener" target="_blank">查看课件 PDF</a> · <a href="https://github.com/TashanGKD/panshi-ai4s-practice/raw/refs/heads/main/pdf/11_科学智能进阶_李瑀旸.pdf" rel="noopener" target="_blank">下载课件 PDF</a></p>
+    </header><div class="article-callout article-callout--top">本文为个人学习笔记；文中「图注」指官方课件的对应页，原图与课件请以官方发布为准。本站不转载课件图片。</div><details class="toc-mobile"><summary>目录</summary><nav class="toc" aria-label="本页目录"><ol><li><a href="#01-领域基座模型负责数据建模ai-scientist-负责组织科研过程">01 领域基座模型负责数据建模，AI Scientist 负责组织科研过程</a></li><li><a href="#02-人工智能正在从数据预测扩展到科研过程的组织">02 人工智能正在从数据预测扩展到科研过程的组织</a></li><li><a href="#03-科学问题需要先明确输入输出与评价标准再进入建模">03 科学问题需要先明确输入、输出与评价标准，再进入建模</a></li><li><a href="#04-无标签数据可以用于预训练有标签数据可以用于任务适配">04 无标签数据可以用于预训练，有标签数据可以用于任务适配</a></li><li><a href="#05-预训练学习数据关系微调使模型适应具体任务">05 预训练学习数据关系，微调使模型适应具体任务</a></li><li><a href="#06-光变序列的片段表示可以衔接自监督预训练与分类任务">06 光变序列的片段表示可以衔接自监督预训练与分类任务</a></li><li><a href="#07-基座模型通过预训练形成可复用的表示再适配下游任务">07 基座模型通过预训练形成可复用的表示，再适配下游任务</a></li><li><a href="#08-预训练表示的迁移效果取决于数据与目标任务的关联">08 预训练表示的迁移效果取决于数据与目标任务的关联</a></li><li><a href="#09-序列中的前后关系可以构成自监督训练的学习目标">09 序列中的前后关系可以构成自监督训练的学习目标</a></li><li><a href="#10-任务标签将预训练表示与具体科学量的预测联系起来">10 任务标签将预训练表示与具体科学量的预测联系起来</a></li><li><a href="#11-专用任务中学到的表示为跨任务复用提供了研究起点">11 专用任务中学到的表示为跨任务复用提供了研究起点</a></li><li><a href="#12-同一套预训练表示可以通过任务适配服务多个科学任务">12 同一套预训练表示可以通过任务适配服务多个科学任务</a></li><li><a href="#13-生成模型提出的科学候选需要通过计算或实验验证">13 生成模型提出的科学候选需要通过计算或实验验证</a></li><li><a href="#14-跨模态跨分布与跨对象建模需要明确数据之间的对齐关系">14 跨模态、跨分布与跨对象建模需要明确数据之间的对齐关系</a></li><li><a href="#15-公开报告整合形成信息时间序列硬件协同决定实际观测节奏">15 公开报告整合形成信息时间序列，硬件协同决定实际观测节奏</a></li><li><a href="#16-观测事件序列需要保留时间波段来源与探测状态">16 观测事件序列需要保留时间、波段、来源与探测状态</a></li><li><a href="#17-历史观测报告可以用于学习服务下游任务的证据表示">17 历史观测报告可以用于学习服务下游任务的证据表示</a></li><li><a href="#18-sn-clock-方案通过观测表示估计爆发年龄的分位数">18 SN Clock 方案通过观测表示估计爆发年龄的分位数</a></li><li><a href="#19-智能体可以把模型改进组织成提出方案运行实验和比较结果的循环">19 智能体可以把模型改进组织成提出方案、运行实验和比较结果的循环</a></li><li><a href="#20-ai-scientist-将计算实验与假设生成结果分析和写作连接起来">20 AI Scientist 将计算实验与假设生成、结果分析和写作连接起来</a></li><li><a href="#21-树搜索让科研系统能够比较并选择多条实验路线">21 树搜索让科研系统能够比较并选择多条实验路线</a></li><li><a href="#22-实验反馈需要参与下一轮决策才能形成持续迭代的研究流程">22 实验反馈需要参与下一轮决策，才能形成持续迭代的研究流程</a></li><li><a href="#23-语言模型接入实验工具时需要同时定义科学目标与验证标准">23 语言模型接入实验工具时，需要同时定义科学目标与验证标准</a></li><li><a href="#24-固定工作流与动态规划应依据稳定性和探索需求配合使用">24 固定工作流与动态规划应依据稳定性和探索需求配合使用</a></li><li><a href="#25-望远镜通过指向观测和状态调整执行科研系统的行动">25 望远镜通过指向、观测和状态调整执行科研系统的行动</a></li><li><a href="#26-观测任务中的具体瓶颈决定应改进模型还是科研流程">26 观测任务中的具体瓶颈决定应改进模型还是科研流程</a></li><li><a href="#27-starwhisper-telescope-将观测计划设备状态与结果分析连接起来">27 StarWhisper Telescope 将观测计划、设备状态与结果分析连接起来</a></li><li><a href="#28-科学问题的解决常常需要数据模型与科研流程共同改进">28 科学问题的解决常常需要数据模型与科研流程共同改进</a></li><li><a href="#29-跨学科实践需要围绕清晰的问题组织领域方法与工程能力">29 跨学科实践需要围绕清晰的问题组织领域、方法与工程能力</a></li><li><a href="#数据条件任务目标和资源约束共同决定方法选择">数据条件、任务目标和资源约束共同决定方法选择</a><ol><li><a href="#一-输入数据与目标任务决定应使用语言模型还是领域基座模型">一 输入数据与目标任务决定应使用语言模型还是领域基座模型</a></li><li><a href="#二-天文观测世界模型通过环境与目标信息支持望远镜行动学习">二 天文观测世界模型通过环境与目标信息支持望远镜行动学习</a></li><li><a href="#三-编程智能体的运行机制需要兼顾探索能力与执行稳定性">三 编程智能体的运行机制需要兼顾探索能力与执行稳定性</a></li><li><a href="#四-二维到三维重建需要先定义输出表示并检查监督信息">四 二维到三维重建需要先定义输出表示并检查监督信息</a></li><li><a href="#五-多层次生物数据整合需要明确对象关系与可检验的建模目标">五 多层次生物数据整合需要明确对象关系与可检验的建模目标</a></li><li><a href="#六-资源有限时应先用小规模实验检验方法再扩大训练">六 资源有限时，应先用小规模实验检验方法，再扩大训练</a></li></ol></li><li><a href="#参考资料">参考资料</a></li></ol></nav></details><div class="article-layout"><nav class="toc" aria-label="本页目录"><p class="toc-title">目录</p><ol><li><a href="#01-领域基座模型负责数据建模ai-scientist-负责组织科研过程">01 领域基座模型负责数据建模，AI Scientist 负责组织科研过程</a></li><li><a href="#02-人工智能正在从数据预测扩展到科研过程的组织">02 人工智能正在从数据预测扩展到科研过程的组织</a></li><li><a href="#03-科学问题需要先明确输入输出与评价标准再进入建模">03 科学问题需要先明确输入、输出与评价标准，再进入建模</a></li><li><a href="#04-无标签数据可以用于预训练有标签数据可以用于任务适配">04 无标签数据可以用于预训练，有标签数据可以用于任务适配</a></li><li><a href="#05-预训练学习数据关系微调使模型适应具体任务">05 预训练学习数据关系，微调使模型适应具体任务</a></li><li><a href="#06-光变序列的片段表示可以衔接自监督预训练与分类任务">06 光变序列的片段表示可以衔接自监督预训练与分类任务</a></li><li><a href="#07-基座模型通过预训练形成可复用的表示再适配下游任务">07 基座模型通过预训练形成可复用的表示，再适配下游任务</a></li><li><a href="#08-预训练表示的迁移效果取决于数据与目标任务的关联">08 预训练表示的迁移效果取决于数据与目标任务的关联</a></li><li><a href="#09-序列中的前后关系可以构成自监督训练的学习目标">09 序列中的前后关系可以构成自监督训练的学习目标</a></li><li><a href="#10-任务标签将预训练表示与具体科学量的预测联系起来">10 任务标签将预训练表示与具体科学量的预测联系起来</a></li><li><a href="#11-专用任务中学到的表示为跨任务复用提供了研究起点">11 专用任务中学到的表示为跨任务复用提供了研究起点</a></li><li><a href="#12-同一套预训练表示可以通过任务适配服务多个科学任务">12 同一套预训练表示可以通过任务适配服务多个科学任务</a></li><li><a href="#13-生成模型提出的科学候选需要通过计算或实验验证">13 生成模型提出的科学候选需要通过计算或实验验证</a></li><li><a href="#14-跨模态跨分布与跨对象建模需要明确数据之间的对齐关系">14 跨模态、跨分布与跨对象建模需要明确数据之间的对齐关系</a></li><li><a href="#15-公开报告整合形成信息时间序列硬件协同决定实际观测节奏">15 公开报告整合形成信息时间序列，硬件协同决定实际观测节奏</a></li><li><a href="#16-观测事件序列需要保留时间波段来源与探测状态">16 观测事件序列需要保留时间、波段、来源与探测状态</a></li><li><a href="#17-历史观测报告可以用于学习服务下游任务的证据表示">17 历史观测报告可以用于学习服务下游任务的证据表示</a></li><li><a href="#18-sn-clock-方案通过观测表示估计爆发年龄的分位数">18 SN Clock 方案通过观测表示估计爆发年龄的分位数</a></li><li><a href="#19-智能体可以把模型改进组织成提出方案运行实验和比较结果的循环">19 智能体可以把模型改进组织成提出方案、运行实验和比较结果的循环</a></li><li><a href="#20-ai-scientist-将计算实验与假设生成结果分析和写作连接起来">20 AI Scientist 将计算实验与假设生成、结果分析和写作连接起来</a></li><li><a href="#21-树搜索让科研系统能够比较并选择多条实验路线">21 树搜索让科研系统能够比较并选择多条实验路线</a></li><li><a href="#22-实验反馈需要参与下一轮决策才能形成持续迭代的研究流程">22 实验反馈需要参与下一轮决策，才能形成持续迭代的研究流程</a></li><li><a href="#23-语言模型接入实验工具时需要同时定义科学目标与验证标准">23 语言模型接入实验工具时，需要同时定义科学目标与验证标准</a></li><li><a href="#24-固定工作流与动态规划应依据稳定性和探索需求配合使用">24 固定工作流与动态规划应依据稳定性和探索需求配合使用</a></li><li><a href="#25-望远镜通过指向观测和状态调整执行科研系统的行动">25 望远镜通过指向、观测和状态调整执行科研系统的行动</a></li><li><a href="#26-观测任务中的具体瓶颈决定应改进模型还是科研流程">26 观测任务中的具体瓶颈决定应改进模型还是科研流程</a></li><li><a href="#27-starwhisper-telescope-将观测计划设备状态与结果分析连接起来">27 StarWhisper Telescope 将观测计划、设备状态与结果分析连接起来</a></li><li><a href="#28-科学问题的解决常常需要数据模型与科研流程共同改进">28 科学问题的解决常常需要数据模型与科研流程共同改进</a></li><li><a href="#29-跨学科实践需要围绕清晰的问题组织领域方法与工程能力">29 跨学科实践需要围绕清晰的问题组织领域、方法与工程能力</a></li><li><a href="#数据条件任务目标和资源约束共同决定方法选择">数据条件、任务目标和资源约束共同决定方法选择</a><ol><li><a href="#一-输入数据与目标任务决定应使用语言模型还是领域基座模型">一 输入数据与目标任务决定应使用语言模型还是领域基座模型</a></li><li><a href="#二-天文观测世界模型通过环境与目标信息支持望远镜行动学习">二 天文观测世界模型通过环境与目标信息支持望远镜行动学习</a></li><li><a href="#三-编程智能体的运行机制需要兼顾探索能力与执行稳定性">三 编程智能体的运行机制需要兼顾探索能力与执行稳定性</a></li><li><a href="#四-二维到三维重建需要先定义输出表示并检查监督信息">四 二维到三维重建需要先定义输出表示并检查监督信息</a></li><li><a href="#五-多层次生物数据整合需要明确对象关系与可检验的建模目标">五 多层次生物数据整合需要明确对象关系与可检验的建模目标</a></li><li><a href="#六-资源有限时应先用小规模实验检验方法再扩大训练">六 资源有限时，应先用小规模实验检验方法，再扩大训练</a></li></ol></li><li><a href="#参考资料">参考资料</a></li></ol></nav><article class="article-body"><p><a href="../index.html#sources">返回课程目录</a> · <a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/11_%E7%A7%91%E5%AD%A6%E6%99%BA%E8%83%BD%E8%BF%9B%E9%98%B6_%E6%9D%8E%E7%91%80%E6%97%B8.pdf" rel="noopener" target="_blank">查看课件 PDF</a> · <a href="https://github.com/TashanGKD/panshi-ai4s-practice/raw/refs/heads/main/pdf/11_科学智能进阶_李瑀旸.pdf" rel="noopener" target="_blank">下载课件 PDF</a></p>
 <p>主讲：李瑀旸｜磐石·科学智能实训营</p>
 <h2 id="01-领域基座模型负责数据建模ai-scientist-负责组织科研过程">01 领域基座模型负责数据建模，AI Scientist 负责组织科研过程<a aria-label="链接到本节" class="heading-anchor" href="#01-领域基座模型负责数据建模ai-scientist-负责组织科研过程">#</a></h2>
-<figure class="note-figure"><img alt="图1：如何构建领域基座模型与AI Scientist系统" decoding="async" height="675" loading="lazy" src="../assets/notes/11/slide-01.webp" width="1200"/><figcaption>图1：如何构建领域基座模型与AI Scientist系统</figcaption></figure>
+<div class="figure-ref"><span class="ref-label">图注</span><span class="ref-text">图1：如何构建领域基座模型与AI Scientist系统</span><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/11_%E7%A7%91%E5%AD%A6%E6%99%BA%E8%83%BD%E8%BF%9B%E9%98%B6_%E6%9D%8E%E7%91%80%E6%97%B8.pdf" rel="noopener" target="_blank">官方课件 11 ↗</a></div>
 <p>人工智能参与科学研究，可以从两个相互关联的问题入手：怎样从科学数据中学习可复用的特征，以及怎样组织工具和实验，使研究过程能够持续推进。</p>
 <p>第一个问题指向领域基座模型。一个学科往往积累了大量观测或实验数据，但只有少部分数据经过专家标注。如何利用其余数据学习结构、关联和变化规律，再将所学表示用于分类、参数估计等具体任务，是构建领域基座模型的基本出发点。</p>
 <p>第二个问题指向 AI Scientist 系统。科研过程包含文献调研、问题提出、实验设计、实验执行、结果分析与方案修正。模型可能完成其中一项预测，而科研系统还需要把这些环节组织起来，根据实验反馈决定下一步行动。</p>
 <p>可以从光变曲线的小规模实验理解这两个问题：先建立分类模型，再引入预训练和微调，随后由智能体协助设计、运行和比较实验。通过这一过程，逐步理解数据表示、任务适配与实验迭代之间的联系。</p>
 <h2 id="02-人工智能正在从数据预测扩展到科研过程的组织">02 人工智能正在从数据预测扩展到科研过程的组织<a aria-label="链接到本节" class="heading-anchor" href="#02-人工智能正在从数据预测扩展到科研过程的组织">#</a></h2>
-<figure class="note-figure"><img alt="图2：人工智能发展历程" decoding="async" height="675" loading="lazy" src="../assets/notes/11/slide-02.webp" width="1200"/><figcaption>图2：人工智能发展历程</figcaption></figure>
+<div class="figure-ref"><span class="ref-label">图注</span><span class="ref-text">图2：人工智能发展历程</span><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/11_%E7%A7%91%E5%AD%A6%E6%99%BA%E8%83%BD%E8%BF%9B%E9%98%B6_%E6%9D%8E%E7%91%80%E6%97%B8.pdf" rel="noopener" target="_blank">官方课件 11 ↗</a></div>
 <p>统计学习和深度学习为科学研究提供了一类数据驱动的方法：从已有样本中学习输入与输出之间的关系，用于识别、分类、回归或预测。例如，输入一段观测序列，输出天体的类别；输入分子的表示，预测某种性质。这类任务通常围绕一个明确的数据接口展开。</p>
 <p>大语言模型与工具调用能力的发展，使人工智能可以进一步参与科研过程的组织。文献中的信息能够被用于提出候选假设，实验步骤能够被转化为工具调用，运行结果又能够成为下一轮分析和设计的依据。科学模型与科研智能体因此形成互补：前者处理专业数据，后者围绕研究目标协调信息、工具和行动。</p>
 <p>科研应用同时关心任务表现与科学解释。准确率用于衡量预测表现；对物理机制的判断，需要结合模型依赖的特征、对照实验和领域知识。智能体生成的报告也需要逐项核对实验记录，使每个结论都有相应证据。</p>
 <h2 id="03-科学问题需要先明确输入输出与评价标准再进入建模">03 科学问题需要先明确输入、输出与评价标准，再进入建模<a aria-label="链接到本节" class="heading-anchor" href="#03-科学问题需要先明确输入输出与评价标准再进入建模">#</a></h2>
-<figure class="note-figure"><img alt="图3：科学问题与数据问题" decoding="async" height="675" loading="lazy" src="../assets/notes/11/slide-03.webp" width="1200"/><figcaption>图3：科学问题与数据问题</figcaption></figure>
+<div class="figure-ref"><span class="ref-label">图注</span><span class="ref-text">图3：科学问题与数据问题</span><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/11_%E7%A7%91%E5%AD%A6%E6%99%BA%E8%83%BD%E8%BF%9B%E9%98%B6_%E6%9D%8E%E7%91%80%E6%97%B8.pdf" rel="noopener" target="_blank">官方课件 11 ↗</a></div>
 <p>将人工智能用于一个具体学科，通常需要完成两步：先把科学问题转化为明确的数据任务，再选择方法解决这个任务。</p>
 <p>“研究某类天体”仍然是一个宽泛的目标。要进入建模阶段，需要进一步说明：输入是图像、光谱还是光变曲线？输出是类别、某个物理参数，还是一段未来观测？现有样本有多少，标签来自哪里？结果需要达到什么精度，对可解释性有什么要求？这些信息决定了模型能够学习什么，也决定了应当怎样检验结果。</p>
 <p>清晰的数据任务同时有利于三种思考：研究者自己明确问题边界，与其他学科的研究者交换方法，以及与人工智能工具协作。跨学科交流中，不同领域的术语可能形成障碍；当问题被表述为输入、输出、约束与评价标准时，双方更容易讨论可行的技术路径。</p>
@@ -97,13 +96,13 @@
 <p>基线构建 Skill 将数据检查、模型训练和评价步骤组织为编程智能体可以读取和执行的方法说明。[2] 研究者提供任务目标、数据位置和评价要求后，可以让智能体按这些步骤建立基线。若有解释性要求，还需要将其具体化，例如检查模型依赖曲线的哪些部分，以及对噪声或整体平移是否敏感。</p>
 <p>在本次光变分类示例中，LSTM 的单次测试准确率为 87.71%。模型的判断依据可能包括曲线形状、亮度幅度或数据处理留下的特征。要进一步理解这些特征与天体物理机制的关系，可以检查模型关注的曲线片段，测试加入噪声或整体平移后的表现，再结合领域知识分析。</p>
 <h2 id="04-无标签数据可以用于预训练有标签数据可以用于任务适配">04 无标签数据可以用于预训练，有标签数据可以用于任务适配<a aria-label="链接到本节" class="heading-anchor" href="#04-无标签数据可以用于预训练有标签数据可以用于任务适配">#</a></h2>
-<figure class="note-figure"><img alt="图4：大量没有专家订正的数据怎么用" decoding="async" height="675" loading="lazy" src="../assets/notes/11/slide-04.webp" width="1200"/><figcaption>图4：大量没有专家订正的数据怎么用</figcaption></figure>
+<div class="figure-ref"><span class="ref-label">图注</span><span class="ref-text">图4：大量没有专家订正的数据怎么用</span><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/11_%E7%A7%91%E5%AD%A6%E6%99%BA%E8%83%BD%E8%BF%9B%E9%98%B6_%E6%9D%8E%E7%91%80%E6%97%B8.pdf" rel="noopener" target="_blank">官方课件 11 ↗</a></div>
 <p>观测设备和测序技术可以持续积累曲线、图像和序列，而专家确认的类别或性质通常只覆盖其中一部分。监督学习依靠输入与任务标签之间的对应关系，因此还需要其他训练方式，才能利用大量未标注样本。</p>
 <p>可以把学习过程分成两个阶段。第一阶段利用大量数据学习其内部的结构和关联，例如曲线的变化方式、序列中的上下文关系。第二阶段再利用少量有标签样本，把已有表示适配到目标任务。前者对应预训练，后者可以通过下游任务微调实现。</p>
 <p>“无标签数据”指缺少目标任务标注的数据。自监督学习从数据本身构造训练目标，例如用序列的前一部分预测后一部分。实际的后续序列提供了训练信号，使模型能够学习序列内部的关系。</p>
 <p>对于光变曲线，可以先学习序列的变化结构，再利用有类别标签的样本训练分类器。蛋白质、DNA、分子和时空场也可以采用类似的分阶段思路，但其数据表示和预训练任务需要分别设计。</p>
 <h2 id="05-预训练学习数据关系微调使模型适应具体任务">05 预训练学习数据关系，微调使模型适应具体任务<a aria-label="链接到本节" class="heading-anchor" href="#05-预训练学习数据关系微调使模型适应具体任务">#</a></h2>
-<figure class="note-figure"><img alt="图5：先学习关系，再完成具体任务" decoding="async" height="675" loading="lazy" src="../assets/notes/11/slide-05.webp" width="1200"/><figcaption>图5：先学习关系，再完成具体任务</figcaption></figure>
+<div class="figure-ref"><span class="ref-label">图注</span><span class="ref-text">图5：先学习关系，再完成具体任务</span><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/11_%E7%A7%91%E5%AD%A6%E6%99%BA%E8%83%BD%E8%BF%9B%E9%98%B6_%E6%9D%8E%E7%91%80%E6%97%B8.pdf" rel="noopener" target="_blank">官方课件 11 ↗</a></div>
 <p>自回归语言模型提供了一个直观的预训练例子：给定已有文本，预测下一个 token。Token 是模型处理文本的基本单元，可以对应一个字、一个词或词的一部分。模型通过大量这样的预测任务学习上下文关系。</p>
 <p>例如，给定“天气真不”，接续内容可能是“错”，具体取决于前文语境。训练时，模型输出候选 token 的概率分布，将其与数据中实际出现的 token 比较，计算损失，再根据梯度更新参数。</p>
 <p>增加训练数据、模型容量和上下文范围，可以为学习更复杂的关联提供条件。研究者需要在目标任务上比较不同配置，检验这些关联是否带来了实际收益。</p>
@@ -113,7 +112,7 @@
 <p>问答微调后的模型仍可能混淆科学概念。在一组小模型测试中，面对“Why is DNA important?”，模型回答“A chain of amino acids”；面对“What is gravity?”，模型回答“A sequence of bases”。前一条用氨基酸链描述 DNA，后一条用碱基序列解释引力，两条回答都出现了概念混淆。评价问答模型时，需要同时检查回答形式、概念准确性及回答与问题的对应关系。[1]</p>
 <p>练习时，应同时保留正确与错误输出，比较同一输入在微调前后的变化。损失下降说明模型对训练目标的拟合有所改善；能否推广到新问题，还需要独立样本和有针对性的评价。</p>
 <h2 id="06-光变序列的片段表示可以衔接自监督预训练与分类任务">06 光变序列的片段表示可以衔接自监督预训练与分类任务<a aria-label="链接到本节" class="heading-anchor" href="#06-光变序列的片段表示可以衔接自监督预训练与分类任务">#</a></h2>
-<figure class="note-figure"><img alt="图6：从语言预训练到科学预训练" decoding="async" height="675" loading="lazy" src="../assets/notes/11/slide-06.webp" width="1200"/><figcaption>图6：从语言预训练到科学预训练</figcaption></figure>
+<div class="figure-ref"><span class="ref-label">图注</span><span class="ref-text">图6：从语言预训练到科学预训练</span><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/11_%E7%A7%91%E5%AD%A6%E6%99%BA%E8%83%BD%E8%BF%9B%E9%98%B6_%E6%9D%8E%E7%91%80%E6%97%B8.pdf" rel="noopener" target="_blank">官方课件 11 ↗</a></div>
 <p>将语言模型的方法用于科学数据，首先需要解决表示问题。可以把科学数据组织成模型能够处理的序列，同时保留其中有意义的关系。</p>
 <p>蛋白质可以用氨基酸序列表示，DNA 可以用碱基序列表示，符号之间的关系具有各自的生物学含义。气象数据包含时间与空间关系，晶体包含几何结构。将这些数据送入模型时，需要在编码中保留相应的顺序、邻接或空间信息。</p>
 <p>对于连续时间序列，可以将输入划分为若干片段，将每个片段编码为一个表示单元。这个单元在模型中的作用类似于语言模型的 token：片段构成局部单位，整段曲线构成有顺序的上下文。数值片段经过编码后，便可以进入序列模型学习。</p>
@@ -159,122 +158,122 @@
 <p>在这次单次运行中，随机森林的准确率和宏 F1 最高。预训练方案的准确率高于 800 步直接分类、低于 1,100 步直接分类，宏 F1 则高于这两组直接分类结果。两个指标给出了不同的比较顺序，选择训练方案时需要结合任务关注的评价目标。1,100 步对照匹配了总更新次数，各方案的实际计算量仍可能不同。[1]</p>
 <p>若进一步研究预训练的价值，可以在一致的数据划分下增加无标签样本、改变模型规模，并重复实验。比较不同条件下的结果及其波动，才能判断预训练在什么条件下有帮助。</p>
 <h2 id="07-基座模型通过预训练形成可复用的表示再适配下游任务">07 基座模型通过预训练形成可复用的表示，再适配下游任务<a aria-label="链接到本节" class="heading-anchor" href="#07-基座模型通过预训练形成可复用的表示再适配下游任务">#</a></h2>
-<figure class="note-figure"><img alt="图7：输入表示、预训练模型与输出" decoding="async" height="675" loading="lazy" src="../assets/notes/11/slide-07.webp" width="1200"/><figcaption>图7：输入表示、预训练模型与输出</figcaption></figure>
+<div class="figure-ref"><span class="ref-label">图注</span><span class="ref-text">图7：输入表示、预训练模型与输出</span><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/11_%E7%A7%91%E5%AD%A6%E6%99%BA%E8%83%BD%E8%BF%9B%E9%98%B6_%E6%9D%8E%E7%91%80%E6%97%B8.pdf" rel="noopener" target="_blank">官方课件 11 ↗</a></div>
 <p>领域基座模型通常包含输入表示、共享模型和面向任务的输出部分。输入可以是语言、图像、科学序列或其他结构化数据，经过编码后进入模型的表示空间。模型通过预训练学习可复用的特征，再通过任务适配输出类别、数值、结构或生成结果。</p>
 <p>基座模型在较广泛的数据上预训练，形成能够适配多种下游任务的表示。[3] 其基础作用体现在表示复用和任务适配，模型规模则描述参数量等资源特征。评价一个领域模型时，需要分别考察它的规模、预训练数据范围以及在不同任务上的适配表现。</p>
 <p>在具体科学领域开展探索，可以先从较小规模入手，验证数据表示、预训练目标和下游适配是否合理，再决定是否扩大训练。模型的规模应与数据、目标任务和资源条件相匹配。</p>
 <h2 id="08-预训练表示的迁移效果取决于数据与目标任务的关联">08 预训练表示的迁移效果取决于数据与目标任务的关联<a aria-label="链接到本节" class="heading-anchor" href="#08-预训练表示的迁移效果取决于数据与目标任务的关联">#</a></h2>
-<figure class="note-figure"><img alt="图8：预训练与微调" decoding="async" height="675" loading="lazy" src="../assets/notes/11/slide-08.webp" width="1200"/><figcaption>图8：预训练与微调</figcaption></figure>
+<div class="figure-ref"><span class="ref-label">图注</span><span class="ref-text">图8：预训练与微调</span><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/11_%E7%A7%91%E5%AD%A6%E6%99%BA%E8%83%BD%E8%BF%9B%E9%98%B6_%E6%9D%8E%E7%91%80%E6%97%B8.pdf" rel="noopener" target="_blank">官方课件 11 ↗</a></div>
 <p>预训练与下游任务之间，通过模型内部的表示建立联系。例如，一个图像模型在较广泛的图像数据上训练后，其特征提取部分可以作为新任务的起点。研究者可以在此基础上增加或调整输出部分，再利用目标领域的数据进行适配。</p>
 <p>表示的复用程度取决于预训练数据与目标任务之间的关联。两者差异较大时，需要检查哪些特征仍然适用、哪些部分需要进一步训练。目标数据上的评价结果，可以帮助确定适配范围。</p>
 <h2 id="09-序列中的前后关系可以构成自监督训练的学习目标">09 序列中的前后关系可以构成自监督训练的学习目标<a aria-label="链接到本节" class="heading-anchor" href="#09-序列中的前后关系可以构成自监督训练的学习目标">#</a></h2>
-<figure class="note-figure"><img alt="图9：预训练阶段" decoding="async" height="675" loading="lazy" src="../assets/notes/11/slide-09.webp" width="1200"/><figcaption>图9：预训练阶段</figcaption></figure>
+<div class="figure-ref"><span class="ref-label">图注</span><span class="ref-text">图9：预训练阶段</span><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/11_%E7%A7%91%E5%AD%A6%E6%99%BA%E8%83%BD%E8%BF%9B%E9%98%B6_%E6%9D%8E%E7%91%80%E6%97%B8.pdf" rel="noopener" target="_blank">官方课件 11 ↗</a></div>
 <p>序列补全可以从数据本身构造监督信号。给定前面的一段序列，模型预测后续内容，实际后续序列就是训练目标。通过重复这一过程，模型学习输入中的统计关系及上下文结构。</p>
 <p>这种思路可以用于文本，也可以用于适当表示后的科学序列。氨基酸序列、光变曲线及某些时空数据，都可以根据数据特点设计预测任务。表示方法需要保留序列顺序、局部邻接和物理含义，使训练目标与科学对象的结构相适应。</p>
 <p>预训练得到的表示为后续预测提供基础。进入任务适配阶段后，需要明确输出对象，并选择相应的标签与评价标准。</p>
 <h2 id="10-任务标签将预训练表示与具体科学量的预测联系起来">10 任务标签将预训练表示与具体科学量的预测联系起来<a aria-label="链接到本节" class="heading-anchor" href="#10-任务标签将预训练表示与具体科学量的预测联系起来">#</a></h2>
-<figure class="note-figure"><img alt="图10：微调阶段" decoding="async" height="675" loading="lazy" src="../assets/notes/11/slide-10.webp" width="1200"/><figcaption>图10：微调阶段</figcaption></figure>
+<div class="figure-ref"><span class="ref-label">图注</span><span class="ref-text">图10：微调阶段</span><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/11_%E7%A7%91%E5%AD%A6%E6%99%BA%E8%83%BD%E8%BF%9B%E9%98%B6_%E6%9D%8E%E7%91%80%E6%97%B8.pdf" rel="noopener" target="_blank">官方课件 11 ↗</a></div>
 <p>微调将预训练得到的表示与任务标签联系起来。对于分类，输出是类别；对于回归，输出是研究者关心的连续量。天文任务中，可以考虑天体类别，或在具有相应数据与标签的条件下估计有效温度、表面重力和金属丰度等参数。</p>
 <p>同一类输入可以服务于不同任务，每个任务都需要明确标签的定义、单位和评价标准。标签决定输出量的含义，独立评价检验预测的准确程度，二者共同支撑对结果的解释。</p>
 <p>其他领域也有相同结构：从蛋白质表示预测性质，从太阳观测数据判断活动状态，或者从时空数据预测气象变量。方法之间的共同点在于复用表示，而具体的输入、输出和科学约束仍属于各自领域。</p>
 <h2 id="11-专用任务中学到的表示为跨任务复用提供了研究起点">11 专用任务中学到的表示为跨任务复用提供了研究起点<a aria-label="链接到本节" class="heading-anchor" href="#11-专用任务中学到的表示为跨任务复用提供了研究起点">#</a></h2>
-<figure class="note-figure"><img alt="图11：专用模型与单任务能力" decoding="async" height="675" loading="lazy" src="../assets/notes/11/slide-11.webp" width="1200"/><figcaption>图11：专用模型与单任务能力</figcaption></figure>
+<div class="figure-ref"><span class="ref-label">图注</span><span class="ref-text">图11：专用模型与单任务能力</span><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/11_%E7%A7%91%E5%AD%A6%E6%99%BA%E8%83%BD%E8%BF%9B%E9%98%B6_%E6%9D%8E%E7%91%80%E6%97%B8.pdf" rel="noopener" target="_blank">官方课件 11 ↗</a></div>
 <p>专用科学模型通常围绕一个明确任务设计，将数据结构、领域知识和评价目标结合起来。模型的输入、网络结构和输出形式，都可以针对这一任务进行优化。</p>
 <p>当某一任务取得较好表现后，一个自然的问题是：相同数据中学到的表示，能否支持其他任务？如果每个任务都从头整理数据、训练网络，就难以共享已经积累的经验。由此产生了从专用任务走向可复用表示的研究思路。</p>
 <p>各领域的数据条件和研究目标不同，从专用任务走向表示复用的进度与技术路径也有所差异。</p>
 <h2 id="12-同一套预训练表示可以通过任务适配服务多个科学任务">12 同一套预训练表示可以通过任务适配服务多个科学任务<a aria-label="链接到本节" class="heading-anchor" href="#12-同一套预训练表示可以通过任务适配服务多个科学任务">#</a></h2>
-<figure class="note-figure"><img alt="图12：从专用模型到多任务复用" decoding="async" height="675" loading="lazy" src="../assets/notes/11/slide-12.webp" width="1200"/><figcaption>图12：从专用模型到多任务复用</figcaption></figure>
+<div class="figure-ref"><span class="ref-label">图注</span><span class="ref-text">图12：从专用模型到多任务复用</span><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/11_%E7%A7%91%E5%AD%A6%E6%99%BA%E8%83%BD%E8%BF%9B%E9%98%B6_%E6%9D%8E%E7%91%80%E6%97%B8.pdf" rel="noopener" target="_blank">官方课件 11 ↗</a></div>
 <p>一个预训练模型可以在不同任务中复用相同的基础表示，再通过任务头或微调处理各自的输出要求。例如，同一类分子或生物序列中可能包含多个性质相关的信息，预训练得到的表示可以分别用于分类、性质预测或其他任务。</p>
 <p>复用表示可以让不同任务共享已有训练成果。通过多个下游任务的评价，研究者能够检查哪些信息具有迁移价值，以及哪些任务仍需要专门的表示或训练。</p>
 <p>Transformer 是其中常见的模型结构，具体架构可以根据数据结构和任务要求选择。</p>
 <h2 id="13-生成模型提出的科学候选需要通过计算或实验验证">13 生成模型提出的科学候选需要通过计算或实验验证<a aria-label="链接到本节" class="heading-anchor" href="#13-生成模型提出的科学候选需要通过计算或实验验证">#</a></h2>
-<figure class="note-figure"><img alt="图13：更多任务与候选生成" decoding="async" height="675" loading="lazy" src="../assets/notes/11/slide-13.webp" width="1200"/><figcaption>图13：更多任务与候选生成</figcaption></figure>
+<div class="figure-ref"><span class="ref-label">图注</span><span class="ref-text">图13：更多任务与候选生成</span><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/11_%E7%A7%91%E5%AD%A6%E6%99%BA%E8%83%BD%E8%BF%9B%E9%98%B6_%E6%9D%8E%E7%91%80%E6%97%B8.pdf" rel="noopener" target="_blank">官方课件 11 ↗</a></div>
 <p>科学模型的输出可以从类别和数值，扩展为结构、序列或候选对象。在已有数据与约束下生成候选，使模型能够参与研究方案的探索。</p>
 <p>生成候选之后，需要通过计算或实验检查其科学约束和目标性质。生成与验证共同构成候选筛选过程：模型提供探索方向，验证结果决定哪些候选值得继续研究。</p>
 <p>根据任务需要，研究者可以组合不同结构，例如在部分生成或时空建模场景中结合 Transformer 与扩散方法。结构选择应服务于要表达的数据关系和输出目标。</p>
 <h2 id="14-跨模态跨分布与跨对象建模需要明确数据之间的对齐关系">14 跨模态、跨分布与跨对象建模需要明确数据之间的对齐关系<a aria-label="链接到本节" class="heading-anchor" href="#14-跨模态跨分布与跨对象建模需要明确数据之间的对齐关系">#</a></h2>
-<figure class="note-figure"><img alt="图14：跨模态、跨分布与跨对象" decoding="async" height="675" loading="lazy" src="../assets/notes/11/slide-14.webp" width="1200"/><figcaption>图14：跨模态、跨分布与跨对象</figcaption></figure>
+<div class="figure-ref"><span class="ref-label">图注</span><span class="ref-text">图14：跨模态、跨分布与跨对象</span><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/11_%E7%A7%91%E5%AD%A6%E6%99%BA%E8%83%BD%E8%BF%9B%E9%98%B6_%E6%9D%8E%E7%91%80%E6%97%B8.pdf" rel="noopener" target="_blank">官方课件 11 ↗</a></div>
 <p>当模型开始处理更多来源的数据，需要进一步区分三类问题。</p>
 <p><strong>跨模态</strong>关注同一研究对象的不同测量形式。例如，一个对象可能同时具有序列、结构和表达信息；模型需要理解这些信息之间的联系。</p>
 <p><strong>跨分布</strong>关注数据来源或条件的变化。同类对象可能来自不同物种、组织、实验平台或数据集，数值分布和采集条件并不完全一致。共享表示需要面对这些差异。</p>
 <p><strong>跨对象</strong>关注不同科学对象之间的共同描述，例如在同一框架中表示分子、蛋白质、细胞及其关系。一种探索方式是将多类科学对象组织为统一 token 序列。这类方法希望让模型在共同表示中学习关联，其效果仍需在相应任务上检验。</p>
 <p>扩大模型可处理的数据范围，需要先明确哪些信息需要对齐、对齐关系有什么科学依据，以及共同表示能够支持哪些任务，再确定相应的架构和训练规模。</p>
 <h2 id="15-公开报告整合形成信息时间序列硬件协同决定实际观测节奏">15 公开报告整合形成信息时间序列，硬件协同决定实际观测节奏<a aria-label="链接到本节" class="heading-anchor" href="#15-公开报告整合形成信息时间序列硬件协同决定实际观测节奏">#</a></h2>
-<figure class="note-figure"><img alt="图15：从GOTTA到Virtual GOTTA" decoding="async" height="675" loading="lazy" src="../assets/notes/11/slide-15.webp" width="1200"/><figcaption>图15：从GOTTA到Virtual GOTTA</figcaption></figure>
+<div class="figure-ref"><span class="ref-label">图注</span><span class="ref-text">图15：从GOTTA到Virtual GOTTA</span><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/11_%E7%A7%91%E5%AD%A6%E6%99%BA%E8%83%BD%E8%BF%9B%E9%98%B6_%E6%9D%8E%E7%91%80%E6%97%B8.pdf" rel="noopener" target="_blank">官方课件 11 ↗</a></div>
 <p>Virtual GOTTA 与 SN Clock 的设计示例，将公开观测报告的组织、序列表示学习和爆发年龄估计联系起来。[1]</p>
 <p>硬件协同观测与公开数据整合，是两种不同的组织方式。前者通过望远镜阵列和统一调度安排实际观测，后者把不同巡天发布的测光报告汇集到同一目标下，形成按时间组织的信息。</p>
 <p>Virtual GOTTA 采用公开数据整合方式：整合公开光变报告，统计目标级报告时间点及其间隔。这种报告间隔反映公开信息的到达情况，应与望远镜真实观测的采样节奏区分。</p>
 <h2 id="16-观测事件序列需要保留时间波段来源与探测状态">16 观测事件序列需要保留时间、波段、来源与探测状态<a aria-label="链接到本节" class="heading-anchor" href="#16-观测事件序列需要保留时间波段来源与探测状态">#</a></h2>
-<figure class="note-figure"><img alt="图16：跨波段、跨巡天观测语言" decoding="async" height="675" loading="lazy" src="../assets/notes/11/slide-16.webp" width="1200"/><figcaption>图16：跨波段、跨巡天观测语言</figcaption></figure>
+<div class="figure-ref"><span class="ref-label">图注</span><span class="ref-text">图16：跨波段、跨巡天观测语言</span><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/11_%E7%A7%91%E5%AD%A6%E6%99%BA%E8%83%BD%E8%BF%9B%E9%98%B6_%E6%9D%8E%E7%91%80%E6%97%B8.pdf" rel="noopener" target="_blank">官方课件 11 ↗</a></div>
 <p>一条观测记录可以同时包含时间、亮度或上限、测量误差、波段、探测状态和来源。将这些字段组织为观测事件 token，再按目标构成时序上下文，可以保留不同记录之间的关联。</p>
 <p>波段、探测状态和来源共同决定一条记录的观测含义。亮度测量与未检出时给出的上限，应分别记录其状态；不同波段的数据也需要保留对应标识。这样，模型可以结合测量条件理解数值之间的关系。</p>
 <h2 id="17-历史观测报告可以用于学习服务下游任务的证据表示">17 历史观测报告可以用于学习服务下游任务的证据表示<a aria-label="链接到本节" class="heading-anchor" href="#17-历史观测报告可以用于学习服务下游任务的证据表示">#</a></h2>
-<figure class="note-figure"><img alt="图17：Virtual GOTTA基座模型" decoding="async" height="675" loading="lazy" src="../assets/notes/11/slide-17.webp" width="1200"/><figcaption>图17：Virtual GOTTA基座模型</figcaption></figure>
+<div class="figure-ref"><span class="ref-label">图注</span><span class="ref-text">图17：Virtual GOTTA基座模型</span><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/11_%E7%A7%91%E5%AD%A6%E6%99%BA%E8%83%BD%E8%BF%9B%E9%98%B6_%E6%9D%8E%E7%91%80%E6%97%B8.pdf" rel="noopener" target="_blank">官方课件 11 ↗</a></div>
 <p>Virtual GOTTA 的模型方案将公开报告转为事件序列，通过前缀时序编码器得到当前证据状态。自监督目标包括后续报告的时间、亮度或上限、波段或来源以及探测状态等。</p>
 <p>这一设计有明确的时间边界：在某个决策时刻，只使用此前已经公开的信息。若训练或评价混入未来报告，模型就可能利用实际决策时尚不可获得的信息，造成对应用能力的高估。</p>
 <p>所得表示概括了当前可用的公开测光信息，可以作为下游分类或参数估计的输入。</p>
 <h2 id="18-sn-clock-方案通过观测表示估计爆发年龄的分位数">18 SN Clock 方案通过观测表示估计爆发年龄的分位数<a aria-label="链接到本节" class="heading-anchor" href="#18-sn-clock-方案通过观测表示估计爆发年龄的分位数">#</a></h2>
-<figure class="note-figure"><img alt="图18：SN Clock下游任务" decoding="async" height="675" loading="lazy" src="../assets/notes/11/slide-18.webp" width="1200"/><figcaption>图18：SN Clock下游任务</figcaption></figure>
+<div class="figure-ref"><span class="ref-label">图注</span><span class="ref-text">图18：SN Clock下游任务</span><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/11_%E7%A7%91%E5%AD%A6%E6%99%BA%E8%83%BD%E8%BF%9B%E9%98%B6_%E6%9D%8E%E7%91%80%E6%97%B8.pdf" rel="noopener" target="_blank">官方课件 11 ↗</a></div>
 <p>SN Clock 的下游模型方案使用当前证据状态估计爆发年龄。输出采用分位数形式，包括第 16、第 50 和第 84 百分位，用于描述估计值及其不确定性范围。</p>
 <p>这一方案先学习观测信息的表示，再将表示用于爆发年龄估计。分位数给出估计分布中的不同位置，区间的实际覆盖情况需要通过校准与独立样本检验。</p>
 <p><em>示例指标的适用样本与完整评价条件尚未提供。</em></p>
 <h2 id="19-智能体可以把模型改进组织成提出方案运行实验和比较结果的循环">19 智能体可以把模型改进组织成提出方案、运行实验和比较结果的循环<a aria-label="链接到本节" class="heading-anchor" href="#19-智能体可以把模型改进组织成提出方案运行实验和比较结果的循环">#</a></h2>
-<figure class="note-figure"><img alt="图19：模型跑通之后的迭代" decoding="async" height="675" loading="lazy" src="../assets/notes/11/slide-19.webp" width="1200"/><figcaption>图19：模型跑通之后的迭代</figcaption></figure>
+<div class="figure-ref"><span class="ref-label">图注</span><span class="ref-text">图19：模型跑通之后的迭代</span><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/11_%E7%A7%91%E5%AD%A6%E6%99%BA%E8%83%BD%E8%BF%9B%E9%98%B6_%E6%9D%8E%E7%91%80%E6%97%B8.pdf" rel="noopener" target="_blank">官方课件 11 ↗</a></div>
 <p>模型能够运行之后，研究往往进入反复改进阶段。可调整的内容大体包括数据、模型结构和训练设置。研究者提出一个改动，修改程序，运行实验，再比较结果；如果每一步都需要手工衔接，这个过程会消耗大量时间。</p>
 <p>autoresearch 提供了一种将程序修改与实验反馈连接起来的实践形式。[5] 在明确的运行环境和评价目标下，智能体可以提出改动、编辑代码、运行实验、检查结果，并据此决定下一步。这使计算环境成为一个可以持续交互的实验环境。</p>
 <p>在光变分类任务中，可以先让智能体根据基线结果提出候选方向，再要求它解释这些方向的依据。模型为何要改变序列表示，为什么调整训练设置，预期影响哪个指标，都应当说清楚。随后再决定实际执行哪些实验。</p>
 <p>迭代需要有明确的比较基础。若每一轮同时改变数据划分、模型结构和评价指标，即使分数提高，也难以判断改善来自哪里。保存实验设置、运行日志与结果，是理解改动效果的前提。</p>
 <p>nanoSciGPT 提供了基线训练、预训练与微调的运行记录，完整自动研究流程仍处于试验阶段。实践时可以先完成基线训练与实验方案讨论，再逐步检查自动执行的各个环节。[2]</p>
 <h2 id="20-ai-scientist-将计算实验与假设生成结果分析和写作连接起来">20 AI Scientist 将计算实验与假设生成、结果分析和写作连接起来<a aria-label="链接到本节" class="heading-anchor" href="#20-ai-scientist-将计算实验与假设生成结果分析和写作连接起来">#</a></h2>
-<figure class="note-figure"><img alt="图20：从模型迭代到计算研究" decoding="async" height="675" loading="lazy" src="../assets/notes/11/slide-20.webp" width="1200"/><figcaption>图20：从模型迭代到计算研究</figcaption></figure>
+<div class="figure-ref"><span class="ref-label">图注</span><span class="ref-text">图20：从模型迭代到计算研究</span><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/11_%E7%A7%91%E5%AD%A6%E6%99%BA%E8%83%BD%E8%BF%9B%E9%98%B6_%E6%9D%8E%E7%91%80%E6%97%B8.pdf" rel="noopener" target="_blank">官方课件 11 ↗</a></div>
 <p>计算实验只是科研流程的一部分。实验之前，需要提出问题、形成假设并设计方案；实验之后，需要处理结果、解释差异、整理报告，再由这些结果产生新的问题。</p>
 <p>The AI Scientist 的研究框架将想法生成、实验执行、结果整理和论文写作等环节连接起来。[6] 模型训练由此成为研究方案的一次检验，其配置、运行过程与结果都需要记录，供后续分析和方案修正使用。</p>
 <p>以光变任务为例，可以从“哪种序列表示更适合当前分类任务”出发，设计若干可比较的实验。结果分析需要说明各项证据支持什么判断、还存在哪些替代解释，以及下一轮实验如何区分这些解释。研究报告据此组织论点、实验记录和结论。</p>
 <p>机器学习与计算实验适合作为自动研究流程的实践起点，相应工具可以直接在代码环境中运行。将这种框架迁移到其他学科，还需要重新定义假设空间、实验工具和结果判据。</p>
 <h2 id="21-树搜索让科研系统能够比较并选择多条实验路线">21 树搜索让科研系统能够比较并选择多条实验路线<a aria-label="链接到本节" class="heading-anchor" href="#21-树搜索让科研系统能够比较并选择多条实验路线">#</a></h2>
-<figure class="note-figure"><img alt="图21：从单一路线到多路线研究" decoding="async" height="675" loading="lazy" src="../assets/notes/11/slide-21.webp" width="1200"/><figcaption>图21：从单一路线到多路线研究</figcaption></figure>
+<div class="figure-ref"><span class="ref-label">图注</span><span class="ref-text">图21：从单一路线到多路线研究</span><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/11_%E7%A7%91%E5%AD%A6%E6%99%BA%E8%83%BD%E8%BF%9B%E9%98%B6_%E6%9D%8E%E7%91%80%E6%97%B8.pdf" rel="noopener" target="_blank">官方课件 11 ↗</a></div>
 <p>面对一个研究问题，可能同时存在多个值得检验的想法。一条固定流程能够依次执行任务，却未必适合在不同研究路线之间反复比较和选择。</p>
 <p>The AI Scientist-v2 采用由实验管理智能体协调的渐进式树搜索，扩展并比较实验分支，同时减少对人工编写代码模板的依赖。[7] 与只沿一条路线继续修改相比，这种组织方式允许系统保留多个候选方向，再依据结果决定继续探索哪一个分支。</p>
 <p>多路径探索需要比单次运行更清晰的记录。每个分支改变了什么，使用哪些数据，结果与哪个基线比较，失败是否来自方法本身还是执行错误，都需要保留。否则，分支数量增加只会带来更多难以解释的运行结果。</p>
 <p>在研究实践中，可以让智能体提出多个假设，与研究者确认优先级，再选择有限的实验开展比较。分支的选择依据应包括科学目标、已有证据和实验成本，使探索集中在值得检验的问题上。</p>
 <h2 id="22-实验反馈需要参与下一轮决策才能形成持续迭代的研究流程">22 实验反馈需要参与下一轮决策，才能形成持续迭代的研究流程<a aria-label="链接到本节" class="heading-anchor" href="#22-实验反馈需要参与下一轮决策才能形成持续迭代的研究流程">#</a></h2>
-<figure class="note-figure"><img alt="图22：实验结果自动返回与下一轮规划" decoding="async" height="675" loading="lazy" src="../assets/notes/11/slide-22.webp" width="1200"/><figcaption>图22：实验结果自动返回与下一轮规划</figcaption></figure>
+<div class="figure-ref"><span class="ref-label">图注</span><span class="ref-text">图22：实验结果自动返回与下一轮规划</span><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/11_%E7%A7%91%E5%AD%A6%E6%99%BA%E8%83%BD%E8%BF%9B%E9%98%B6_%E6%9D%8E%E7%91%80%E6%97%B8.pdf" rel="noopener" target="_blank">官方课件 11 ↗</a></div>
 <p>自然科学中的自动实验设备，为研究流程自动化提供了物理基础。实验装置可以执行预定操作，采集数据，并将结果返回计算系统。关键在于，返回的数据是否能够参与下一次实验的选择。</p>
 <p>一个反馈驱动的过程包括：提出待验证的问题，选择实验条件，执行实验，分析结果，再修改下一轮方案。各环节需要共享足够的信息，使新的决策建立在前一轮的证据上。</p>
 <p>物理实验受到设备能力、操作安全、样本条件和实验成本约束。将计算研究框架用于实验室时，需要在工具接口和执行规则中明确可执行的操作、必要的检查及异常处理方式。</p>
 <h2 id="23-语言模型接入实验工具时需要同时定义科学目标与验证标准">23 语言模型接入实验工具时，需要同时定义科学目标与验证标准<a aria-label="链接到本节" class="heading-anchor" href="#23-语言模型接入实验工具时需要同时定义科学目标与验证标准">#</a></h2>
-<figure class="note-figure"><img alt="图23：查询、计算、实验与结果读取" decoding="async" height="675" loading="lazy" src="../assets/notes/11/slide-23.webp" width="1200"/><figcaption>图23：查询、计算、实验与结果读取</figcaption></figure>
+<div class="figure-ref"><span class="ref-label">图注</span><span class="ref-text">图23：查询、计算、实验与结果读取</span><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/11_%E7%A7%91%E5%AD%A6%E6%99%BA%E8%83%BD%E8%BF%9B%E9%98%B6_%E6%9D%8E%E7%91%80%E6%97%B8.pdf" rel="noopener" target="_blank">官方课件 11 ↗</a></div>
 <p>当语言模型能够读取文献、理解实验要求并调用外部工具时，就有可能把研究目标转化为计算或实验操作。Coscientist 是这一方向的案例之一：研究将大语言模型与搜索、代码执行和实验自动化能力结合起来，用于化学研究任务。[8]</p>
 <p>进入具体学科后，问题提出、实验执行和评价标准都需要适应研究对象。材料或生物医药任务需要围绕相应性质和实验终点设计验证，并选择适合的仿真程序、分析仪器或自动化实验平台。</p>
 <p>迁移 AI Scientist 框架时，需要逐一明确系统处理的问题类型、可执行的操作、反馈的获取方式和结果的判断责任。通用流程与学科特定的科学对象、工具和证据标准结合后，才能形成可实施的研究方案。</p>
 <h2 id="24-固定工作流与动态规划应依据稳定性和探索需求配合使用">24 固定工作流与动态规划应依据稳定性和探索需求配合使用<a aria-label="链接到本节" class="heading-anchor" href="#24-固定工作流与动态规划应依据稳定性和探索需求配合使用">#</a></h2>
-<figure class="note-figure"><img alt="图24：根据结果改变假设和研究路线" decoding="async" height="675" loading="lazy" src="../assets/notes/11/slide-24.webp" width="1200"/><figcaption>图24：根据结果改变假设和研究路线</figcaption></figure>
+<div class="figure-ref"><span class="ref-label">图注</span><span class="ref-text">图24：根据结果改变假设和研究路线</span><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/11_%E7%A7%91%E5%AD%A6%E6%99%BA%E8%83%BD%E8%BF%9B%E9%98%B6_%E6%9D%8E%E7%91%80%E6%97%B8.pdf" rel="noopener" target="_blank">官方课件 11 ↗</a></div>
 <p>科研系统可以采用相对固定的智能体工作流，也可以让具有较强工具使用能力的编程智能体承担更多动态规划。固定工作流便于明确步骤、控制接口和检查执行状态；动态组织则允许系统根据中间结果调整路线。</p>
 <p>Skill 可以承载可读取的任务说明、方法步骤和经验，供编程智能体在执行任务时参考。实验结束后，研究者可以依据结果和人工反馈检查这些说明，保留有效步骤并修正不适用的做法。持续的记录、检查和更新，使经验能够逐步积累。</p>
 <p>天文观测提供了一个学科实例。科研系统需要处理观测计划、望远镜指向、多个设备或传感器的协调，以及观测后的数据分析。结果可以反过来指导下一轮目标选择，从而把执行环节与研究决策连接起来。</p>
 <p>选择何种组织方式，应考虑场景对稳定性、探索空间和人工审核的要求。对于必须严格遵循的步骤，可以保留固定流程；对于需要比较多个研究方向的部分，可以允许更灵活的规划。二者可以在同一系统中配合。</p>
 <h2 id="25-望远镜通过指向观测和状态调整执行科研系统的行动">25 望远镜通过指向、观测和状态调整执行科研系统的行动<a aria-label="链接到本节" class="heading-anchor" href="#25-望远镜通过指向观测和状态调整执行科研系统的行动">#</a></h2>
-<figure class="note-figure"><img alt="图25：望远镜演示画面" decoding="async" height="675" loading="lazy" src="../assets/notes/11/slide-25.webp" width="1200"/><figcaption>图25：望远镜演示画面</figcaption></figure>
+<div class="figure-ref"><span class="ref-label">图注</span><span class="ref-text">图25：望远镜演示画面</span><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/11_%E7%A7%91%E5%AD%A6%E6%99%BA%E8%83%BD%E8%BF%9B%E9%98%B6_%E6%9D%8E%E7%91%80%E6%97%B8.pdf" rel="noopener" target="_blank">官方课件 11 ↗</a></div>
 <p>具身科研系统通过仪器与外部环境发生联系。望远镜执行的行动包括改变指向、开展观测和调整设备状态。设备返回的状态与观测结果用于确认执行情况，并为下一步行动提供依据。</p>
 <p><em>望远镜观测演示的视频截帧。</em></p>
 <h2 id="26-观测任务中的具体瓶颈决定应改进模型还是科研流程">26 观测任务中的具体瓶颈决定应改进模型还是科研流程<a aria-label="链接到本节" class="heading-anchor" href="#26-观测任务中的具体瓶颈决定应改进模型还是科研流程">#</a></h2>
-<figure class="note-figure"><img alt="图26：天文观测场景" decoding="async" height="675" loading="lazy" src="../assets/notes/11/slide-26.webp" width="1200"/><figcaption>图26：天文观测场景</figcaption></figure>
+<div class="figure-ref"><span class="ref-label">图注</span><span class="ref-text">图26：天文观测场景</span><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/11_%E7%A7%91%E5%AD%A6%E6%99%BA%E8%83%BD%E8%BF%9B%E9%98%B6_%E6%9D%8E%E7%91%80%E6%97%B8.pdf" rel="noopener" target="_blank">官方课件 11 ↗</a></div>
 <p>天文观测中的任务来自具体需求：在变化的观测条件下选择目标，协调观测资源，并及时处理返回的数据。构建系统之前，需要先说明哪一个环节形成了瓶颈，以及自动化能够解决其中哪一部分。</p>
 <p>技术选择应从这些需求出发。数据处理困难可能需要改进科学模型，设备与流程衔接困难可能需要智能体协调。两类问题可以同时存在，但应分别定义和检验。</p>
 <h2 id="27-starwhisper-telescope-将观测计划设备状态与结果分析连接起来">27 StarWhisper Telescope 将观测计划、设备状态与结果分析连接起来<a aria-label="链接到本节" class="heading-anchor" href="#27-starwhisper-telescope-将观测计划设备状态与结果分析连接起来">#</a></h2>
-<figure class="note-figure"><img alt="图27：StarWhisper Telescope" decoding="async" height="675" loading="lazy" src="../assets/notes/11/slide-27.webp" width="1200"/><figcaption>图27：StarWhisper Telescope</figcaption></figure>
+<div class="figure-ref"><span class="ref-label">图注</span><span class="ref-text">图27：StarWhisper Telescope</span><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/11_%E7%A7%91%E5%AD%A6%E6%99%BA%E8%83%BD%E8%BF%9B%E9%98%B6_%E6%9D%8E%E7%91%80%E6%97%B8.pdf" rel="noopener" target="_blank">官方课件 11 ↗</a></div>
 <p>StarWhisper Telescope 案例将语言模型与天文观测环节联系起来，涉及警报信息、台站情况、望远镜状态、观测计划及结果报告。把这些信息接入系统后，研究目标才能转化为具体的观测安排。</p>
 <p>进一步的探索包括为观测环境建立模型，并在数字孪生或仿真环境中研究行动策略。系统根据环境与设备状态选择动作，再检查动作造成的变化。策略在仿真中测试后，还需要通过真实设备验证，检查环境差异对观测表现的影响。</p>
 <p>天文观测需求决定了系统需要连接哪些信息和工具：观测条件影响目标选择，测量信息支持结果分析，设备接口负责落实行动。</p>
 <h2 id="28-科学问题的解决常常需要数据模型与科研流程共同改进">28 科学问题的解决常常需要数据模型与科研流程共同改进<a aria-label="链接到本节" class="heading-anchor" href="#28-科学问题的解决常常需要数据模型与科研流程共同改进">#</a></h2>
-<figure class="note-figure"><img alt="图28：模型与研究过程共同完成科学问题" decoding="async" height="675" loading="lazy" src="../assets/notes/11/slide-28.webp" width="1200"/><figcaption>图28：模型与研究过程共同完成科学问题</figcaption></figure>
+<div class="figure-ref"><span class="ref-label">图注</span><span class="ref-text">图28：模型与研究过程共同完成科学问题</span><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/11_%E7%A7%91%E5%AD%A6%E6%99%BA%E8%83%BD%E8%BF%9B%E9%98%B6_%E6%9D%8E%E7%91%80%E6%97%B8.pdf" rel="noopener" target="_blank">官方课件 11 ↗</a></div>
 <p>开始一个 AI4S 项目时，可以先判断困难主要位于哪里。</p>
 <p>如果已有大量科学数据，但难以从中得到准确的类别、参数或预测，问题主要涉及数据表示与建模。当大量样本缺少任务标签、少量样本具有可靠标签时，可以研究预训练与下游适配是否能够充分利用现有数据。</p>
 <p>如果单项工具已经可用，困难在于调研、设计、执行与分析之间缺少衔接，则需要考虑科研流程的组织。智能体可以承担一部分信息处理与工具协调，科学模型则作为其中处理专业数据的组件。</p>
 <p>实际项目常常同时包含两者。模型得到预测，智能体据此提出下一步操作，实验产生新数据，再回到分析与建模。整个过程的有效性，需要由具体科学任务的结果来判断。</p>
 <p>AI for Science 的方法选择应围绕研究问题展开。先明确数据和流程中的困难，再比较可用方法，依据实验结果决定下一步投入。</p>
 <h2 id="29-跨学科实践需要围绕清晰的问题组织领域方法与工程能力">29 跨学科实践需要围绕清晰的问题组织领域、方法与工程能力<a aria-label="链接到本节" class="heading-anchor" href="#29-跨学科实践需要围绕清晰的问题组织领域方法与工程能力">#</a></h2>
-<figure class="note-figure"><img alt="图29：致谢与团队" decoding="async" height="675" loading="lazy" src="../assets/notes/11/slide-29.webp" width="1200"/><figcaption>图29：致谢与团队</figcaption></figure>
+<div class="figure-ref"><span class="ref-label">图注</span><span class="ref-text">图29：致谢与团队</span><a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/11_%E7%A7%91%E5%AD%A6%E6%99%BA%E8%83%BD%E8%BF%9B%E9%98%B6_%E6%9D%8E%E7%91%80%E6%97%B8.pdf" rel="noopener" target="_blank">官方课件 11 ↗</a></div>
 <p>科学问题往往需要领域知识、数据方法和工程能力共同参与。领域研究者解释研究对象和证据标准，方法研究者提供建模与评价思路，工具和平台帮助团队实施与复现。这些能力之间的交流，需要建立在清晰的问题描述上。</p>
 <p>理解基本方法后，可以围绕自己的数据与课题开展实践。在小规模任务中检验方法，记录失败和未解决的问题，再决定如何扩展，是连接学习与研究的一条具体路径。</p>
 <h2 id="数据条件任务目标和资源约束共同决定方法选择">数据条件、任务目标和资源约束共同决定方法选择<a aria-label="链接到本节" class="heading-anchor" href="#数据条件任务目标和资源约束共同决定方法选择">#</a></h2>
@@ -306,7 +305,7 @@
 <p>随着任务逐步清晰，可以再考虑扩充数据、增加模型容量或申请更多计算资源。先证明某种方法在当前问题上具有研究价值，再扩大实验，是资源有限时较稳妥的推进方式。</p>
 <h2 id="参考资料">参考资料<a aria-label="链接到本节" class="heading-anchor" href="#参考资料">#</a></h2>
 <ol>
-<li>李瑀旸：《如何构建领域基座模型与 AI Scientist 系统》，磐石·科学智能实训营课件及完整课程转写。<a href="https://github.com/biociao/panshi-ai4s-practice/blob/study/pdf/11_%E7%A7%91%E5%AD%A6%E6%99%BA%E8%83%BD%E8%BF%9B%E9%98%B6_%E6%9D%8E%E7%91%80%E6%97%B8.pdf" rel="noopener" target="_blank">课件 PDF</a>。图像、案例数据及部分方法讨论的来源。</li>
+<li>李瑀旸：《如何构建领域基座模型与 AI Scientist 系统》，磐石·科学智能实训营课件及完整课程转写。<a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/11_%E7%A7%91%E5%AD%A6%E6%99%BA%E8%83%BD%E8%BF%9B%E9%98%B6_%E6%9D%8E%E7%91%80%E6%97%B8.pdf" rel="noopener" target="_blank">课件 PDF</a>。图像、案例数据及部分方法讨论的来源。</li>
 <li>李瑀旸：<a href="https://github.com/Yu-Yang-Li/nanoSciGPT" rel="noopener" target="_blank">nanoSciGPT 配套教学仓库</a>。提供示例代码、数据说明、研究方法 Skill 与运行记录。</li>
 <li>Bommasani, R., et al. <a href="https://arxiv.org/abs/2108.07258" rel="noopener" target="_blank">On the Opportunities and Risks of Foundation Models</a>. 2021.</li>
 <li>Karpathy, A. <a href="https://github.com/karpathy/nanoGPT" rel="noopener" target="_blank">nanoGPT</a>.</li>
@@ -334,18 +333,18 @@
         </svg>
         <div>
           <strong>磐石 AI4S · 学习笔记</strong>
-          <span>11 讲课程索引与个人学习记录</span>
+          <span>个人学习记录与课程引用</span>
         </div>
       </div>
       <nav class="footer-links" aria-label="页脚链接">
-        <a href="../index.html#lectures">课程目录</a>
-        <a href="../index.html#progress">学习进度</a>
         <a href="index.html">笔记</a>
+        <a href="../index.html#progress">进度</a>
+        <a href="../index.html#sources">课程来源</a>
         <a href="https://github.com/biociao/panshi-ai4s-practice" target="_blank" rel="noopener">GitHub</a>
       </nav>
     </div>
     <div class="wrap footer-bottom">
-      <span>整理 biociao · 更新于 2026-11-16 · 数据来源 learning/progress.md</span>
+      <span>整理 biociao · 更新于 2026-11-16 · 个人学习记录</span>
       <span>排版 原生 HTML / CSS · 无第三方依赖</span>
     </div>
   </footer>

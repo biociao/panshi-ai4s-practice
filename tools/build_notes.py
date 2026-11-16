@@ -4,11 +4,11 @@
 Usage:
     python3 tools/build_notes.py
 
-Reads the notes under learning/notes and courses/11-li-yuyang, renders them
-into docs/notes/*.html, optimizes referenced images into docs/assets/notes/,
-and builds docs/notes/index.html.
+The site is a personal reading log. Course slides are not copied: each
+figure becomes a short caption plus a link to the official PDF. Notes are
+rendered into docs/notes/*.html and docs/notes/index.html.
 
-Requires: markdown, beautifulsoup4, Pillow.
+Requires: markdown, beautifulsoup4.
 """
 
 from __future__ import annotations
@@ -25,52 +25,78 @@ from urllib.parse import quote, unquote
 
 import markdown
 from bs4 import BeautifulSoup
-from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
 NOTES_OUT = DOCS / "notes"
-IMG_OUT = DOCS / "assets" / "notes"
+
 REPO = "https://github.com/biociao/panshi-ai4s-practice"
 BRANCH = "study"
+OFFICIAL = "https://github.com/TashanGKD/panshi-ai4s-practice"
 
-# 笔记页配置：顺序同时决定“上一篇 / 下一篇”
+PDF_FILES = {
+    "01": "01_科学模型实训（一）_李文毅.pdf",
+    "02": "02_科学模型实训（二）_李文毅.pdf",
+    "03": "03_科研智能体实训（一）_陈希鸿.pdf",
+    "04": "04_科研智能体实训（二）_刘子笑.pdf",
+    "05": "05_科研智能体实训（三）_巩泽钊.pdf",
+    "06": "06_智能体记忆与知识库_余宣庆.pdf",
+    "07": "07_Harness实训_张健.pdf",
+    "08": "08_磐石应用实训_王正帅.pdf",
+    "09": "09_端到端闭环（一）_欧仕刚.pdf",
+    "10": "10_端到端闭环（二）_欧仕刚.pdf",
+    "11": "11_科学智能进阶_李瑀旸.pdf",
+}
+
+OFFICIAL_PDFS = {
+    number: f"{OFFICIAL}/blob/main/pdf/{quote(filename)}"
+    for number, filename in PDF_FILES.items()
+}
+OFFICIAL_PDF_BY_PATH = {
+    f"pdf/{filename}": OFFICIAL_PDFS[number]
+    for number, filename in PDF_FILES.items()
+}
+
 NOTES = [
     {
         "slug": "task1-illustrated",
         "src": "learning/notes/task1/illustrated-notes.md",
         "kicker": "Task 01 · 03 + 04 · 图文笔记",
         "short": "Task1 图文",
-        "image_dir": "task1",
+        "lecture": "03",
         "desc": "03 + 04 两讲的结构化精读：Harness 的六件事、一次文献检索的时序、ReAct 与 Workflow 的分工、Skill 的三段结构与调用机制。",
-        "pdf": "learning/notes/task1/task1-illustrated-notes.pdf",
+        "pdf": f"{REPO}/blob/{BRANCH}/{quote('learning/notes/task1/task1-illustrated-notes.pdf')}",
+        "pdf_label": "笔记 PDF",
     },
     {
         "slug": "task1-text",
         "src": "learning/notes/task1/README.md",
         "kicker": "Task 01 · 03 + 04 · 文字版",
         "short": "Task1 文字",
-        "image_dir": None,
+        "lecture": "03",
         "desc": "同一份笔记的文字版：表格、页码索引、速查与自测题，适合检索、复制和打印。",
-        "pdf": "learning/notes/task1/task1-illustrated-notes.pdf",
+        "pdf": f"{REPO}/blob/{BRANCH}/{quote('learning/notes/task1/task1-illustrated-notes.pdf')}",
+        "pdf_label": "笔记 PDF",
     },
     {
         "slug": "11",
         "src": "courses/11-li-yuyang/README.md",
         "kicker": "第 11 讲 · 科学智能进阶",
         "short": "第 11 讲",
-        "image_dir": "11",
+        "lecture": "11",
         "desc": "29 节图文资料：领域基座模型、光变序列、SN Clock、StarWhisper 望远镜与 AI Scientist 的实验闭环。",
-        "pdf": "pdf/11_科学智能进阶_李瑀旸.pdf",
+        "pdf": OFFICIAL_PDFS["11"],
+        "pdf_label": "官方 PDF",
     },
     {
         "slug": "progress",
         "src": "learning/progress.md",
         "kicker": "课程进度",
         "short": "学习进度",
-        "image_dir": None,
+        "lecture": "",
         "desc": "11 讲的状态、页码、起止日期与笔记入口，随学习进度更新。",
-        "pdf": None,
+        "pdf": "",
+        "pdf_label": "",
     },
 ]
 
@@ -82,26 +108,12 @@ PAGE_BY_SRC = {
     "learning/notes/11/README.md": "11.html",
     "learning/progress.md": "progress.html",
     "courses/11-li-yuyang/README.md": "11.html",
-    "README.md": "../index.html#lectures",
+    "README.md": "../index.html#sources",
 }
 
-# 空模板（尚未写笔记）统一指到笔记索引里的“各讲笔记状态”
 EMPTY_TEMPLATE = re.compile(r"^learning/notes/\d{2}/README\.md$")
 
-# 11 讲的状态（与 learning/progress.md 保持一致；更新进度时手动同步）
-LECTURES = [
-    ("01", "科学模型实训（一）", "todo"),
-    ("02", "科学模型实训（二）", "todo"),
-    ("03", "科研智能体实训（一）", "task1"),
-    ("04", "科研智能体实训（二）", "task1"),
-    ("05", "科研智能体实训（三）", "todo"),
-    ("06", "智能体记忆与知识库", "todo"),
-    ("07", "Harness 实训", "todo"),
-    ("08", "磐石应用实训", "todo"),
-    ("09", "端到端闭环（一）", "todo"),
-    ("10", "端到端闭环（二）", "todo"),
-    ("11", "科学智能进阶", "11"),
-]
+STATUS = {"03": "task1", "04": "task1", "11": "11"}
 
 
 def escape(value: str) -> str:
@@ -145,16 +157,11 @@ def source_url(rel: str) -> str:
     return github_url(rel, "blob")
 
 
-def pdf_url(rel: str) -> str:
-    return github_url(rel, "blob")
-
-
 def extract_title(text: str, fallback: str) -> tuple[str, str]:
     match = re.search(r"^#\s+(.+?)\s*$", text, flags=re.MULTILINE)
     if not match:
         return fallback, text
-    title = match.group(1).strip()
-    return title, text[: match.start()] + text[match.end() :]
+    return match.group(1).strip(), text[: match.start()] + text[match.end() :]
 
 
 def resolve_repo_path(src_rel: str, href: str) -> str | None:
@@ -167,83 +174,77 @@ def resolve_repo_path(src_rel: str, href: str) -> str | None:
     return posixpath.normpath(posixpath.join(base, path)).lstrip("/")
 
 
-def optimize_image(src_path: Path, out_dir: str, cache: dict) -> tuple[str, tuple[int, int]]:
-    key = (str(src_path), out_dir)
-    if key in cache:
-        return cache[key]
-
-    dst_dir = IMG_OUT / out_dir
-    dst_dir.mkdir(parents=True, exist_ok=True)
-    dst = dst_dir / (src_path.stem + ".webp")
-
-    im = Image.open(src_path).convert("RGB")
-    if im.width > 1200:
-        im = im.resize((1200, round(im.height * 1200 / im.width)), Image.LANCZOS)
-    im.save(dst, "WEBP", quality=82, method=6)
-
-    url = f"../assets/notes/{out_dir}/{dst.name}"
-    cache[key] = (url, im.size)
-    return cache[key]
+def figure_lecture(note: dict, src: str) -> str:
+    if note["slug"] == "11":
+        return "11"
+    name = posixpath.basename(unquote(src))
+    match = re.match(r"(03|04)-", name)
+    if match:
+        return match.group(1)
+    return note.get("lecture", "")
 
 
-def process_images(soup: BeautifulSoup, note: dict, cache: dict) -> int:
-    src_rel = note["src"]
-    out_dir = note["image_dir"]
-    count = 0
+def process_figure_refs(soup: BeautifulSoup, note: dict) -> int:
+    """Replace embedded course screenshots with caption + official PDF link."""
+    refs = 0
 
-    for img in soup.find_all("img"):
-        original = img.get("src", "")
-        if not original or original.startswith(("http://", "https://", "data:")):
-            count += 1
-            continue
-
-        repo_path = resolve_repo_path(src_rel, original)
-        if not repo_path:
-            continue
-        local = ROOT / repo_path
-
-        if local.exists() and out_dir:
-            url, size = optimize_image(local, out_dir, cache)
-            img["src"] = url
-            img["width"], img["height"] = str(size[0]), str(size[1])
-        else:
-            # 没有本地图片时，退回 GitHub 原始文件
-            img["src"] = f"{REPO}/raw/{BRANCH}/{quote(repo_path, safe='/')}"
-
-        img["loading"] = "lazy"
-        img["decoding"] = "async"
-        count += 1
-
+    for img in list(soup.find_all("img")):
+        alt = (img.get("alt") or "").strip()
+        src = img.get("src") or ""
         parent = img.parent
+        caption_html = alt
+        following_p = None
+
         if (
             parent
             and parent.name == "p"
             and len(parent.find_all("img", recursive=False)) == 1
             and not parent.get_text(strip=True)
         ):
-            figure = soup.new_tag("figure")
-            figure["class"] = "note-figure"
-            parent.replace_with(figure)
-            figure.append(img)
-
-            caption_html = ""
-            following = figure.find_next_sibling()
+            following = parent.find_next_sibling()
             if following and following.name == "p":
                 em = following.find("em")
                 if em and following.get_text(strip=True) == em.get_text(strip=True):
                     caption_html = em.decode_contents()
-                    following.decompose()
+                    following_p = following
 
-            if caption_html:
-                cap = soup.new_tag("figcaption")
-                cap.append(BeautifulSoup(caption_html, "html.parser"))
-                figure.append(cap)
-            elif img.get("alt"):
-                cap = soup.new_tag("figcaption")
-                cap.string = img["alt"]
-                figure.append(cap)
+        lecture = figure_lecture(note, src)
+        url = OFFICIAL_PDFS.get(lecture, note.get("pdf", ""))
 
-    return count
+        block = soup.new_tag("div")
+        block["class"] = "figure-ref"
+
+        label = soup.new_tag("span")
+        label["class"] = "ref-label"
+        label.string = "图注"
+        block.append(label)
+
+        text = soup.new_tag("span")
+        text["class"] = "ref-text"
+        if caption_html:
+            if following_p:
+                text.append(BeautifulSoup(caption_html, "html.parser"))
+            else:
+                text.string = caption_html
+        else:
+            text.string = "课件图"
+        block.append(text)
+
+        if url:
+            link = soup.new_tag("a", href=url, target="_blank", rel="noopener")
+            link.string = f"官方课件 {lecture} ↗" if lecture else "官方课件 ↗"
+            block.append(link)
+
+        if parent and parent.name == "p":
+            parent.replace_with(block)
+        else:
+            img.replace_with(block)
+
+        if following_p:
+            following_p.decompose()
+        refs += 1
+
+    return refs
 
 
 def process_links(soup: BeautifulSoup, src_rel: str) -> None:
@@ -276,11 +277,17 @@ def process_links(soup: BeautifulSoup, src_rel: str) -> None:
             continue
 
         local = ROOT / repo_path
-        if repo_path.endswith(".pdf"):
-            a["href"] = pdf_url(repo_path)
-        elif local.is_dir() or repo_path in ("pdf",):
+        if repo_path in OFFICIAL_PDF_BY_PATH:
+            a["href"] = OFFICIAL_PDF_BY_PATH[repo_path]
+        elif repo_path == "pdf":
+            a["href"] = f"{OFFICIAL}/tree/main/pdf"
+        elif repo_path.endswith(".pdf") and repo_path.startswith("pdf/"):
+            a["href"] = f"{OFFICIAL}/blob/main/{quote(repo_path, safe='/')}"
+        elif repo_path.endswith(".pdf"):
+            a["href"] = github_url(repo_path, "blob")
+        elif local.is_dir():
             a["href"] = github_url(repo_path, "tree")
-        elif local.exists() or repo_path.startswith(("learning/", "pdf/", "courses/")):
+        elif local.exists() or repo_path.startswith(("learning/", "courses/")):
             a["href"] = github_url(repo_path, "blob")
         else:
             continue
@@ -399,10 +406,9 @@ NAV = Template(
       </a>
 
       <nav class="nav-links" id="site-menu" aria-label="页面导航">
-        <a href="${up}index.html#path">学习路线</a>
-        <a href="${up}index.html#lectures">课程目录</a>
-        <a href="${up}index.html#progress">学习进度</a>
         <a href="index.html" class="$notes_class"$notes_current>笔记</a>
+        <a href="${up}index.html#progress">进度</a>
+        <a href="${up}index.html#sources">课程来源</a>
         <a href="${up}index.html#resources">资料</a>
       </nav>
 
@@ -438,18 +444,18 @@ FOOTER = Template(
         </svg>
         <div>
           <strong>磐石 AI4S · 学习笔记</strong>
-          <span>11 讲课程索引与个人学习记录</span>
+          <span>个人学习记录与课程引用</span>
         </div>
       </div>
       <nav class="footer-links" aria-label="页脚链接">
-        <a href="${up}index.html#lectures">课程目录</a>
-        <a href="${up}index.html#progress">学习进度</a>
         <a href="index.html">笔记</a>
+        <a href="${up}index.html#progress">进度</a>
+        <a href="${up}index.html#sources">课程来源</a>
         <a href="$repo" target="_blank" rel="noopener">GitHub</a>
       </nav>
     </div>
     <div class="wrap footer-bottom">
-      <span>整理 biociao · 更新于 2026-11-16 · 数据来源 learning/progress.md</span>
+      <span>整理 biociao · 更新于 2026-11-16 · 个人学习记录</span>
       <span>排版 原生 HTML / CSS · 无第三方依赖</span>
     </div>
   </footer>"""
@@ -475,7 +481,7 @@ def render_shell(page_title: str, description: str, content: str, body_class: st
     )
 
 
-def prepare_note(note: dict, image_cache: dict) -> dict:
+def prepare_note(note: dict) -> dict:
     src_rel = note["src"]
     src_path = ROOT / src_rel
     raw = src_path.read_text(encoding="utf-8")
@@ -488,7 +494,7 @@ def prepare_note(note: dict, image_cache: dict) -> dict:
     body_html = md.convert(raw)
     soup = BeautifulSoup(body_html, "html.parser")
 
-    images = process_images(soup, note, image_cache)
+    refs = process_figure_refs(soup, note)
     process_links(soup, src_rel)
     process_tables(soup)
     add_heading_anchors(soup)
@@ -506,11 +512,12 @@ def prepare_note(note: dict, image_cache: dict) -> dict:
         "toc": build_toc(md.toc_tokens),
         "words": words,
         "minutes": max(1, round(words / 400)),
-        "images": images,
+        "refs": refs,
         "date": date,
         "date_cn": cn_date(date),
         "source": source_url(src_rel),
-        "pdf": pdf_url(note["pdf"]) if note["pdf"] else "",
+        "pdf": note["pdf"],
+        "pdf_label": note["pdf_label"],
     }
 
 
@@ -522,8 +529,8 @@ def make_article(page: dict, prev_page: dict | None, next_page: dict | None) -> 
     </nav>'''
 
     meta = [f'<span>更新于 {escape(page["date_cn"])}</span>', f'<span>约 {page["words"]:,} 字</span>', f'<span>约 {page["minutes"]} 分钟</span>']
-    if page["images"]:
-        meta.append(f'<span>{page["images"]} 张图</span>')
+    if page["refs"]:
+        meta.append(f'<span>{page["refs"]} 处图注</span>')
 
     head = f'''<header class="article-head">
       <p class="eyebrow">{escape(page["kicker"])}</p>
@@ -531,6 +538,15 @@ def make_article(page: dict, prev_page: dict | None, next_page: dict | None) -> 
       <p class="article-meta">{"".join(meta)}</p>
       <p class="article-source">源文件：<a href="{escape(page["source"])}" target="_blank" rel="noopener">GitHub</a> · <a href="index.html">全部笔记</a></p>
     </header>'''
+
+    callout = ""
+    if page["refs"]:
+        callout = (
+            '<div class="article-callout article-callout--top">'
+            "本文为个人学习笔记；文中「图注」指官方课件的对应页，原图与课件请以官方发布为准。"
+            "本站不转载课件图片。"
+            "</div>"
+        )
 
     toc_html = page["toc"]
     toc_mobile = ""
@@ -559,7 +575,7 @@ def make_article(page: dict, prev_page: dict | None, next_page: dict | None) -> 
         )
     article_nav = '<nav class="article-nav" aria-label="笔记翻页">' + "".join(nav_parts) + "</nav>"
 
-    content = crumbs + head + toc_mobile + layout + article_nav
+    content = crumbs + head + callout + toc_mobile + layout + article_nav
     body_class = "page-note note-wide" if page["slug"] == "progress" else "page-note"
     return render_shell(f'{page["title"]} · 磐石 AI4S', page["desc"], content, body_class)
 
@@ -568,11 +584,13 @@ def make_index(pages: list[dict], title_date: str) -> str:
     entries = []
     for page in pages:
         meta = [f'约 {page["words"]:,} 字']
-        if page["images"]:
-            meta.append(f'{page["images"]} 张图')
+        if page["refs"]:
+            meta.append(f'{page["refs"]} 处图注')
         meta.append(f'更新于 {escape(page["date_cn"])}')
         if page["pdf"]:
-            meta.append(f'<a href="{escape(page["pdf"])}" target="_blank" rel="noopener">PDF</a>')
+            meta.append(
+                f'<a href="{escape(page["pdf"])}" target="_blank" rel="noopener">{escape(page["pdf_label"])}</a>'
+            )
         entries.append(
             f'''<article class="note-entry">
         <p class="note-entry-kicker">{escape(page["kicker"])}</p>
@@ -583,14 +601,15 @@ def make_index(pages: list[dict], title_date: str) -> str:
         )
 
     rows = []
-    for number, name, kind in LECTURES:
+    for number in [f"{i:02d}" for i in range(1, 12)]:
+        kind = STATUS.get(number)
         if kind == "task1":
             note = '<a href="task1-illustrated.html">Task1 图文</a> · <a href="task1-text.html">文字版</a>'
         elif kind == "11":
             note = '<a href="11.html">图文资料</a>'
         else:
             note = '<span class="todo">待补</span>'
-        rows.append(f"<tr><td>{number}</td><td>{escape(name)}</td><td>{note}</td></tr>")
+        rows.append(f"<tr><td>{number}</td><td>{note}</td></tr>")
 
     content = f'''<nav class="breadcrumb" aria-label="面包屑">
       <a href="../index.html">首页</a><span class="sep">/</span>
@@ -600,7 +619,7 @@ def make_index(pages: list[dict], title_date: str) -> str:
     <header class="article-head">
       <p class="eyebrow">笔记索引</p>
       <h1>学习笔记</h1>
-      <p class="article-lede">每讲一页，只写自己的理解，不抄原文。长文带目录与配图，文末可回到索引；源文件都在 <code>learning/notes</code>，课程原文与课件不在这里重复。</p>
+      <p class="article-lede">每讲一页，只写自己的理解，不抄原文。长文带目录与图注；源文件都在 <code>learning/notes</code>，课程内容与课件请以官方发布为准。</p>
       <p class="article-meta"><span>{len(pages)} 篇</span><span>2 讲已整理</span><span>更新于 {escape(title_date)}</span></p>
       <p class="article-source">源目录：<a href="{REPO}/tree/{BRANCH}/learning/notes" target="_blank" rel="noopener">learning/notes</a> · <a href="../index.html">返回首页</a></p>
     </header>
@@ -613,24 +632,21 @@ def make_index(pages: list[dict], title_date: str) -> str:
       <h2 id="lecture-notes">各讲笔记状态</h2>
       <div class="table-wrap">
         <table>
-          <thead><tr><th>讲次</th><th>课程</th><th>笔记</th></tr></thead>
+          <thead><tr><th>讲次</th><th>笔记</th></tr></thead>
           <tbody>{"".join(rows)}</tbody>
         </table>
       </div>
       <div class="article-callout">
-        <strong>关于生成：</strong>笔记页由 <code>tools/build_notes.py</code> 从 Markdown 生成。修改 <code>learning/notes</code> 或 <code>courses/11-li-yuyang/README.md</code> 后，重新运行脚本并提交 <code>docs/notes</code> 与 <code>docs/assets/notes</code>。尚未动笔的讲次保留模板，不生成空页。
+        <strong>关于引用：</strong>笔记页由 <code>tools/build_notes.py</code> 从 Markdown 生成；文中图注只引用官方课件的标题与页码，并链接到官方 PDF，不转载课件图片。尚未动笔的讲次保留模板，不生成空页。
       </div>
     </div>'''
 
-    return render_shell("学习笔记 · 磐石 AI4S", "磐石 AI4S 课程笔记索引：Task1 图文/文字笔记、第 11 讲图文资料与学习进度。", content, "page-note notes-index")
+    return render_shell("学习笔记 · 磐石 AI4S", "磐石 AI4S 个人学习笔记索引：Task1 图文/文字笔记、第 11 讲图文资料与学习进度。", content, "page-note notes-index")
 
 
 def main() -> None:
     NOTES_OUT.mkdir(parents=True, exist_ok=True)
-    IMG_OUT.mkdir(parents=True, exist_ok=True)
-
-    cache: dict = {}
-    pages = [prepare_note(note, cache) for note in NOTES]
+    pages = [prepare_note(note) for note in NOTES]
 
     for index, page in enumerate(pages):
         prev_page = pages[index - 1] if index > 0 else None
@@ -640,13 +656,9 @@ def main() -> None:
         print(f"wrote {out.relative_to(ROOT)}")
 
     latest = max(page["date"] for page in pages)
-    index_html = make_index(pages, cn_date(latest))
-    (NOTES_OUT / "index.html").write_text(index_html, encoding="utf-8")
+    (NOTES_OUT / "index.html").write_text(make_index(pages, cn_date(latest)), encoding="utf-8")
     print(f"wrote {(NOTES_OUT / 'index.html').relative_to(ROOT)}")
-
-    images = list(IMG_OUT.rglob("*.webp"))
-    total = sum(p.stat().st_size for p in images)
-    print(f"{len(pages)} note pages · {len(images)} images ({total / 1024 / 1024:.1f} MB)")
+    print(f"{len(pages)} note pages · no course images copied")
 
 
 if __name__ == "__main__":
