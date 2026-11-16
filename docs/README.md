@@ -12,11 +12,17 @@ python3 -m http.server 8765
 # 打开 http://127.0.0.1:8765/
 ```
 
-## 部署到 GitHub Pages
+## 线上地址
+
+<https://biociao.github.io/panshi-ai4s-practice/>
+
+已通过 GitHub Pages 发布：**Deploy from a branch**，`study` 分支 / `/docs` 目录（legacy build）。
+
+若要在别的 fork 重新部署：
 
 1. 把 `docs/` 提交到 `study` 分支并 push。
 2. 仓库 **Settings → Pages → Build and deployment**：Source 选 **Deploy from a branch**，Branch 选 `study`，Folder 选 `/docs`。
-3. 稍等片刻，访问 `https://<你的用户名>.github.io/panshi-ai4s-practice/`。
+3. 稍等片刻，访问 `https://<用户名>.github.io/panshi-ai4s-practice/`。
 
 > 页面里的 PDF、笔记链接都指向 GitHub 的 `study` 分支。部署前请确认 `learning/notes/task1/`、`learning/progress.md` 已推送，否则 Task1 相关链接会 404。
 >
