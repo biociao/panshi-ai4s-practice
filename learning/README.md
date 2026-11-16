@@ -6,6 +6,7 @@
 - [`notes/`](notes/)：每讲一页笔记，已按讲次建好模板。
 - [`exercises/`](exercises/)：动手练习与复现代码。
 - [`assets/`](assets/)：笔记用的截图/图片。
+- [`../docs/`](../docs/)：静态展示页（讲次索引、学习进度、笔记入口），可部署到 GitHub Pages。
 
 上游课件本身在 [`../README.md`](../README.md) 与 [`../pdf/`](../pdf/)。
 
