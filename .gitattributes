@@ -1,0 +1,2 @@
+# 课程课件与笔记 PDF 按二进制处理，避免把 PDF 内容当作文本 diff
+*.pdf binary
