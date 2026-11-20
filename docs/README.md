@@ -33,6 +33,8 @@ python3 tools/build_notes.py
 | --- | --- |
 | `learning/notes/task1/illustrated-notes.md` | `docs/notes/task1-illustrated.html` |
 | `learning/notes/task1/README.md` | `docs/notes/task1-text.html` |
+| `learning/notes/task2/illustrated-notes.md` | `docs/notes/task2-illustrated.html` |
+| `learning/notes/task2/README.md` | `docs/notes/task2-text.html` |
 | `courses/11-li-yuyang/README.md` | `docs/notes/11.html` |
 | `learning/progress.md` | `docs/notes/progress.html` |
 
@@ -61,6 +63,8 @@ docs/
 │   ├── index.html            笔记索引
 │   ├── task1-illustrated.html
 │   ├── task1-text.html
+│   ├── task2-illustrated.html
+│   ├── task2-text.html
 │   ├── 11.html
 │   └── progress.html
 ├── assets/

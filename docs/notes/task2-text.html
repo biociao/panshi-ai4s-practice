@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Task2 学习笔记：科研知识与数据整理 · 磐石 AI4S</title>
+  <meta name="description" content="同一份笔记的文字版：术语表、页码索引、方案横评、自测题与待办，适合检索、复制和打印。">
+  <meta name="theme-color" content="#17130f">
+  <meta name="author" content="biociao">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/style.css">
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('ai4s-theme');
+        var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        document.documentElement.dataset.theme = theme;
+      } catch (e) {
+        document.documentElement.dataset.theme = 'dark';
+      }
+      document.documentElement.classList.add('js');
+    })();
+  </script>
+</head>
+<body class="page-note">
+  <a class="skip-link" href="#main">跳到正文</a>
+  <header class="nav" id="site-nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="../index.html" aria-label="磐石 AI4S 学习笔记，回到首页">
+        <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
+          <defs>
+            <linearGradient id="brandGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#d9b28c"/><stop offset="1" stop-color="#b08463"/>
+            </linearGradient>
+          </defs>
+          <rect width="64" height="64" rx="12" fill="#231f1a"/>
+          <rect x="1" y="1" width="62" height="62" rx="11" fill="none" stroke="url(#brandGrad)" stroke-opacity=".55"/>
+          <circle cx="32" cy="32" r="14.5" fill="none" stroke="url(#brandGrad)" stroke-width="2.5"/>
+          <circle cx="32" cy="32" r="4" fill="#f6f1e7"/>
+          <circle cx="46" cy="18" r="3.2" fill="url(#brandGrad)"/>
+        </svg>
+        <span class="brand-text"><strong>磐石 AI4S</strong><em>学习笔记</em></span>
+      </a>
+
+      <nav class="nav-links" id="site-menu" aria-label="页面导航">
+        <a href="index.html" class="active" aria-current="page">笔记</a>
+        <a href="../index.html#progress">进度</a>
+        <a href="../index.html#sources">课程来源</a>
+        <a href="../index.html#resources">资料</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a class="repo-link" href="https://github.com/biociao/panshi-ai4s-practice" target="_blank" rel="noopener">GitHub<span aria-hidden="true">↗</span></a>
+        <button class="icon-btn theme-btn" type="button" data-theme-toggle aria-label="切换深浅色主题">
+          <svg class="ico-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a7 7 0 1 0 10.5 10.5Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+          <svg class="ico-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 2v2.4M12 19.6V22M2 12h2.4M19.6 12H22M4.9 4.9l1.7 1.7M17.4 17.4l1.7 1.7M19.1 4.9l-1.7 1.7M6.6 17.4l-1.7 1.7" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+        </button>
+        <button class="icon-btn menu-btn" type="button" data-menu-toggle aria-expanded="false" aria-controls="site-menu" aria-label="打开导航菜单">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+  <main id="main" class="article-main">
+    <div class="wrap article-wrap">
+      <nav class="breadcrumb" aria-label="面包屑">
+      <a href="../index.html">首页</a><span class="sep">/</span>
+      <a href="index.html">笔记</a><span class="sep">/</span>
+      <span aria-current="page">Task2 文字</span>
+    </nav><header class="article-head">
+      <p class="eyebrow">Task 02 · 06 + 07 · 文字版</p>
+      <h1>Task2 学习笔记：科研知识与数据整理</h1>
+      <p class="article-meta"><span>更新于 2026 年 11 月 21 日</span><span>约 9,385 字</span><span>约 23 分钟</span></p>
+      <p class="article-source">源文件：<a href="https://github.com/biociao/panshi-ai4s-practice/blob/study/learning/notes/task2/README.md" target="_blank" rel="noopener">GitHub</a> · <a href="index.html">全部笔记</a></p>
+    </header><details class="toc-mobile"><summary>目录</summary><nav class="toc" aria-label="本页目录"><ol><li><a href="#0-主线一句话">0. 主线一句话</a></li><li><a href="#1-起点模型的三个缺口两类外挂06-p3p4p7">1. 起点：模型的三个缺口，两类外挂（06-P3、P4、P7）</a></li><li><a href="#2-rag-的四个词与五步闭环06-p8p12p15">2. RAG 的四个词与五步闭环（06-P8~P12、P15）</a><ol><li><a href="#21-四个词先记住06-p8">2.1 四个词先记住（06-P8）</a></li><li><a href="#22-建库三步06-p9">2.2 建库三步（06-P9）</a></li><li><a href="#23-检索四步06-p10">2.3 检索四步（06-P10）</a></li><li><a href="#24-一个完整的例子06-p12">2.4 一个完整的例子（06-P12）</a></li><li><a href="#25-30-分钟手搓一个-rag06-p15">2.5 30 分钟手搓一个 RAG（06-P15）</a></li></ol></li><li><a href="#3-外循环-内循环rag-在智能体里的位置06-p11">3. 外循环 / 内循环：RAG 在智能体里的位置（06-P11）</a></li><li><a href="#4-从图书管理员到研究助手传统-rag-vs-agentic-rag06-p13p14">4. 从图书管理员到研究助手：传统 RAG vs Agentic RAG（06-P13、P14）</a></li><li><a href="#5-效果上限在预处理06-p17p18p20">5. 效果上限在预处理（06-P17、P18、P20）</a></li><li><a href="#6-记忆是什么三种存储形态06-p25p28">6. 记忆是什么：三种存储形态（06-P25~P28）</a><ol><li><a href="#61-本地-markdown-目录06-p26">6.1 本地 Markdown 目录（06-P26）</a></li><li><a href="#62-高维向量化存储06-p27">6.2 高维向量化存储（06-P27）</a></li><li><a href="#63-怎么选混合架构06-p28">6.3 怎么选：混合架构（06-P28）</a></li></ol></li><li><a href="#7-轨迹记忆技能三层颗粒度06-p29p32">7. 轨迹、记忆、技能：三层颗粒度（06-P29~P32）</a><ol><li><a href="#71-人脑类比06-p30p31">7.1 人脑类比（06-P30、P31）</a></li><li><a href="#72-知识记忆-vs-规则与技能06-p32">7.2 知识记忆 vs 规则与技能（06-P32）</a></li></ol></li><li><a href="#8-时序分层与读写代谢06-p33p35">8. 时序分层与读写代谢（06-P33~P35）</a><ol><li><a href="#81-l0l3-金字塔06-p33">8.1 L0–L3 金字塔（06-P33）</a></li><li><a href="#82-写入与读取的完整代谢06-p34">8.2 写入与读取的完整代谢（06-P34）</a></li><li><a href="#83-记忆重塑召回只是第一步06-p35">8.3 记忆重塑：召回只是第一步（06-P35）</a></li></ol></li><li><a href="#9-冲突记忆里最像科研的部分06-p36">9. 冲突：记忆里最像科研的部分（06-P36）</a></li><li><a href="#10-选型与共享06-p38p42">10. 选型与共享（06-P38~P42）</a><ol><li><a href="#101-市面方案横评06-p38">10.1 市面方案横评（06-P38）</a></li><li><a href="#102-有记忆-vs-无记忆06-p39">10.2 有记忆 vs 无记忆（06-P39）</a></li><li><a href="#103-mcp跨智能体的神经系统06-p40p42">10.3 MCP：跨智能体的「神经系统」（06-P40~P42）</a></li><li><a href="#104-科研流程各环节用知识库还是记忆06-p45">10.4 科研流程各环节，用知识库还是记忆（06-P45）</a></li></ol></li><li><a href="#11-07-讲为什么要自建领域数据集07-p02">11. 07 讲：为什么要自建领域数据集（07-P02）</a></li><li><a href="#12-四代方法控制权在谁手里07-p03p06">12. 四代方法：控制权在谁手里（07-P03~P06）</a></li><li><a href="#13-质量自建-benchmark-三层07-p07">13. 质量：自建 Benchmark 三层（07-P07）</a></li><li><a href="#14-发布从-fair-到-ai-ready07-p08">14. 发布：从 FAIR 到 AI-Ready（07-P08）</a></li><li><a href="#15-把两讲拼成一条流水线我的整合">15. 把两讲拼成一条流水线（我的整合）</a></li><li><a href="#16-迁移到自己的课题以组学为例">16. 迁移到自己的课题（以组学为例）</a></li><li><a href="#17-动手计划尚未执行">17. 动手计划（尚未执行）</a></li><li><a href="#18-我提炼的九条用自己的话">18. 我提炼的九条（用自己的话）</a></li><li><a href="#19-自测先答再对要点">19. 自测（先答，再对要点）</a></li><li><a href="#20-待办与疑问">20. 待办与疑问</a></li><li><a href="#21-资料出处与引用声明">21. 资料出处与引用声明</a></li></ol></nav></details><div class="article-layout"><nav class="toc" aria-label="本页目录"><p class="toc-title">目录</p><ol><li><a href="#0-主线一句话">0. 主线一句话</a></li><li><a href="#1-起点模型的三个缺口两类外挂06-p3p4p7">1. 起点：模型的三个缺口，两类外挂（06-P3、P4、P7）</a></li><li><a href="#2-rag-的四个词与五步闭环06-p8p12p15">2. RAG 的四个词与五步闭环（06-P8~P12、P15）</a><ol><li><a href="#21-四个词先记住06-p8">2.1 四个词先记住（06-P8）</a></li><li><a href="#22-建库三步06-p9">2.2 建库三步（06-P9）</a></li><li><a href="#23-检索四步06-p10">2.3 检索四步（06-P10）</a></li><li><a href="#24-一个完整的例子06-p12">2.4 一个完整的例子（06-P12）</a></li><li><a href="#25-30-分钟手搓一个-rag06-p15">2.5 30 分钟手搓一个 RAG（06-P15）</a></li></ol></li><li><a href="#3-外循环-内循环rag-在智能体里的位置06-p11">3. 外循环 / 内循环：RAG 在智能体里的位置（06-P11）</a></li><li><a href="#4-从图书管理员到研究助手传统-rag-vs-agentic-rag06-p13p14">4. 从图书管理员到研究助手：传统 RAG vs Agentic RAG（06-P13、P14）</a></li><li><a href="#5-效果上限在预处理06-p17p18p20">5. 效果上限在预处理（06-P17、P18、P20）</a></li><li><a href="#6-记忆是什么三种存储形态06-p25p28">6. 记忆是什么：三种存储形态（06-P25~P28）</a><ol><li><a href="#61-本地-markdown-目录06-p26">6.1 本地 Markdown 目录（06-P26）</a></li><li><a href="#62-高维向量化存储06-p27">6.2 高维向量化存储（06-P27）</a></li><li><a href="#63-怎么选混合架构06-p28">6.3 怎么选：混合架构（06-P28）</a></li></ol></li><li><a href="#7-轨迹记忆技能三层颗粒度06-p29p32">7. 轨迹、记忆、技能：三层颗粒度（06-P29~P32）</a><ol><li><a href="#71-人脑类比06-p30p31">7.1 人脑类比（06-P30、P31）</a></li><li><a href="#72-知识记忆-vs-规则与技能06-p32">7.2 知识记忆 vs 规则与技能（06-P32）</a></li></ol></li><li><a href="#8-时序分层与读写代谢06-p33p35">8. 时序分层与读写代谢（06-P33~P35）</a><ol><li><a href="#81-l0l3-金字塔06-p33">8.1 L0–L3 金字塔（06-P33）</a></li><li><a href="#82-写入与读取的完整代谢06-p34">8.2 写入与读取的完整代谢（06-P34）</a></li><li><a href="#83-记忆重塑召回只是第一步06-p35">8.3 记忆重塑：召回只是第一步（06-P35）</a></li></ol></li><li><a href="#9-冲突记忆里最像科研的部分06-p36">9. 冲突：记忆里最像科研的部分（06-P36）</a></li><li><a href="#10-选型与共享06-p38p42">10. 选型与共享（06-P38~P42）</a><ol><li><a href="#101-市面方案横评06-p38">10.1 市面方案横评（06-P38）</a></li><li><a href="#102-有记忆-vs-无记忆06-p39">10.2 有记忆 vs 无记忆（06-P39）</a></li><li><a href="#103-mcp跨智能体的神经系统06-p40p42">10.3 MCP：跨智能体的「神经系统」（06-P40~P42）</a></li><li><a href="#104-科研流程各环节用知识库还是记忆06-p45">10.4 科研流程各环节，用知识库还是记忆（06-P45）</a></li></ol></li><li><a href="#11-07-讲为什么要自建领域数据集07-p02">11. 07 讲：为什么要自建领域数据集（07-P02）</a></li><li><a href="#12-四代方法控制权在谁手里07-p03p06">12. 四代方法：控制权在谁手里（07-P03~P06）</a></li><li><a href="#13-质量自建-benchmark-三层07-p07">13. 质量：自建 Benchmark 三层（07-P07）</a></li><li><a href="#14-发布从-fair-到-ai-ready07-p08">14. 发布：从 FAIR 到 AI-Ready（07-P08）</a></li><li><a href="#15-把两讲拼成一条流水线我的整合">15. 把两讲拼成一条流水线（我的整合）</a></li><li><a href="#16-迁移到自己的课题以组学为例">16. 迁移到自己的课题（以组学为例）</a></li><li><a href="#17-动手计划尚未执行">17. 动手计划（尚未执行）</a></li><li><a href="#18-我提炼的九条用自己的话">18. 我提炼的九条（用自己的话）</a></li><li><a href="#19-自测先答再对要点">19. 自测（先答，再对要点）</a></li><li><a href="#20-待办与疑问">20. 待办与疑问</a></li><li><a href="#21-资料出处与引用声明">21. 资料出处与引用声明</a></li></ol></nav><article class="article-body"><blockquote>
+<p>精读版：<a href="task2-illustrated.html">图文笔记</a> · <a href="https://github.com/biociao/panshi-ai4s-practice/blob/study/learning/notes/task2/task2-illustrated-notes.pdf" rel="noopener" target="_blank">PDF</a>（叙述式，含 14 张课件图）</p>
+</blockquote>
+<ul>
+<li>任务：Task2（科研知识与数据整理）</li>
+<li>覆盖课件：06《智能体记忆与知识库》（余宣庆，53 页）＋ 07《Harness 实训：构建科研数据 Harness》（张健，10 页）</li>
+<li>状态：两讲课件已通读并整理；配套两节线上实训、录播未看（见「待办」）</li>
+<li>页码写法：<code>06-P15</code> = 06 讲第 15 页；<code>07-P05</code> = 07 讲第 5 页</li>
+</ul>
+<hr/>
+<h2 id="0-主线一句话">0. 主线一句话<a aria-label="链接到本节" class="heading-anchor" href="#0-主线一句话">#</a></h2>
+<p>Task2 关心的是「<strong>智能体靠什么知道</strong>」：06 讲把<strong>静态文献</strong>变成可检索、可引用的知识库，把<strong>动态实验过程</strong>变成跨会话记忆；07 讲把<strong>散落在论文里的科研数据</strong>变成可验证、可发布的 AI-Ready 数据集。</p>
+<p>三者是同一条证据链上的三个环节，各缺一块都不成立：</p>
+<ul>
+<li>知识库解决「<strong>查得到</strong>」——公共、静态、有引用。</li>
+<li>记忆解决「<strong>接着做</strong>」——个人、动态、跨会话。</li>
+<li>数据集解决「<strong>别人能接着做</strong>」——结构化、可追溯、有治理。</li>
+</ul>
+<p>一句话记：<strong>知识库管查得到，记忆管接着做，数据集管别人能接着做。</strong></p>
+<hr/>
+<h2 id="1-起点模型的三个缺口两类外挂06-p3p4p7">1. 起点：模型的三个缺口，两类外挂（06-P3、P4、P7）<a aria-label="链接到本节" class="heading-anchor" href="#1-起点模型的三个缺口两类外挂06-p3p4p7">#</a></h2>
+<p>06 讲开头就把问题摆清楚了：大模型训练完参数就冻结，你的资料、偏好、项目进展它一概不知道（06-P3）。落到科研场景，缺口有三个（06-P7）：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>缺口</th>
+<th>课件表述</th>
+<th>后果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>知识过时</td>
+<td>大模型知识截止到训练日期</td>
+<td>查不到最新进展，前沿方向尤其明显</td>
+</tr>
+<tr>
+<td>私有盲区</td>
+<td>你的 PDF 是私有的，预训练时从没见过</td>
+<td>本地 200 篇文献，AI 等于「没读过」</td>
+</tr>
+<tr>
+<td>幻觉</td>
+<td>一次性塞入过多上下文，模型会胡说或丢重点</td>
+<td>答案看起来流畅，实际经不起核对</td>
+</tr>
+</tbody>
+</table></div>
+<p>对策是外挂两样东西：<strong>知识库（查得到）＋记忆（记得你）</strong>。RAG 是连接文献库与模型的那座桥，桥的四段是：切分 → 嵌入 → 检索 → 生成（06-P7）。</p>
+<p>这里有个我认为很重要的判断：<strong>用文件夹分文献已经算「做了一半的 RAG」</strong>（06-P4）。</p>
+<ul>
+<li>按章节建文件夹、让 AI 助手管理，本质也是检索增强；</li>
+<li>但没分块、没索引，AI 只看得到标题，每次都要全量重读，<strong>慢、费 Token、定位不准</strong>；</li>
+<li>知识库的做法是把「你已经有的习惯」做到位：提前解析、切分片段、按需精准召回、可溯源到原文段落。</li>
+</ul>
+<p>换句话说，RAG 不是新发明的需求，而是把「翻文件夹」这件事工程化。</p>
+<hr/>
+<h2 id="2-rag-的四个词与五步闭环06-p8p12p15">2. RAG 的四个词与五步闭环（06-P8~P12、P15）<a aria-label="链接到本节" class="heading-anchor" href="#2-rag-的四个词与五步闭环06-p8p12p15">#</a></h2>
+<h3 id="21-四个词先记住06-p8">2.1 四个词先记住（06-P8）<a aria-label="链接到本节" class="heading-anchor" href="#21-四个词先记住06-p8">#</a></h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>术语</th>
+<th>英文</th>
+<th>课件定义</th>
+<th>我的记法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>嵌入</td>
+<td>Embedding</td>
+<td>把文本转成高维向量，让 AI 理解语义</td>
+<td>把「意思」翻译成「坐标」</td>
+</tr>
+<tr>
+<td>召回</td>
+<td>Recall</td>
+<td>从知识库检索并提取相关片段返回给模型</td>
+<td>先捞一批候选</td>
+</tr>
+<tr>
+<td>重排序</td>
+<td>Rerank</td>
+<td>对召回结果二次精排，把最相关的排前面</td>
+<td>再排一次队</td>
+</tr>
+<tr>
+<td>检索</td>
+<td>Retrieve</td>
+<td>广义的信息查找，包含召回、重排等整套动作</td>
+<td>「查」的总称</td>
+</tr>
+</tbody>
+</table></div>
+<p>课件特别点了一句：<strong>检索是包含召回和重排的整套动作，不是单指某一步</strong>（06-P8）。日常说「检索效果不好」时，先分清是召回没捞到，还是捞到了但没排上来——这两类问题的修法完全不同。</p>
+<h3 id="22-建库三步06-p9">2.2 建库三步（06-P9）<a aria-label="链接到本节" class="heading-anchor" href="#22-建库三步06-p9">#</a></h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>做什么</th>
+<th>课件参数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. 切分 Chunk</td>
+<td>PDF → 小段文本</td>
+<td>500 字/段</td>
+</tr>
+<tr>
+<td>2. 向量化 Embedding</td>
+<td>文本 → 高维向量</td>
+<td>768 维</td>
+</tr>
+<tr>
+<td>3. 存储 Vector DB</td>
+<td>向量 → 向量数据库</td>
+<td>语义近则距离近</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p>课件在两处口径略有差异：06-P9 写「500 字/段」，06-P12 写「500 tokens/段」。工程上按 token 更准（切分要受模型上下文约束），但不必纠结数字，重点是<strong>一段只装一个语义单元</strong>。</p>
+</blockquote>
+<p>课件用一张三维坐标图解释「语义位置」：意义相近的论文在向量空间里「挨得近」，这不是地理位置，而是语义位置（06-P9）。图里同时摆了 K-Means、DBSCAN、归一化、标准化、F1、轮廓系数这些概念，用来提示「这只是一个把语义落到距离上的空间」，不要把它误会成地理坐标。</p>
+<h3 id="23-检索四步06-p10">2.3 检索四步（06-P10）<a aria-label="链接到本节" class="heading-anchor" href="#23-检索四步06-p10">#</a></h3>
+<ol>
+<li>用户提问：「这篇综述对比了哪几种聚类算法？」</li>
+<li>问题向量化：把问题也变成 768 个数字；</li>
+<li>最近邻搜索：在向量空间里找离问题最近的片段；</li>
+<li>召回 Top-K：取出最相关的 3–5 个片段。</li>
+</ol>
+<p>课件给的示例相似度是 0.92 / 0.89 / 0.85（06-P10）。<strong>注意这三个数只是排序依据，不是可信度</strong>——相似度高只说明「语义接近」，不说明「这句话是对的」。这一条后面会反复用到。</p>
+<h3 id="24-一个完整的例子06-p12">2.4 一个完整的例子（06-P12）<a aria-label="链接到本节" class="heading-anchor" href="#24-一个完整的例子06-p12">#</a></h3>
+<p>一篇 PDF 切成 500 tokens/段、共 50 个片段；提问后召回三段，每段都带来源页码：</p>
+<pre><code class="language-text">K-Means 需要预先指定 K 值 ...        ← 来源：P.12
+DBSCAN 基于密度，能发现任意形状 ...  ← 来源：P.15
+层次聚类分为凝聚式和分裂式 ...        ← 来源：P.18
+</code></pre>
+<p>回答里用 <code>[1] [2] [3]</code> 标到具体片段，结论是「所有陈述均有文献出处，拒绝幻觉」（06-P12）。</p>
+<p><strong>这张图是整讲最该记住的一页。</strong> 它说明 RAG 的价值不止「答得准」，而是「每句话都可溯源、可审计」。科研场景里，后者比前者更硬。</p>
+<h3 id="25-30-分钟手搓一个-rag06-p15">2.5 30 分钟手搓一个 RAG（06-P15）<a aria-label="链接到本节" class="heading-anchor" href="#25-30-分钟手搓一个-rag06-p15">#</a></h3>
+<p>课件给的最小闭环是零安装的三个组件：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>组件</th>
+<th>选择</th>
+<th>理由</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>编排</td>
+<td>LangChain</td>
+<td>Notebook / 命令行即可跑</td>
+</tr>
+<tr>
+<td>嵌入</td>
+<td>智谱 Embedding 公开接口</td>
+<td>本地跑不动模型就直接用 API</td>
+</tr>
+<tr>
+<td>向量库</td>
+<td>FAISS</td>
+<td>LangChain 自动加载，免单独安装</td>
+</tr>
+</tbody>
+</table></div>
+<p>五步：切分（PyPDFLoader，500 字/段）→ 嵌入（768 维）→ 入库 → 提问 → 召回（Top-K 拼上下文）。课件的话是「跑通一次，胜过听讲十遍」（06-P15）。</p>
+<blockquote>
+<p><strong>我的批注（不是课件原话）</strong>：手搓 RAG 的意义不是造工具，而是亲手撞一次「切分不当→召回失败」的墙。只有撞过，才会相信下一节「瓶颈不在检索」的结论。</p>
+</blockquote>
+<hr/>
+<h2 id="3-外循环-内循环rag-在智能体里的位置06-p11">3. 外循环 / 内循环：RAG 在智能体里的位置（06-P11）<a aria-label="链接到本节" class="heading-anchor" href="#3-外循环-内循环rag-在智能体里的位置06-p11">#</a></h2>
+<p>06-P11 把智能体内部拆成两个循环，这是理解「知识库怎么接进 Agent」的关键：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>循环</th>
+<th>干什么</th>
+<th>组成</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>外循环（工具调用）</td>
+<td>找资料</td>
+<td>LLM 判断「需要查资料」→ 调工具箱（RAG 检索 / 记忆查询 / 联网搜索）→ 返回片段</td>
+</tr>
+<tr>
+<td>内循环（上下文组装与生成）</td>
+<td>拼上下文</td>
+<td>系统指令 + 历史对话（前 5 轮）+ RAG 召回片段 + 记忆片段 + 当前问题</td>
+</tr>
+</tbody>
+</table></div>
+<p>两个要点：</p>
+<ol>
+<li><strong>外循环检索到的一切，最终都要进内循环的上下文窗口。</strong> 所以「检索质量」和「上下文预算」是一对矛盾：召回越多越全，但挤掉的历史与指令也越多。</li>
+<li><strong>工具箱里 RAG 和记忆是并列的两个工具</strong>（06-P11 画的是 RAG 检索、记忆查询、联网搜索三格）。这解释了为什么 06 讲后半段要专门讲记忆——它不是 RAG 的子功能，而是另一个独立来源。</li>
+</ol>
+<p>和 Task1 的接口在这里：外循环就是 Harness 的「调用工具」，内循环就是 Harness 的「整理上下文」。<strong>RAG 不是一个产品，而是 Harness 工具箱里的一个工具。</strong></p>
+<hr/>
+<h2 id="4-从图书管理员到研究助手传统-rag-vs-agentic-rag06-p13p14">4. 从图书管理员到研究助手：传统 RAG vs Agentic RAG（06-P13、P14）<a aria-label="链接到本节" class="heading-anchor" href="#4-从图书管理员到研究助手传统-rag-vs-agentic-rag06-p13p14">#</a></h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th></th>
+<th>传统 RAG</th>
+<th>Agentic RAG</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>隐喻</td>
+<td>图书管理员</td>
+<td>研究助手</td>
+</tr>
+<tr>
+<td>流程</td>
+<td>提问 → 向量检索 → 生成 → 答案</td>
+<td>规划 / 决策 / 评估中心 → 多次检索 → 反思 → 报告</td>
+</tr>
+<tr>
+<td>形态</td>
+<td>线性、单向</td>
+<td>循环、多步</td>
+</tr>
+<tr>
+<td>会不会换关键词再搜</td>
+<td>不会</td>
+<td>会</td>
+</tr>
+<tr>
+<td>适不适合复杂推理</td>
+<td>不适合</td>
+<td>适合</td>
+</tr>
+</tbody>
+</table></div>
+<p>06-P14 给了一个调用时序，值得抄下来当模板：</p>
+<pre><code class="language-text">用户："根据我昨天说的标准，评估这个新方案"
+Agent → search_memory("评估标准")   → 返回："用户要求 ROI&gt;30%"
+Agent → search_rag("新方案 ROI 数据") → 返回："方案 B 首年 ROI 预计 35%"
+Agent 综合记忆与文档 → "方案 B 满足您 ROI&gt;30% 的标准 …"
+</code></pre>
+<p>这张时序图有两个信息量：</p>
+<ul>
+<li><strong>记忆和 RAG 的调用是串行且互相依赖的</strong>：不先查记忆，就不知道「标准」是什么；</li>
+<li><strong>答案的每个前提都能指认来源</strong>：30% 来自记忆，35% 来自文档。</li>
+</ul>
+<blockquote>
+<p><strong>我的批注</strong>：Agentic RAG 增加的不是模型能力，而是「检索策略」这一层。代价是循环成本与「检索表演」——反复换词查却始终不收敛。Task1 里 Harness 的次数/时间边界正是防这个的。</p>
+</blockquote>
+<hr/>
+<h2 id="5-效果上限在预处理06-p17p18p20">5. 效果上限在预处理（06-P17、P18、P20）<a aria-label="链接到本节" class="heading-anchor" href="#5-效果上限在预处理06-p17p18p20">#</a></h2>
+<p>课件列了三个现场高频现象（06-P17）：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>现象</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>化学式、公式类提问召回失败</td>
+<td>公式被解析成乱码或图片，没有可检索文本</td>
+</tr>
+<tr>
+<td>表格内容答非所问</td>
+<td>表格被按阅读顺序拍平，行列关系丢失</td>
+</tr>
+<tr>
+<td>扫描版 PDF 几乎搜不到</td>
+<td>没有文本层，切分出来是空片段</td>
+</tr>
+</tbody>
+</table></div>
+<p>归因一句话：<strong>效果上限由数据预处理决定，不在检索算法，也不在模型大小</strong>（06-P17）。课件配的工具是 MinerU：PDF → 结构化 Markdown，公式、表格识别准确，解析结果可直接入库。</p>
+<p>预处理之后，成熟工具可以一键管理（06-P18，以 TiMEM Space 为例）：创建主题库 → 上传自动解析 → 问答带引用溯源 → 共享给团队；配套笔记功能（实验记录随手沉淀）、库管理（导入/导出/移动/重命名），以及用 MCP 连接器突破「知识只能在它内部问答」的边界。</p>
+<p>再往上还有一张进阶清单（06-P20），课件明确说「今天不展开，遇到瓶颈时按这张图逐项排查」：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>环节</th>
+<th>要点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>切分 Chunk</td>
+<td>overlap 重叠窗口，避免语义被切断</td>
+</tr>
+<tr>
+<td>Embedding 选型与微调</td>
+<td>单模态 vs 多模态；垂直领域可微调</td>
+</tr>
+<tr>
+<td>Reranker 重排序</td>
+<td>召回后再精排，显著降低噪音</td>
+</tr>
+<tr>
+<td>向量库选型</td>
+<td>Milvus / PGVector / ZVec，企业级部署</td>
+</tr>
+<tr>
+<td>GraphRAG / LightRAG</td>
+<td>图结构管理知识，面向多跳推理</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p><strong>我的批注</strong>：科研 PDF 还有两个课件没展开的坑——双栏排版会被读串行，参考文献列表会被当成正文召回。预处理阶段就应该把「页码 + 版面块类型（正文/图表/参考文献）」一起留下来，否则后面的引用只能落到「某篇 PDF」，落不到「哪一页哪一段」。</p>
+</blockquote>
+<hr/>
+<h2 id="6-记忆是什么三种存储形态06-p25p28">6. 记忆是什么：三种存储形态（06-P25~P28）<a aria-label="链接到本节" class="heading-anchor" href="#6-记忆是什么三种存储形态06-p25p28">#</a></h2>
+<p>06-P25 先把「记忆的存储形态」分成三类，并纠正一个常见误解：<strong>RAG 是统一的检索层，不是记忆本身的存储类型</strong>。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>形态</th>
+<th>隐喻</th>
+<th>载体</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>知识库型</td>
+<td>图书馆，静态只读</td>
+<td>向量库 / 静态领域图谱 / PDF</td>
+</tr>
+<tr>
+<td>文档型</td>
+<td>笔记本，记录交互历史</td>
+<td>Markdown / 文本 / JSON</td>
+</tr>
+<tr>
+<td>图谱型</td>
+<td>思维导图，随交互生长</td>
+<td>记忆图谱：实体—关系—实体</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="61-本地-markdown-目录06-p26">6.1 本地 Markdown 目录（06-P26）<a aria-label="链接到本节" class="heading-anchor" href="#61-本地-markdown-目录06-p26">#</a></h3>
+<pre><code class="language-text">memories/
+  user_alice/
+    profile.md          # 姓名、偏好、职业
+    2026-08-28.md       # 当日记录
+    project_timem.md    # 项目进展
+</code></pre>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>完全人类可读可编辑，VS Code 直接改</td>
+<td>缺乏语义检索，只能关键词/正则</td>
+</tr>
+<tr>
+<td>支持 Git 版本控制，排错一目了然</td>
+<td>规模瓶颈，文件会臃肿到超 Token 上限</td>
+</tr>
+<tr>
+<td>可整份塞进 System Prompt 作全局画像</td>
+<td>需要人工维护结构</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="62-高维向量化存储06-p27">6.2 高维向量化存储（06-P27）<a aria-label="链接到本节" class="heading-anchor" href="#62-高维向量化存储06-p27">#</a></h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>模糊与语义匹配强（「苹果」≈「Apple」）</td>
+<td>人类不可读，纯数字数组难排错</td>
+</tr>
+<tr>
+<td>无惧海量数据，ANN 毫秒级召回</td>
+<td>修改成本高，改一句要重嵌入、更新库</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="63-怎么选混合架构06-p28">6.3 怎么选：混合架构（06-P28）<a aria-label="链接到本节" class="heading-anchor" href="#63-怎么选混合架构06-p28">#</a></h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>维度</th>
+<th>本地 MD 目录</th>
+<th>高维向量化</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>可读性</td>
+<td>极高</td>
+<td>极低</td>
+</tr>
+<tr>
+<td>检索机制</td>
+<td>精确匹配、路径路由</td>
+<td>语义相似度、Top-K</td>
+</tr>
+<tr>
+<td>维护成本</td>
+<td>极低</td>
+<td>较高（要维护 Embedding 模型）</td>
+</tr>
+<tr>
+<td>最适用</td>
+<td>核心 Prompt、全局画像、系统规则</td>
+<td>单次历史对话、海量历史轨迹</td>
+</tr>
+</tbody>
+</table></div>
+<p>课件的结论是：<strong>现代 Agent 往往采用混合架构</strong>——MD 存核心且需人工维护的规则与画像，向量库存海量对话轨迹与执行日志（06-P28）。</p>
+<blockquote>
+<p><strong>我的批注</strong>：这个选择的本质不是技术偏好，而是「<strong>谁维护、怎么排错</strong>」。MD 能被 <code>git diff</code> 看见，向量库不能；反过来，向量库能扛住十万条轨迹，MD 不能。我的做法会是：画像与规则用 MD（可 review），轨迹用向量库（可增长），两者用一个 id 关联。</p>
+</blockquote>
+<hr/>
+<h2 id="7-轨迹记忆技能三层颗粒度06-p29p32">7. 轨迹、记忆、技能：三层颗粒度（06-P29~P32）<a aria-label="链接到本节" class="heading-anchor" href="#7-轨迹记忆技能三层颗粒度06-p29p32">#</a></h2>
+<p>06-P29 给了一条从细到粗、从短到长的轴：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>层级</th>
+<th>内容</th>
+<th>时间跨度</th>
+<th>产物</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>L1 任务轨迹</td>
+<td>一次对话 / 一次实验</td>
+<td>短</td>
+<td>运行记录、日志</td>
+</tr>
+<tr>
+<td>L2 跨会话记忆</td>
+<td>习惯、偏好、长期认知</td>
+<td>中</td>
+<td>画像、周报</td>
+</tr>
+<tr>
+<td>L3 技能</td>
+<td>可复用的能力模块与 SOP</td>
+<td>长</td>
+<td>Skill</td>
+</tr>
+</tbody>
+</table></div>
+<p>课件的原话是：<strong>轨迹会封存，记忆会跨会话累积；技能 = 从多次成功决策中提炼的标准化流程（SOP），是记忆的产物，会被不断复用</strong>（06-P29）。</p>
+<p>这就把 Task1 的 Skill 和 Task2 的记忆接上了：<strong>Skill 是记忆的最高抽象层。</strong> 一次成功的轨迹，先变成记忆，再从多次记忆里提炼成 Skill。</p>
+<h3 id="71-人脑类比06-p30p31">7.1 人脑类比（06-P30、P31）<a aria-label="链接到本节" class="heading-anchor" href="#71-人脑类比06-p30p31">#</a></h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>人脑</th>
+<th>AI</th>
+<th>容量/生命周期</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>感觉记忆</td>
+<td>上下文窗口</td>
+<td>当前输入，4K–128K tokens</td>
+</tr>
+<tr>
+<td>工作记忆</td>
+<td>会话缓存</td>
+<td>本次会话历史，会话结束清空</td>
+</tr>
+<tr>
+<td>长时记忆</td>
+<td>时序记忆树</td>
+<td>跨会话持久化：主题摘要 → 趋势 → 画像</td>
+</tr>
+</tbody>
+</table></div>
+<p>长期记忆内部再分三类（06-P30）：语义记忆（事实，「研究方向是机器学习」）、情景记忆（经历，「上周二 K=5 表现最好」）、程序记忆（技能，「基线→标准化→调参」的 SOP），物理载体是向量库/数据库/文件系统。</p>
+<p>课件那句「<strong>不是在造数据库，是在给数字生命体造海马体</strong>」（06-P31），点明了记忆系统的目标不是存储，而是「形成可用的经验」。</p>
+<h3 id="72-知识记忆-vs-规则与技能06-p32">7.2 知识记忆 vs 规则与技能（06-P32）<a aria-label="链接到本节" class="heading-anchor" href="#72-知识记忆-vs-规则与技能06-p32">#</a></h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th></th>
+<th>知识记忆</th>
+<th>规则与技能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>本质</td>
+<td>世界是什么样的</td>
+<td>遇到事情该怎么做</td>
+</tr>
+<tr>
+<td>隐喻</td>
+<td>海马体 / 档案馆</td>
+<td>基底核 / 工具箱</td>
+</tr>
+<tr>
+<td>形态</td>
+<td>事实·偏好·经历·文档</td>
+<td>SOP·脚本·函数调用</td>
+</tr>
+<tr>
+<td>作用</td>
+<td>提供决策素材</td>
+<td>约束并驱动行为</td>
+</tr>
+</tbody>
+</table></div>
+<p>两者是互生关系：知识为技能提供决策素材，技能基于知识执行落地动作。<strong>只记不做，等于一堆笔记；只做不记，等于每次从零开始。</strong></p>
+<hr/>
+<h2 id="8-时序分层与读写代谢06-p33p35">8. 时序分层与读写代谢（06-P33~P35）<a aria-label="链接到本节" class="heading-anchor" href="#8-时序分层与读写代谢06-p33p35">#</a></h2>
+<h3 id="81-l0l3-金字塔06-p33">8.1 L0–L3 金字塔（06-P33）<a aria-label="链接到本节" class="heading-anchor" href="#81-l0l3-金字塔06-p33">#</a></h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>层级</th>
+<th>颗粒度</th>
+<th>更新节奏</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>L0 原始碎片</td>
+<td>对话原文与时间戳</td>
+<td>实时</td>
+</tr>
+<tr>
+<td>L1 主题摘要</td>
+<td>主题级</td>
+<td>每日归档</td>
+</tr>
+<tr>
+<td>L2 周报 / 周期总结</td>
+<td>趋势级</td>
+<td>每周更新</td>
+</tr>
+<tr>
+<td>L3 动态画像</td>
+<td>人格级</td>
+<td>持续演化</td>
+</tr>
+</tbody>
+</table></div>
+<p>左边是「聚合方向」（自下而上层层提炼），右边是「查询展开」（按需自上而下展开）。参考工作是 TiMem（ACL 2026，arXiv:2601.02845）。</p>
+<h3 id="82-写入与读取的完整代谢06-p34">8.2 写入与读取的完整代谢（06-P34）<a aria-label="链接到本节" class="heading-anchor" href="#82-写入与读取的完整代谢06-p34">#</a></h3>
+<p>写入路径是一条层层提纯的流水线：</p>
+<pre><code class="language-text">原始交互 100% 信息量（高噪声）
+  → 主题摘要 30%（去噪留干）
+  → 每日归档（时间线整理，形成脉络）
+  → 趋势总结（周期性回顾，发现演化）
+  → 人格画像 5%（核心认知，高精度）
+</code></pre>
+<p>信息密度递减，抽象层级递增。存的介质也分开：<strong>原始对话 → 向量库；摘要 → 结构化 JSON；画像 → Markdown</strong>。</p>
+<p>读取路径则相反：用户提问 → 触发检索 → 记忆重塑（按当前需求展开、拼接片段）→ 上下文组装（注入 System Prompt）→ 喂给模型。</p>
+<h3 id="83-记忆重塑召回只是第一步06-p35">8.3 记忆重塑：召回只是第一步（06-P35）<a aria-label="链接到本节" class="heading-anchor" href="#83-记忆重塑召回只是第一步06-p35">#</a></h3>
+<p>课件举的例子很具体：召回 10 条相关或无关的记忆，其中混着「周三：吃火锅」这种噪音；然后</p>
+<ol>
+<li>过滤相关性（扔掉吃火锅）；</li>
+<li>融合去重（合并重复记录）；</li>
+<li>时间排序（理清先后）；</li>
+</ol>
+<p>最终留下 5 条高质量记忆喂给 LLM。课件的话是：<strong>搜出来还不够，要筛选才有效——召回只是第一步，过滤整理才决定上下文质量</strong>（06-P35）。</p>
+<blockquote>
+<p><strong>我的批注</strong>：压缩是有损的。L0 原始记录必须保留「永删」的指针，否则画像一旦出错就无法复核。这和 Task1 的「不要相信 Agent 的自我总结，要相信它留下的原始记录」是同一条工程约束。</p>
+</blockquote>
+<hr/>
+<h2 id="9-冲突记忆里最像科研的部分06-p36">9. 冲突：记忆里最像科研的部分（06-P36）<a aria-label="链接到本节" class="heading-anchor" href="#9-冲突记忆里最像科研的部分06-p36">#</a></h2>
+<p>课件给的例子几乎就是科研日常：</p>
+<ul>
+<li>上周的记忆：在调 KNN，K=5 效果最好，先沿这条路线做；</li>
+<li>今天的记忆：KNN 对异常值太敏感，改用密度聚类 DBSCAN 试试。</li>
+</ul>
+<p>系统怎么发现矛盾？<strong>新记忆与历史画像做语义比对，若语义冲突且时间跨度大，就触发冲突检测</strong>（06-P36）。处理有三种策略：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>策略</th>
+<th>做法</th>
+<th>代价</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>① 打时间戳，新覆盖旧</td>
+<td>默认策略，以最新决定为准</td>
+<td>丢掉「为什么改」</td>
+</tr>
+<tr>
+<td>② 保留两者，标注「观点变化」</td>
+<td>把矛盾本身记成一条记忆</td>
+<td>需要额外存储与阅读成本</td>
+</tr>
+<tr>
+<td>③ 让大模型裁决</td>
+<td>结合上下文判断是「一次实验受挫」还是「路线真实切换」</td>
+<td>裁决可能错，且要留依据</td>
+</tr>
+</tbody>
+</table></div>
+<p>课件的落点是：<strong>实验会失败，路线也会调整；记忆系统的价值在于能发现「方向变了」，并跟着课题一起更新</strong>（06-P36）。</p>
+<blockquote>
+<p><strong>我的批注</strong>：科研里「路线变更」本身往往就是结论的一部分。默认的「新覆盖旧」最省事，但会把「为什么放弃 KNN」这个最有价值的信息删掉。我倾向于默认用②，至少对「方法/参数/结论」三类记忆不覆盖。</p>
+</blockquote>
+<hr/>
+<h2 id="10-选型与共享06-p38p42">10. 选型与共享（06-P38~P42）<a aria-label="链接到本节" class="heading-anchor" href="#10-选型与共享06-p38p42">#</a></h2>
+<h3 id="101-市面方案横评06-p38">10.1 市面方案横评（06-P38）<a aria-label="链接到本节" class="heading-anchor" href="#101-市面方案横评06-p38">#</a></h3>
+<div class="table-wrap"><table class="wide">
+<thead>
+<tr>
+<th>方案</th>
+<th>时序分层</th>
+<th>自动摘要</th>
+<th>中文支持</th>
+<th>MCP</th>
+<th>一句话定位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mem0</td>
+<td>版本时间戳</td>
+<td>需自定义</td>
+<td>英文为主</td>
+<td>✅</td>
+<td>API 简洁，适合动手环节</td>
+</tr>
+<tr>
+<td>Zep</td>
+<td>时间图谱</td>
+<td>原生支持</td>
+<td>英文为主</td>
+<td>✅</td>
+<td>企业级会话上下文记忆</td>
+</tr>
+<tr>
+<td>Letta</td>
+<td>核心/归档</td>
+<td>需自定义</td>
+<td>英文为主</td>
+<td>✅</td>
+<td>原 MemGPT，虚拟内存类比</td>
+</tr>
+<tr>
+<td>TiMEM</td>
+<td>原生支持</td>
+<td>原生支持</td>
+<td>中文优先</td>
+<td>✅</td>
+<td>时序分层记忆引擎，支持私有化部署</td>
+</tr>
+</tbody>
+</table></div>
+<p>选型口诀（06-P38）：快速体验/英文为主选 Mem0，复杂关系推理看 Zep，企业级要自动总结看 Zep/Letta，中文+时序分层+私有化+长周期看 TiMEM。</p>
+<h3 id="102-有记忆-vs-无记忆06-p39">10.2 有记忆 vs 无记忆（06-P39）<a aria-label="链接到本节" class="heading-anchor" href="#102-有记忆-vs-无记忆06-p39">#</a></h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th></th>
+<th>无记忆</th>
+<th>有记忆</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>首轮</td>
+<td>分析 KNN 在 Iris 上 K=3、82% 的原因</td>
+<td>同左，但记住 Iris / K=3 / 82%</td>
+</tr>
+<tr>
+<td>重开窗口后问「先标准化会不会好点」</td>
+<td>「标准化通常有帮助，请问你具体在用哪个数据集？」</td>
+<td>「针对你 Iris 上 82% 的问题，KNN 对距离敏感，标准化后权重一致，很可能有效。」</td>
+</tr>
+<tr>
+<td>差别</td>
+<td>完全断片，反复询问</td>
+<td>指代消解成功、上下文继承</td>
+</tr>
+</tbody>
+</table></div>
+<p>课件总结：接入记忆引擎后，回答从「通用模板」变成懂上下文的「专属建议」（06-P39）。</p>
+<h3 id="103-mcp跨智能体的神经系统06-p40p42">10.3 MCP：跨智能体的「神经系统」（06-P40~P42）<a aria-label="链接到本节" class="heading-anchor" href="#103-mcp跨智能体的神经系统06-p40p42">#</a></h3>
+<p>06-P40 的图景：代码助手、编程智能体、文献助手、实验记录助手、日程/周报助手，各自通过 MCP 连到同一个记忆引擎，背后是<strong>统一记忆库（时序分层）+ 统一知识库（RAG）+ 统一工具库（Skills）</strong>。没有 MCP 就各记各的、换个助手就失忆；有了 MCP，接入只需要「服务地址 + 访问密钥」。</p>
+<p>06-P42 补了一句关键区分：<strong>Skill = 使用规则，定义何时读记忆、何时写记忆。</strong> 也就是说，MCP 解决「接得上」，Skill 解决「什么时候读写」——这和 Task1 里 MCP 与 Skill 的分工完全一致。</p>
+<blockquote>
+<p><strong>我的批注</strong>：跨智能体共享把「记忆污染」的面放大了：一个助手写错，所有助手都记错。所以共享记忆必须配写入审计（谁写、依据什么、可否回滚），这比接入本身更重要。</p>
+</blockquote>
+<h3 id="104-科研流程各环节用知识库还是记忆06-p45">10.4 科研流程各环节，用知识库还是记忆（06-P45）<a aria-label="链接到本节" class="heading-anchor" href="#104-科研流程各环节用知识库还是记忆06-p45">#</a></h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>环节</th>
+<th>用什么</th>
+<th>理由</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>文献调研</td>
+<td>知识库</td>
+<td>查得到、有引用</td>
+</tr>
+<tr>
+<td>实验过程</td>
+<td>记忆</td>
+<td>记得你、跨天连续</td>
+</tr>
+<tr>
+<td>数据分析</td>
+<td>知识库 + 记忆</td>
+<td>代码入库、过程入记忆</td>
+</tr>
+<tr>
+<td>论文写作</td>
+<td>两者协同</td>
+<td>引用靠库、风格靠记忆</td>
+</tr>
+</tbody>
+</table></div>
+<p>课件的小结是：<strong>静态资料用知识库，动态过程靠记忆，底层是同一个统一记忆引擎</strong>（06-P45）。这张表正好对应 Task2 的任务描述——「搭建文献知识库」对应第一行，「整理和使用实验记录」对应第二行。</p>
+<p>最后，06-P51 给了记忆的三步演进：外挂记忆（工具化）→ 内化记忆（模型层记录）→ 记忆长在参数里（持续学习）；同时点出三个挑战：隐私边界、遗忘机制、冲突消解。课件的判断是短期内外挂更灵活可控，长远趋势是记忆伴随协作「长」进参数（06-P51）。</p>
+<hr/>
+<h2 id="11-07-讲为什么要自建领域数据集07-p02">11. 07 讲：为什么要自建领域数据集（07-P02）<a aria-label="链接到本节" class="heading-anchor" href="#11-07-讲为什么要自建领域数据集07-p02">#</a></h2>
+<p>07 讲从一个真实困境开始：想快速全面了解一个新领域、或者写综述，需要有「全面、及时、维护良好」的数据集（07-P02）。案例是 Open Astronomy Catalogs——设想每个子领域由社区自发维护数据库、通过 GitHub 协作提交，现实却是：</p>
+<ul>
+<li>数据提交与整理入库依赖专家大量重复劳动，运维难以为继；</li>
+<li>核心发起者离开后项目停止维护；</li>
+<li>只有 TNS、开放系外行星数据库等热门领域靠成熟组织与资金存活，冷门子领域始终缺口。</li>
+</ul>
+<p>课件的判断很硬：<strong>本质上是经济问题而非技术问题</strong>；AI 的作用是把「专家重复枯燥的智力劳动」压到「API 账单的价格」（07-P02）。</p>
+<p>这句话解释了 Task2 为什么要同时讲知识库和数据集：</p>
+<ul>
+<li><strong>知识库是「对内」的</strong>：让自己的智能体查得到、答得出；</li>
+<li><strong>数据集是「对外」的</strong>：让整个领域（以及其他人的 Agent）能直接使用、不必重建。</li>
+</ul>
+<hr/>
+<h2 id="12-四代方法控制权在谁手里07-p03p06">12. 四代方法：控制权在谁手里（07-P03~P06）<a aria-label="链接到本节" class="heading-anchor" href="#12-四代方法控制权在谁手里07-p03p06">#</a></h2>
+<p>07 讲用同一个任务（从高速星论文里提取候选）比较了四种做法：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>做法</th>
+<th>优势</th>
+<th>缺陷</th>
+<th>控制权</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>一、单轮聊天机器人</td>
+<td>上传 PDF，一句话说需求，单轮得答案</td>
+<td>简单、直接、零门槛</td>
+<td>手动提供资料、手动整理结果，自动化最低</td>
+<td>人</td>
+</tr>
+<tr>
+<td>二、AI 产品深度研究</td>
+<td>云电脑里的 Agent 自动搜集、分析、出报告</td>
+<td>一句话启动完整调研</td>
+<td>过程不透明、资源受商业限制</td>
+<td>平台</td>
+</tr>
+<tr>
+<td>三、通用 Agent</td>
+<td>本地运行，任务拆成 ToDo，并行子代理逐篇提取</td>
+<td>流程透明灵活、资源不受限；上下文隔离提升质量</td>
+<td>对单一数据集过重、结果难审计；问题定义不严，执行必然漂移</td>
+<td>模型</td>
+</tr>
+<tr>
+<td>四、自建科研数据 Harness</td>
+<td>自己定义问题，搭「文献 → 数据产物」工作流，程序化验证</td>
+<td>清晰透明、掌控力最强</td>
+<td>搭建耗时（作者项目连续 4 个月以上）</td>
+<td>自己</td>
+</tr>
+</tbody>
+</table></div>
+<p>几个值得记的细节：</p>
+<ul>
+<li><strong>方法二的数量级问题</strong>：要求调研 2018 年至今发现的高速星，报告只收录 21 条，而实际应有上百颗（07-P04）。过程不透明，所以「少了」也无法归因。</li>
+<li><strong>方法三的漂移</strong>：并行子代理提取后，结果里混入了 bound（束缚）条目——<code>红色 = unbound，绿色 = bound</code>，说明 Agent 偏离了最初的约定（07-P05）。课件归因：<strong>问题定义不严，执行必然漂移</strong>。</li>
+<li><strong>方法四的定义</strong>：Agent = LLM + Harness；Harness 本义是马具，大模型是力大却难控的烈马，需要一套工程组件约束它按你的需求完成任务（07-P06）。方法要点是「自己定义问题 + 程序化验证（每条结果可追溯到原文具体位置）」。</li>
+<li><strong>成本是明示的</strong>：作者的项目连续工作 4 个月以上，并把项目蒸馏成可复用的搭建指南 Stella-meta 开源（07-P06）。</li>
+</ul>
+<blockquote>
+<p><strong>我的批注</strong>：四代不是替代关系，而是按任务规模选。单篇临时提取用方法一就够；只有「领域级、要复用、要发表」的数据集才值得方法四。看到「4 个月」这个数字，就该明白方法四的代价不是技术门槛，而是持续投入。</p>
+</blockquote>
+<hr/>
+<h2 id="13-质量自建-benchmark-三层07-p07">13. 质量：自建 Benchmark 三层（07-P07）<a aria-label="链接到本节" class="heading-anchor" href="#13-质量自建-benchmark-三层07-p07">#</a></h2>
+<p>为什么需要 Benchmark（07-P07）：</p>
+<ul>
+<li>用分数直观量化新系统与旧版本、同类竞品的能力差距；</li>
+<li>知道如何评价一个工作，就知道这个工作该怎么做；</li>
+<li>重要 Benchmark 奠定领域基础——ImageNet → AlexNet、CASP → AlphaFold。</li>
+</ul>
+<p>文献数据提取的三层评价模板：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>层级</th>
+<th>检查什么</th>
+<th>典型错误</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>L0 格式层</td>
+<td>每篇文章的提取结果是否符合输出格式要求</td>
+<td>字段缺失、类型错、JSON 不合法</td>
+</tr>
+<tr>
+<td>L1 实体层</td>
+<td>提取的科学实体条目与专家结果是否一致</td>
+<td>漏抽、多抽、别名未归一</td>
+</tr>
+<tr>
+<td>L2 数值层</td>
+<td>每个科学实体对应的数值是否准确</td>
+<td>单位换算错、有效数字错、看错列</td>
+</tr>
+</tbody>
+</table></div>
+<p>课件提到作者与合作者花一个多月（人机结合）提取 50 篇文献，构建了高速星提取的 Benchmark，据此量化准确率、召回率等指标（07-P07）。核心原则是一句话：<strong>有效衡量你真正关心的东西。</strong></p>
+<blockquote>
+<p><strong>我的批注</strong>：三层其实对应三类误差，修法不同——L0 可以完全程序化（schema 校验），L1 需要实体对齐规则（别名表、同义词），L2 需要数值容差（单位、精度）。Benchmark 没建好时，报「准确率 90%」没有意义，因为不知道 90% 是在哪一层算的。</p>
+</blockquote>
+<hr/>
+<h2 id="14-发布从-fair-到-ai-ready07-p08">14. 发布：从 FAIR 到 AI-Ready（07-P08）<a aria-label="链接到本节" class="heading-anchor" href="#14-发布从-fair-到-ai-ready07-p08">#</a></h2>
+<p>为什么要发布（07-P08）：</p>
+<ul>
+<li>同一领域重复构建同一数据库，是对资源的浪费；</li>
+<li>识别领域最重要的问题，构建好并开放给其他研究者；</li>
+<li>他人免重建即可开展研究，你也能收获领域影响力。</li>
+</ul>
+<p>数据集构建原则分两层：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>层次</th>
+<th>原则</th>
+<th>落地</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FAIR（经典数据科学）</td>
+<td>可查找 Findable、可获取 Accessible、可互操作 Interoperable、可复用 Reusable</td>
+<td>元数据、开放许可、标准格式、版本</td>
+</tr>
+<tr>
+<td>AI-Ready（面向 Agent 使用者）</td>
+<td>① 结构化：便于被其他 Agent 用程序调用；② 可追溯：每条数据可回溯原始出处，便于核验；③ 有治理：明确说明局限，让 Agent 知道何时、如何使用</td>
+<td>Schema、证据列、适用边界文档</td>
+</tr>
+</tbody>
+</table></div>
+<p>FAIR 出处是 Wilkinson et al., 2016, <em>Scientific Data</em>；案例是作者的 STELLA HVS Catalog 网站（07-P08）。07 讲最后的总结把它压成四句：<strong>数据缺口、方法进阶、动手实操、评估与共享</strong>（07-P9）。</p>
+<blockquote>
+<p><strong>我的批注</strong>：三条 AI-Ready 原则里，「有治理」最容易被忽略，却最影响可用性。没有「适用物种/平台/参考版本/已知偏差」的说明，下游 Agent 会把它当成普适真理来用——这比数据少几条更危险。</p>
+</blockquote>
+<hr/>
+<h2 id="15-把两讲拼成一条流水线我的整合">15. 把两讲拼成一条流水线（我的整合）<a aria-label="链接到本节" class="heading-anchor" href="#15-把两讲拼成一条流水线我的整合">#</a></h2>
+<p>三条流水线，对应三类资产：</p>
+<pre><code class="language-text">论文 PDF ──解析(MinerU)──→ 结构化 Markdown ──切分/嵌入──→ 知识库 ──检索──→ 带引用的回答
+实验记录 ──写入(时间戳)──→ L0 碎片 ──聚合──→ L1 摘要 / L2 周报 / L3 画像 ──召回──→ 上下文里的「记得你」
+论文表格 ──抽取(模板)──→ 候选记录 ──程序化验证──→ Benchmark(L0/L1/L2) ──发布──→ 数据集(FAIR + AI-Ready)
+</code></pre>
+<p>三类资产的分工：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>维度</th>
+<th>知识库（RAG）</th>
+<th>记忆</th>
+<th>数据集</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>管理对象</td>
+<td>公共静态知识</td>
+<td>个人动态经历</td>
+<td>结构化的领域事实</td>
+</tr>
+<tr>
+<td>更新方式</td>
+<td>主动上传新 PDF</td>
+<td>每次交互自动写入</td>
+<td>按版本重新抽取</td>
+</tr>
+<tr>
+<td>证据单位</td>
+<td>页码 / 段落</td>
+<td>时间戳 / 会话</td>
+<td>原文位置 + 字段</td>
+</tr>
+<tr>
+<td>主要失败</td>
+<td>解析差、切分差、召回偏</td>
+<td>污染、冲突、过时</td>
+<td>格式错、实体错、数值错</td>
+</tr>
+<tr>
+<td>评价指标</td>
+<td>召回率、引用准确率</td>
+<td>指代消解、冲突发现</td>
+<td>L0/L1/L2 准确率、召回率</td>
+</tr>
+<tr>
+<td>一句话</td>
+<td>查得到</td>
+<td>接着做</td>
+<td>别人能接着做</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>共同底线只有一条：每条结论都能回到原文或原始记录的具体位置。</strong> 06 讲的引用页码、记忆的时间戳与冲突标注、07 讲的「每条结果可追溯到原文具体位置」，说的是同一件事。</p>
+<hr/>
+<h2 id="16-迁移到自己的课题以组学为例">16. 迁移到自己的课题（以组学为例）<a aria-label="链接到本节" class="heading-anchor" href="#16-迁移到自己的课题以组学为例">#</a></h2>
+<blockquote>
+<p>这一节是我的迁移练习，不是课件内容；目的是把两讲的方法落到自己的数据上。</p>
+</blockquote>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>资产</th>
+<th>在本领域的落地</th>
+<th>关键字段/动作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>文献知识库</td>
+<td>按「数据 / 方法 / 结论」切分文献，而不是按章节</td>
+<td>物种、平台、样本量、基因/变异、图号表号；引用落到 figure/table</td>
+</tr>
+<tr>
+<td>实验记录（记忆）</td>
+<td>每次分析写一条带时间戳的记录</td>
+<td>数据版本、参考基因组版本、命令与参数、指标、判断；方案变更单独记一条</td>
+</tr>
+<tr>
+<td>数据集</td>
+<td>变异/表达/影像表 → Schema</td>
+<td>chrom/pos/ref/alt/rsid、AF/OR、证据行号；L0 schema 校验、L1 实体对齐、L2 数值容差</td>
+</tr>
+<tr>
+<td>治理</td>
+<td>每份数据集配一页 README</td>
+<td>适用物种/人群、平台、参考版本、已知偏差、不可用于什么</td>
+</tr>
+</tbody>
+</table></div>
+<p>三条最小动作（按投入从低到高）：</p>
+<ol>
+<li><strong>先把 L0 做好</strong>：解析（保页码）、切分（保图号表号）、引用可跳转。不要一上来就 GraphRAG。</li>
+<li><strong>给实验记录定一个最小模板</strong>（日期 / 数据版本 / 命令 / 指标 / 判断 / 下一步），坚持写两周，再看哪一列真正被用到。</li>
+<li><strong>给已有的一张表建一个 10 篇文献的微 Benchmark</strong>：L1 抽实体、L2 核数值，先量出基线，再谈优化。</li>
+</ol>
+<hr/>
+<h2 id="17-动手计划尚未执行">17. 动手计划（尚未执行）<a aria-label="链接到本节" class="heading-anchor" href="#17-动手计划尚未执行">#</a></h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>来源</th>
+<th>任务</th>
+<th>预计</th>
+<th>状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>06-P15</td>
+<td>用 LangChain + 智谱 Embedding + FAISS，拿自己的 PDF 跑通五步闭环</td>
+<td>30 分钟</td>
+<td>未开始</td>
+</tr>
+<tr>
+<td>06-P53 任务零</td>
+<td>向聚类综述 PDF 提问，验证「会查文献的助手」</td>
+<td>5 分钟</td>
+<td>未开始</td>
+</tr>
+<tr>
+<td>06-P53 任务一</td>
+<td>用记忆服务写入一条实验记录，验证跨会话指代消解</td>
+<td>10 分钟</td>
+<td>未开始</td>
+</tr>
+<tr>
+<td>06-P53 任务二</td>
+<td>生成每日摘要与画像，观察 L0→L3 的聚合</td>
+<td>8 分钟</td>
+<td>未开始</td>
+</tr>
+<tr>
+<td>06-P53 任务三</td>
+<td>集成问答与展示，投屏分享「自己的专属助手」</td>
+<td>6+3 分钟</td>
+<td>未开始</td>
+</tr>
+<tr>
+<td>07-P06</td>
+<td>用 Stella-meta 走一遍：定义问题 → 定存储模板 → 取文献 → 执行提取</td>
+<td>半天</td>
+<td>未开始</td>
+</tr>
+<tr>
+<td>07-P07</td>
+<td>抽 10 篇文献做微 Benchmark，算出 L0/L1/L2 分数</td>
+<td>2–3 小时</td>
+<td>未开始</td>
+</tr>
+</tbody>
+</table></div>
+<p>07 讲的实操还有一个提醒：Stella-meta 是教学示例，有三条局限（07-P10）——只能取 arXiv 文献并处理 LaTeX；要提取的数据必须存在于文献内；数据结构必须能组织成「独立 id + 若干数值属性」。超出这三条，就得自建。</p>
+<p>可复用的相关 Skill（07-P10）：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Skill</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TraitTrawler</td>
+<td>从文献自动构建带原文证据、确定性验证与审计链的结构化数据库</td>
+</tr>
+<tr>
+<td>Data Liberation</td>
+<td>PDF/扫描件/网页/表格 → 带 Schema、溯源、审计与发布流程的可复现数据项目</td>
+</tr>
+<tr>
+<td>Scientific Data Extraction</td>
+<td>科研 PDF/表格/图像/曲线，自动选解析工具并多方法交叉验证</td>
+</tr>
+<tr>
+<td>NASA ADS Skill</td>
+<td>天文学文献检索、全文获取、证据定位、本地文献记忆</td>
+</tr>
+<tr>
+<td>Literature Review</td>
+<td>带检索策略、纳入排除标准、数据抽取与引用验证的系统性综述</td>
+</tr>
+<tr>
+<td>Scientific Agent Skills</td>
+<td>大型科研 Skill 集合（检索、数据库、抽取、计算、分析）</td>
+</tr>
+</tbody>
+</table></div>
+<hr/>
+<h2 id="18-我提炼的九条用自己的话">18. 我提炼的九条（用自己的话）<a aria-label="链接到本节" class="heading-anchor" href="#18-我提炼的九条用自己的话">#</a></h2>
+<ol>
+<li><strong>RAG 的价值是「可审计」，不只是「答得准」。</strong> 每句话带页码，才有资格进科研流程。</li>
+<li><strong>相似度不是可信度。</strong> 0.92 只说明语义近，不说明结论对；核对要另做。</li>
+<li><strong>瓶颈通常在入库前。</strong> 公式、表格、扫描件解析不好，换多大的模型都救不回来。</li>
+<li><strong>知识库与记忆的分工是「公共静态 vs 个人动态」。</strong> 文献找 RAG，实验找记忆，两者拼出「下一步试什么」。</li>
+<li><strong>记忆是代谢，不是仓库。</strong> 写入层层提纯（100%→5%），读取按需展开；只存不炼，等于没记。</li>
+<li><strong>召回只是第一步，重塑才决定上下文质量。</strong> 相关性过滤、去重、时间排序，三步缺一不可。</li>
+<li><strong>冲突处理是记忆系统最像科研的部分。</strong> 默认「新覆盖旧」会丢掉「为什么改」，那往往是最有价值的信息。</li>
+<li><strong>方法论上的进阶 = 控制权的回收。</strong> Chatbot → 深度研究 → 通用 Agent → 自建 Harness，可控性与成本同向上升；按任务规模选，不要一律上最重的。</li>
+<li><strong>数据集的门槛是「评价」，不是「抽取」。</strong> 没有 L0/L1/L2 的 Benchmark，「准确率」无从谈起；没有「治理」说明，数据集会被误用。</li>
+</ol>
+<hr/>
+<h2 id="19-自测先答再对要点">19. 自测（先答，再对要点）<a aria-label="链接到本节" class="heading-anchor" href="#19-自测先答再对要点">#</a></h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>问题</th>
+<th>要点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>模型的三个知识缺口是什么？</td>
+<td>知识过时、私有盲区、幻觉（06-P7）</td>
+</tr>
+<tr>
+<td>2</td>
+<td>嵌入、召回、重排、检索四个词的关系？</td>
+<td>检索是总称，包含召回与重排；嵌入是把文本变向量（06-P8）</td>
+</tr>
+<tr>
+<td>3</td>
+<td>建库三步与课件参数？</td>
+<td>切分（500 字/段）→ 嵌入（768 维）→ 向量库（06-P9）</td>
+</tr>
+<tr>
+<td>4</td>
+<td>RAG 答案为什么要带 <code>[1]</code> 与页码？</td>
+<td>可溯源、可审计，拒绝幻觉（06-P12）</td>
+</tr>
+<tr>
+<td>5</td>
+<td>外循环与内循环分别是什么？</td>
+<td>外循环找资料（工具调用），内循环拼上下文（06-P11）</td>
+</tr>
+<tr>
+<td>6</td>
+<td>传统 RAG 与 Agentic RAG 的差别？</td>
+<td>线性单向 vs 循环多步、会规划与反思（06-P13）</td>
+</tr>
+<tr>
+<td>7</td>
+<td>为什么说瓶颈在数据而不是检索？</td>
+<td>公式/表格/扫描件解析差，召回必然失败（06-P17）</td>
+</tr>
+<tr>
+<td>8</td>
+<td>MD 目录与向量库各自的缺点？</td>
+<td>无语义检索/规模瓶颈 vs 不可读/修改成本高（06-P26、P27）</td>
+</tr>
+<tr>
+<td>9</td>
+<td>L1/L2/L3 分别指什么？</td>
+<td>任务轨迹 / 跨会话记忆 / 技能 SOP（06-P29）</td>
+</tr>
+<tr>
+<td>10</td>
+<td>时序分层 L0–L3 与更新节奏？</td>
+<td>原始碎片（实时）→ 主题摘要（每日）→ 周报（每周）→ 画像（持续）（06-P33）</td>
+</tr>
+<tr>
+<td>11</td>
+<td>记忆重塑的三步过滤？</td>
+<td>相关性 → 融合去重 → 时间排序（06-P35）</td>
+</tr>
+<tr>
+<td>12</td>
+<td>冲突处理的三种策略？</td>
+<td>时间戳覆盖 / 保留标注观点变化 / 大模型裁决（06-P36）</td>
+</tr>
+<tr>
+<td>13</td>
+<td>07 讲四种方法的递进逻辑？</td>
+<td>自动化与可控性递增，成本递增（07-P03~P06）</td>
+</tr>
+<tr>
+<td>14</td>
+<td>通用 Agent 为什么会漂移？</td>
+<td>问题定义不严；执行偏移约定（07-P05）</td>
+</tr>
+<tr>
+<td>15</td>
+<td>Benchmark 三层各查什么？</td>
+<td>格式 / 实体 / 数值（07-P07）</td>
+</tr>
+<tr>
+<td>16</td>
+<td>FAIR 与 AI-Ready 的区别？</td>
+<td>经典数据原则 vs 面向 Agent 的结构化/可追溯/有治理（07-P08）</td>
+</tr>
+</tbody>
+</table></div>
+<hr/>
+<h2 id="20-待办与疑问">20. 待办与疑问<a aria-label="链接到本节" class="heading-anchor" href="#20-待办与疑问">#</a></h2>
+<ul>
+<li>[ ] 看配套两节线上实训录播（本笔记只覆盖 06、07 两讲课件）</li>
+<li>[ ] 跑 06-P15 的五步闭环，用自己的 PDF 验证切分与召回</li>
+<li>[ ] 完成 06-P53 的四个渐进任务，留下截图与代码</li>
+<li>[ ] 用 Stella-meta 走一遍 07 讲的四步实操</li>
+<li>[ ] 建 10 篇文献的微 Benchmark，算出 L0/L1/L2</li>
+</ul>
+<p>疑问：</p>
+<ol>
+<li><strong>RAG 与记忆在工程上真的分得开吗？</strong> 两者底层都是向量检索，同一套库既能存文献也能存记忆；什么时候该分成两个库，课件没展开。</li>
+<li><strong>错误记忆怎么撤销？</strong> 课件讲了冲突检测（观点变化），但没讲「确认写错的记忆」如何回滚与追责。</li>
+<li><strong>L1 实体对齐的判定标准</strong>（别名、同义、上下位）没有展开，而这决定了 Benchmark 分数是否可信。</li>
+<li><strong>07 讲的「程序化验证」具体实现</strong>只给了 Stella-meta，没有展开验证规则怎么写。</li>
+<li><strong>记忆写入的隐私边界</strong>：06-P51 把隐私列为三大挑战之一，但科研场景（合作者、未发表数据）下的具体做法没讲。</li>
+</ol>
+<hr/>
+<h2 id="21-资料出处与引用声明">21. 资料出处与引用声明<a aria-label="链接到本节" class="heading-anchor" href="#21-资料出处与引用声明">#</a></h2>
+<ul>
+<li>06 讲：《智能体知识库与记忆》，余宣庆（中国科学院自动化研究所），53 页。官方课件：<a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/06_%E6%99%BA%E8%83%BD%E4%BD%93%E8%AE%B0%E5%BF%86%E4%B8%8E%E7%9F%A5%E8%AF%86%E5%BA%93_%E4%BD%99%E5%AE%A3%E5%BA%86.pdf" rel="noopener" target="_blank">06_智能体记忆与知识库_余宣庆.pdf</a></li>
+<li>07 讲：《Harness 实训：构建科研数据 Harness —— 从科研文献到可信的 AI-Ready 数据集》，张健（中国科学院大学天文与空间科学学院），10 页。官方课件：<a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/07_Harness%E5%AE%9E%E8%AE%AD_%E5%BC%A0%E5%81%A5.pdf" rel="noopener" target="_blank">07_Harness实训_张健.pdf</a></li>
+<li>文中页码引用（<code>06-P15</code>、<code>07-P07</code>）指上述官方课件的对应页；本笔记只做个人理解与摘述，不转载课件图片。引用的图见<a href="task2-illustrated.html">精读版</a>。</li>
+<li>课件提到的外部工作：TiMem（arXiv:2601.02845，ACL 2026）、FAIR 原则（Wilkinson et al., 2016, <em>Scientific Data</em>）、Stella-meta（github.com/zhang2023-byte/stella-meta）、TraitTrawler 等 Skill 的链接均见 07-P10。</li>
+</ul></article></div><nav class="article-nav" aria-label="笔记翻页"><a class="prev" href="task2-illustrated.html"><span class="label">上一篇</span>Task2 图文</a><a class="next" href="11.html"><span class="label">下一篇</span>第 11 讲</a></nav>
+    </div>
+  </main>
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <div class="footer-brand">
+        <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
+          <defs>
+            <linearGradient id="footGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#d9b28c"/><stop offset="1" stop-color="#b08463"/>
+            </linearGradient>
+          </defs>
+          <rect width="64" height="64" rx="12" fill="#231f1a"/>
+          <rect x="1" y="1" width="62" height="62" rx="11" fill="none" stroke="url(#footGrad)" stroke-opacity=".55"/>
+          <circle cx="32" cy="32" r="14.5" fill="none" stroke="url(#footGrad)" stroke-width="2.5"/>
+          <circle cx="32" cy="32" r="4" fill="#f6f1e7"/>
+          <circle cx="46" cy="18" r="3.2" fill="url(#footGrad)"/>
+        </svg>
+        <div>
+          <strong>磐石 AI4S · 学习笔记</strong>
+          <span>个人学习记录与课程引用</span>
+        </div>
+      </div>
+      <nav class="footer-links" aria-label="页脚链接">
+        <a href="index.html">笔记</a>
+        <a href="../index.html#progress">进度</a>
+        <a href="../index.html#sources">课程来源</a>
+        <a href="https://github.com/biociao/panshi-ai4s-practice" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+    <div class="wrap footer-bottom">
+      <span>整理 biociao · 更新于 2026-11-21 · 个人学习记录</span>
+      <span>排版 原生 HTML / CSS · 无第三方依赖</span>
+    </div>
+  </footer>
+  <button class="to-top" type="button" data-to-top aria-label="回到页面顶部">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <script src="../assets/app.js" defer></script>
+</body>
+</html>

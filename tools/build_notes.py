@@ -79,6 +79,26 @@ NOTES = [
         "pdf_label": "笔记 PDF",
     },
     {
+        "slug": "task2-illustrated",
+        "src": "learning/notes/task2/illustrated-notes.md",
+        "kicker": "Task 02 · 06 + 07 · 图文笔记",
+        "short": "Task2 图文",
+        "lecture": "06",
+        "desc": "06 + 07 两讲的叙述式精读：RAG 的建库与检索、记忆的分层与代谢、实验记录的冲突处理，以及从论文到 AI-Ready 数据集的 Harness 与 Benchmark。",
+        "pdf": f"{REPO}/blob/{BRANCH}/{quote('learning/notes/task2/task2-illustrated-notes.pdf')}",
+        "pdf_label": "笔记 PDF",
+    },
+    {
+        "slug": "task2-text",
+        "src": "learning/notes/task2/README.md",
+        "kicker": "Task 02 · 06 + 07 · 文字版",
+        "short": "Task2 文字",
+        "lecture": "06",
+        "desc": "同一份笔记的文字版：术语表、页码索引、方案横评、自测题与待办，适合检索、复制和打印。",
+        "pdf": f"{REPO}/blob/{BRANCH}/{quote('learning/notes/task2/task2-illustrated-notes.pdf')}",
+        "pdf_label": "笔记 PDF",
+    },
+    {
         "slug": "11",
         "src": "courses/11-li-yuyang/README.md",
         "kicker": "第 11 讲 · 科学智能进阶",
@@ -103,8 +123,12 @@ NOTES = [
 PAGE_BY_SRC = {
     "learning/notes/task1/illustrated-notes.md": "task1-illustrated.html",
     "learning/notes/task1/README.md": "task1-text.html",
+    "learning/notes/task2/illustrated-notes.md": "task2-illustrated.html",
+    "learning/notes/task2/README.md": "task2-text.html",
     "learning/notes/03/README.md": "task1-illustrated.html",
     "learning/notes/04/README.md": "task1-illustrated.html",
+    "learning/notes/06/README.md": "task2-illustrated.html",
+    "learning/notes/07/README.md": "task2-illustrated.html",
     "learning/notes/11/README.md": "11.html",
     "learning/progress.md": "progress.html",
     "courses/11-li-yuyang/README.md": "11.html",
@@ -113,7 +137,7 @@ PAGE_BY_SRC = {
 
 EMPTY_TEMPLATE = re.compile(r"^learning/notes/\d{2}/README\.md$")
 
-STATUS = {"03": "task1", "04": "task1", "11": "11"}
+STATUS = {"03": "task1", "04": "task1", "06": "task2", "07": "task2", "11": "11"}
 
 
 def escape(value: str) -> str:
@@ -178,7 +202,7 @@ def figure_lecture(note: dict, src: str) -> str:
     if note["slug"] == "11":
         return "11"
     name = posixpath.basename(unquote(src))
-    match = re.match(r"(03|04)-", name)
+    match = re.match(r"(\d{2})-", name)
     if match:
         return match.group(1)
     return note.get("lecture", "")
@@ -455,7 +479,7 @@ FOOTER = Template(
       </nav>
     </div>
     <div class="wrap footer-bottom">
-      <span>整理 biociao · 更新于 2026-11-16 · 个人学习记录</span>
+      <span>整理 biociao · 更新于 2026-11-21 · 个人学习记录</span>
       <span>排版 原生 HTML / CSS · 无第三方依赖</span>
     </div>
   </footer>"""
@@ -605,6 +629,8 @@ def make_index(pages: list[dict], title_date: str) -> str:
         kind = STATUS.get(number)
         if kind == "task1":
             note = '<a href="task1-illustrated.html">Task1 图文</a> · <a href="task1-text.html">文字版</a>'
+        elif kind == "task2":
+            note = '<a href="task2-illustrated.html">Task2 图文</a> · <a href="task2-text.html">文字版</a>'
         elif kind == "11":
             note = '<a href="11.html">图文资料</a>'
         else:
@@ -620,7 +646,7 @@ def make_index(pages: list[dict], title_date: str) -> str:
       <p class="eyebrow">笔记索引</p>
       <h1>学习笔记</h1>
       <p class="article-lede">每讲一页，只写自己的理解，不抄原文。长文带目录与图注；源文件都在 <code>learning/notes</code>，课程内容与课件请以官方发布为准。</p>
-      <p class="article-meta"><span>{len(pages)} 篇</span><span>2 讲已整理</span><span>更新于 {escape(title_date)}</span></p>
+      <p class="article-meta"><span>{len(pages)} 篇</span><span>4 讲已整理（Task1 03+04 · Task2 06+07）</span><span>更新于 {escape(title_date)}</span></p>
       <p class="article-source">源目录：<a href="{REPO}/tree/{BRANCH}/learning/notes" target="_blank" rel="noopener">learning/notes</a> · <a href="../index.html">返回首页</a></p>
     </header>
 
@@ -641,7 +667,7 @@ def make_index(pages: list[dict], title_date: str) -> str:
       </div>
     </div>'''
 
-    return render_shell("学习笔记 · 磐石 AI4S", "磐石 AI4S 个人学习笔记索引：Task1 图文/文字笔记、第 11 讲图文资料与学习进度。", content, "page-note notes-index")
+    return render_shell("学习笔记 · 磐石 AI4S", "磐石 AI4S 个人学习笔记索引：Task1、Task2 图文与文字笔记、第 11 讲图文资料与学习进度。", content, "page-note notes-index")
 
 
 def main() -> None:

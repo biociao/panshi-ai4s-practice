@@ -4,6 +4,7 @@
 - 主题：构建科研数据 Harness
 - 课件：../../pdf/07_Harness实训_张健.pdf
 - 页数：10
+- Task2 合并笔记：[../task2/README.md](../task2/README.md)（06 + 07 两讲合并整理，本页模板保留备用）
 
 ## 学习目标
 - [ ] 
