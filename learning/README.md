@@ -32,6 +32,9 @@ git checkout study && git merge main      # 把新增课件带进 study
 
 # 查看进度
 cat learning/progress.md
+
+# 重新生成某份图文笔记的 PDF（需 pandoc + xelatex + 中文字体）
+tools/build_note_pdf.sh task3
 ```
 
 > 若想用 GitHub 网页端同步，也可以在 fork 页面点 **Sync fork**，再本地 `git pull`。

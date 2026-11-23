@@ -99,6 +99,26 @@ NOTES = [
         "pdf_label": "笔记 PDF",
     },
     {
+        "slug": "task3-illustrated",
+        "src": "learning/notes/task3/illustrated-notes.md",
+        "kicker": "Task 03 · 01 + 02 + 05 · 图文笔记",
+        "short": "Task3 图文",
+        "lecture": "01",
+        "desc": "01 + 02 + 05 三讲的叙述式精读：从一组参数（loss、梯度、划分）到一类结构（信息通路、六类数据、选型六问），再到流程里的一格（DFT 七节点与七个 AI 插入点）。",
+        "pdf": f"{REPO}/blob/{BRANCH}/{quote('learning/notes/task3/task3-illustrated-notes.pdf')}",
+        "pdf_label": "笔记 PDF",
+    },
+    {
+        "slug": "task3-text",
+        "src": "learning/notes/task3/README.md",
+        "kicker": "Task 03 · 01 + 02 + 05 · 文字版",
+        "short": "Task3 文字",
+        "lecture": "01",
+        "desc": "同一份笔记的文字版：六问决策卡、数据表示说明书、插入点梯子、术语表、页码索引、24 道自测与待办。",
+        "pdf": f"{REPO}/blob/{BRANCH}/{quote('learning/notes/task3/task3-illustrated-notes.pdf')}",
+        "pdf_label": "笔记 PDF",
+    },
+    {
         "slug": "11",
         "src": "courses/11-li-yuyang/README.md",
         "kicker": "第 11 讲 · 科学智能进阶",
@@ -125,8 +145,13 @@ PAGE_BY_SRC = {
     "learning/notes/task1/README.md": "task1-text.html",
     "learning/notes/task2/illustrated-notes.md": "task2-illustrated.html",
     "learning/notes/task2/README.md": "task2-text.html",
+    "learning/notes/task3/illustrated-notes.md": "task3-illustrated.html",
+    "learning/notes/task3/README.md": "task3-text.html",
+    "learning/notes/01/README.md": "task3-illustrated.html",
+    "learning/notes/02/README.md": "task3-illustrated.html",
     "learning/notes/03/README.md": "task1-illustrated.html",
     "learning/notes/04/README.md": "task1-illustrated.html",
+    "learning/notes/05/README.md": "task3-illustrated.html",
     "learning/notes/06/README.md": "task2-illustrated.html",
     "learning/notes/07/README.md": "task2-illustrated.html",
     "learning/notes/11/README.md": "11.html",
@@ -137,7 +162,9 @@ PAGE_BY_SRC = {
 
 EMPTY_TEMPLATE = re.compile(r"^learning/notes/\d{2}/README\.md$")
 
-STATUS = {"03": "task1", "04": "task1", "06": "task2", "07": "task2", "11": "11"}
+STATUS = {"01": "task3", "02": "task3", "03": "task1", "04": "task1", "05": "task3", "06": "task2", "07": "task2", "11": "11"}
+
+SITE_UPDATED = ""
 
 
 def escape(value: str) -> str:
@@ -479,7 +506,7 @@ FOOTER = Template(
       </nav>
     </div>
     <div class="wrap footer-bottom">
-      <span>整理 biociao · 更新于 2026-11-21 · 个人学习记录</span>
+      <span>整理 biociao · 更新于 ${date} · 个人学习记录</span>
       <span>排版 原生 HTML / CSS · 无第三方依赖</span>
     </div>
   </footer>"""
@@ -493,7 +520,7 @@ def render_shell(page_title: str, description: str, content: str, body_class: st
         notes_current=' aria-current="page"',
         repo=REPO,
     )
-    footer = FOOTER.substitute(up="../", repo=REPO)
+    footer = FOOTER.substitute(up="../", repo=REPO, date=SITE_UPDATED)
     return SHELL.substitute(
         page_title=escape(page_title),
         description=escape(description),
@@ -627,7 +654,9 @@ def make_index(pages: list[dict], title_date: str) -> str:
     rows = []
     for number in [f"{i:02d}" for i in range(1, 12)]:
         kind = STATUS.get(number)
-        if kind == "task1":
+        if kind == "task3":
+            note = '<a href="task3-illustrated.html">Task3 图文</a> · <a href="task3-text.html">文字版</a>'
+        elif kind == "task1":
             note = '<a href="task1-illustrated.html">Task1 图文</a> · <a href="task1-text.html">文字版</a>'
         elif kind == "task2":
             note = '<a href="task2-illustrated.html">Task2 图文</a> · <a href="task2-text.html">文字版</a>'
@@ -646,7 +675,7 @@ def make_index(pages: list[dict], title_date: str) -> str:
       <p class="eyebrow">笔记索引</p>
       <h1>学习笔记</h1>
       <p class="article-lede">每讲一页，只写自己的理解，不抄原文。长文带目录与图注；源文件都在 <code>learning/notes</code>，课程内容与课件请以官方发布为准。</p>
-      <p class="article-meta"><span>{len(pages)} 篇</span><span>4 讲已整理（Task1 03+04 · Task2 06+07）</span><span>更新于 {escape(title_date)}</span></p>
+      <p class="article-meta"><span>{len(pages)} 篇</span><span>7 讲已整理（Task1 03+04 · Task2 06+07 · Task3 01+02+05）</span><span>更新于 {escape(title_date)}</span></p>
       <p class="article-source">源目录：<a href="{REPO}/tree/{BRANCH}/learning/notes" target="_blank" rel="noopener">learning/notes</a> · <a href="../index.html">返回首页</a></p>
     </header>
 
@@ -667,12 +696,16 @@ def make_index(pages: list[dict], title_date: str) -> str:
       </div>
     </div>'''
 
-    return render_shell("学习笔记 · 磐石 AI4S", "磐石 AI4S 个人学习笔记索引：Task1、Task2 图文与文字笔记、第 11 讲图文资料与学习进度。", content, "page-note notes-index")
+    return render_shell("学习笔记 · 磐石 AI4S", "磐石 AI4S 个人学习笔记索引：Task1、Task2、Task3 图文与文字笔记、第 11 讲图文资料与学习进度。", content, "page-note notes-index")
 
 
 def main() -> None:
     NOTES_OUT.mkdir(parents=True, exist_ok=True)
     pages = [prepare_note(note) for note in NOTES]
+
+    latest = max(page["date"] for page in pages)
+    global SITE_UPDATED
+    SITE_UPDATED = cn_date(latest)
 
     for index, page in enumerate(pages):
         prev_page = pages[index - 1] if index > 0 else None
@@ -681,7 +714,6 @@ def main() -> None:
         out.write_text(make_article(page, prev_page, next_page), encoding="utf-8")
         print(f"wrote {out.relative_to(ROOT)}")
 
-    latest = max(page["date"] for page in pages)
     (NOTES_OUT / "index.html").write_text(make_index(pages, cn_date(latest)), encoding="utf-8")
     print(f"wrote {(NOTES_OUT / 'index.html').relative_to(ROOT)}")
     print(f"{len(pages)} note pages · no course images copied")

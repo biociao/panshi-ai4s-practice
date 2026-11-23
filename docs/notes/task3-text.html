@@ -1,0 +1,1787 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Task3 学习笔记：科学模型训练、评估与可解释设计 · 磐石 AI4S</title>
+  <meta name="description" content="同一份笔记的文字版：六问决策卡、数据表示说明书、插入点梯子、术语表、页码索引、24 道自测与待办。">
+  <meta name="theme-color" content="#17130f">
+  <meta name="author" content="biociao">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/style.css">
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('ai4s-theme');
+        var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        document.documentElement.dataset.theme = theme;
+      } catch (e) {
+        document.documentElement.dataset.theme = 'dark';
+      }
+      document.documentElement.classList.add('js');
+    })();
+  </script>
+</head>
+<body class="page-note">
+  <a class="skip-link" href="#main">跳到正文</a>
+  <header class="nav" id="site-nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="../index.html" aria-label="磐石 AI4S 学习笔记，回到首页">
+        <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
+          <defs>
+            <linearGradient id="brandGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#d9b28c"/><stop offset="1" stop-color="#b08463"/>
+            </linearGradient>
+          </defs>
+          <rect width="64" height="64" rx="12" fill="#231f1a"/>
+          <rect x="1" y="1" width="62" height="62" rx="11" fill="none" stroke="url(#brandGrad)" stroke-opacity=".55"/>
+          <circle cx="32" cy="32" r="14.5" fill="none" stroke="url(#brandGrad)" stroke-width="2.5"/>
+          <circle cx="32" cy="32" r="4" fill="#f6f1e7"/>
+          <circle cx="46" cy="18" r="3.2" fill="url(#brandGrad)"/>
+        </svg>
+        <span class="brand-text"><strong>磐石 AI4S</strong><em>学习笔记</em></span>
+      </a>
+
+      <nav class="nav-links" id="site-menu" aria-label="页面导航">
+        <a href="index.html" class="active" aria-current="page">笔记</a>
+        <a href="../index.html#progress">进度</a>
+        <a href="../index.html#sources">课程来源</a>
+        <a href="../index.html#resources">资料</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a class="repo-link" href="https://github.com/biociao/panshi-ai4s-practice" target="_blank" rel="noopener">GitHub<span aria-hidden="true">↗</span></a>
+        <button class="icon-btn theme-btn" type="button" data-theme-toggle aria-label="切换深浅色主题">
+          <svg class="ico-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a7 7 0 1 0 10.5 10.5Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+          <svg class="ico-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 2v2.4M12 19.6V22M2 12h2.4M19.6 12H22M4.9 4.9l1.7 1.7M17.4 17.4l1.7 1.7M19.1 4.9l-1.7 1.7M6.6 17.4l-1.7 1.7" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+        </button>
+        <button class="icon-btn menu-btn" type="button" data-menu-toggle aria-expanded="false" aria-controls="site-menu" aria-label="打开导航菜单">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+  <main id="main" class="article-main">
+    <div class="wrap article-wrap">
+      <nav class="breadcrumb" aria-label="面包屑">
+      <a href="../index.html">首页</a><span class="sep">/</span>
+      <a href="index.html">笔记</a><span class="sep">/</span>
+      <span aria-current="page">Task3 文字</span>
+    </nav><header class="article-head">
+      <p class="eyebrow">Task 03 · 01 + 02 + 05 · 文字版</p>
+      <h1>Task3 学习笔记：科学模型训练、评估与可解释设计</h1>
+      <p class="article-meta"><span>更新于 2026 年 11 月 24 日</span><span>约 10,997 字</span><span>约 27 分钟</span></p>
+      <p class="article-source">源文件：<a href="https://github.com/biociao/panshi-ai4s-practice/blob/study/learning/notes/task3/README.md" target="_blank" rel="noopener">GitHub</a> · <a href="index.html">全部笔记</a></p>
+    </header><details class="toc-mobile"><summary>目录</summary><nav class="toc" aria-label="本页目录"><ol><li><a href="#0-主线一句话">0. 主线一句话</a></li><li><a href="#1-三讲的分工一张表">1. 三讲的分工：一张表</a></li><li><a href="#2-01-讲学习的本质是一组参数">2. 01 讲：学习的本质是一组参数</a><ol><li><a href="#21-先把现实变成模型能比较的数字01-p09p10">2.1 先把现实变成模型能比较的数字（01-P09、P10）</a></li><li><a href="#22-三集划分学习之前先留出没看过的房子01-p10">2.2 三集划分：学习之前先留出没看过的房子（01-P10）</a></li><li><a href="#23-模型-一组可调参数01-p11p12">2.3 模型 = 一组可调参数（01-P11、P12）</a></li><li><a href="#24-最优-把很多个错压成一个数01-p13p14">2.4 最优 = 把很多个错压成一个数（01-P13、P14）</a></li><li><a href="#25-训练-在-loss-landscape-上往低处走01-p15p17">2.5 训练 = 在 loss landscape 上往低处走（01-P15~P17）</a></li><li><a href="#26-一个闭环01-p18">2.6 一个闭环（01-P18）</a></li></ol></li><li><a href="#3-01-讲从直线到深网01-p19p22">3. 01 讲：从直线到深网（01-P19~P22）</a></li><li><a href="#4-01-讲归纳偏置与模型族01-p23p25">4. 01 讲：归纳偏置与模型族（01-P23~P25）</a><ol><li><a href="#41-定义01-p23">4.1 定义（01-P23）</a></li><li><a href="#42-先验怎样变成偏置01-p24">4.2 先验怎样变成偏置（01-P24）</a></li><li><a href="#43-模型族对照01-p25">4.3 模型族对照（01-P25）</a></li></ol></li><li><a href="#5-01-讲一个-agent-时代的真实案例01-p07">5. 01 讲：一个 Agent 时代的真实案例（01-P07）</a></li><li><a href="#6-02-讲架构的本质是谁和谁交换信息02-p05">6. 02 讲：架构的本质是「谁和谁交换信息」（02-P05）</a></li><li><a href="#7-02-讲五个家族的动机02-p08p20">7. 02 讲：五个家族的动机（02-P08~P20）</a></li><li><a href="#8-02-讲六类数据与三问02-p23p29">8. 02 讲：六类数据与三问（02-P23~P29）</a></li><li><a href="#9-02-讲数据表示说明书02-p30">9. 02 讲：数据表示说明书（02-P30）</a></li><li><a href="#10-02-讲模型选型六问02-p03p32p38">10. 02 讲：模型选型六问（02-P03、P32~P38）</a></li><li><a href="#11-02-讲决策卡与-prompt-骨架02-p39p40">11. 02 讲：决策卡与 Prompt 骨架（02-P39、P40）</a><ol><li><a href="#111-一份填写好的任务书02-p32-右侧示例">11.1 一份填写好的任务书（02-P32 右侧示例）</a></li></ol></li><li><a href="#12-05-讲可解释性缺口05-p02p10">12. 05 讲：可解释性缺口（05-P02~P10）</a><ol><li><a href="#121-起点科学是什么05-p02p05">12.1 起点：科学是什么（05-P02~P05）</a></li><li><a href="#122-alphafold2预测成功机理未定05-p07p09">12.2 AlphaFold2：预测成功，机理未定（05-P07~P09）</a></li></ol></li><li><a href="#13-05-讲拆解-dft-计算流程05-p12p13">13. 05 讲：拆解 DFT 计算流程（05-P12、P13）</a></li><li><a href="#14-05-讲七个插入点05-p14p21">14. 05 讲：七个插入点（05-P14~P21）</a></li><li><a href="#15-05-讲四个代表工作05-p22p28">15. 05 讲：四个代表工作（05-P22~P28）</a><ol><li><a href="#151-neuralxc-的-δ-学习05-p23p24">15.1 NeuralXC 的 Δ 学习（05-P23、P24）</a></li></ol></li><li><a href="#16-05-讲方法论四步与天平原型05-p29p34">16. 05 讲：方法论四步与天平原型（05-P29~P34）</a><ol><li><a href="#161-四步方法论05-p29">16.1 四步方法论（05-P29）</a></li><li><a href="#162-过程建模-vs-结果建模05-p30">16.2 过程建模 vs 结果建模（05-P30）</a></li><li><a href="#163-三个例子天平的三个位置">16.3 三个例子：天平的三个位置</a></li></ol></li><li><a href="#17-三讲合起来参数-结构-插入点我的整合">17. 三讲合起来：参数 / 结构 / 插入点（我的整合）</a></li><li><a href="#18-评估清单训练前-训练中-训练后">18. 评估清单：训练前 / 训练中 / 训练后</a></li><li><a href="#19-预测-vs-机理解释三个判据我的整理">19. 预测 vs 机理解释：三个判据（我的整理）</a></li><li><a href="#20-术语表">20. 术语表</a></li><li><a href="#21-页码索引">21. 页码索引</a></li><li><a href="#22-我提炼的十条用自己的话">22. 我提炼的十条（用自己的话）</a></li><li><a href="#23-自测先答再对要点">23. 自测（先答，再对要点）</a></li><li><a href="#24-动手计划尚未执行">24. 动手计划（尚未执行）</a></li><li><a href="#25-待办与疑问">25. 待办与疑问</a></li><li><a href="#26-资料出处与引用声明">26. 资料出处与引用声明</a></li></ol></nav></details><div class="article-layout"><nav class="toc" aria-label="本页目录"><p class="toc-title">目录</p><ol><li><a href="#0-主线一句话">0. 主线一句话</a></li><li><a href="#1-三讲的分工一张表">1. 三讲的分工：一张表</a></li><li><a href="#2-01-讲学习的本质是一组参数">2. 01 讲：学习的本质是一组参数</a><ol><li><a href="#21-先把现实变成模型能比较的数字01-p09p10">2.1 先把现实变成模型能比较的数字（01-P09、P10）</a></li><li><a href="#22-三集划分学习之前先留出没看过的房子01-p10">2.2 三集划分：学习之前先留出没看过的房子（01-P10）</a></li><li><a href="#23-模型-一组可调参数01-p11p12">2.3 模型 = 一组可调参数（01-P11、P12）</a></li><li><a href="#24-最优-把很多个错压成一个数01-p13p14">2.4 最优 = 把很多个错压成一个数（01-P13、P14）</a></li><li><a href="#25-训练-在-loss-landscape-上往低处走01-p15p17">2.5 训练 = 在 loss landscape 上往低处走（01-P15~P17）</a></li><li><a href="#26-一个闭环01-p18">2.6 一个闭环（01-P18）</a></li></ol></li><li><a href="#3-01-讲从直线到深网01-p19p22">3. 01 讲：从直线到深网（01-P19~P22）</a></li><li><a href="#4-01-讲归纳偏置与模型族01-p23p25">4. 01 讲：归纳偏置与模型族（01-P23~P25）</a><ol><li><a href="#41-定义01-p23">4.1 定义（01-P23）</a></li><li><a href="#42-先验怎样变成偏置01-p24">4.2 先验怎样变成偏置（01-P24）</a></li><li><a href="#43-模型族对照01-p25">4.3 模型族对照（01-P25）</a></li></ol></li><li><a href="#5-01-讲一个-agent-时代的真实案例01-p07">5. 01 讲：一个 Agent 时代的真实案例（01-P07）</a></li><li><a href="#6-02-讲架构的本质是谁和谁交换信息02-p05">6. 02 讲：架构的本质是「谁和谁交换信息」（02-P05）</a></li><li><a href="#7-02-讲五个家族的动机02-p08p20">7. 02 讲：五个家族的动机（02-P08~P20）</a></li><li><a href="#8-02-讲六类数据与三问02-p23p29">8. 02 讲：六类数据与三问（02-P23~P29）</a></li><li><a href="#9-02-讲数据表示说明书02-p30">9. 02 讲：数据表示说明书（02-P30）</a></li><li><a href="#10-02-讲模型选型六问02-p03p32p38">10. 02 讲：模型选型六问（02-P03、P32~P38）</a></li><li><a href="#11-02-讲决策卡与-prompt-骨架02-p39p40">11. 02 讲：决策卡与 Prompt 骨架（02-P39、P40）</a><ol><li><a href="#111-一份填写好的任务书02-p32-右侧示例">11.1 一份填写好的任务书（02-P32 右侧示例）</a></li></ol></li><li><a href="#12-05-讲可解释性缺口05-p02p10">12. 05 讲：可解释性缺口（05-P02~P10）</a><ol><li><a href="#121-起点科学是什么05-p02p05">12.1 起点：科学是什么（05-P02~P05）</a></li><li><a href="#122-alphafold2预测成功机理未定05-p07p09">12.2 AlphaFold2：预测成功，机理未定（05-P07~P09）</a></li></ol></li><li><a href="#13-05-讲拆解-dft-计算流程05-p12p13">13. 05 讲：拆解 DFT 计算流程（05-P12、P13）</a></li><li><a href="#14-05-讲七个插入点05-p14p21">14. 05 讲：七个插入点（05-P14~P21）</a></li><li><a href="#15-05-讲四个代表工作05-p22p28">15. 05 讲：四个代表工作（05-P22~P28）</a><ol><li><a href="#151-neuralxc-的-δ-学习05-p23p24">15.1 NeuralXC 的 Δ 学习（05-P23、P24）</a></li></ol></li><li><a href="#16-05-讲方法论四步与天平原型05-p29p34">16. 05 讲：方法论四步与天平原型（05-P29~P34）</a><ol><li><a href="#161-四步方法论05-p29">16.1 四步方法论（05-P29）</a></li><li><a href="#162-过程建模-vs-结果建模05-p30">16.2 过程建模 vs 结果建模（05-P30）</a></li><li><a href="#163-三个例子天平的三个位置">16.3 三个例子：天平的三个位置</a></li></ol></li><li><a href="#17-三讲合起来参数-结构-插入点我的整合">17. 三讲合起来：参数 / 结构 / 插入点（我的整合）</a></li><li><a href="#18-评估清单训练前-训练中-训练后">18. 评估清单：训练前 / 训练中 / 训练后</a></li><li><a href="#19-预测-vs-机理解释三个判据我的整理">19. 预测 vs 机理解释：三个判据（我的整理）</a></li><li><a href="#20-术语表">20. 术语表</a></li><li><a href="#21-页码索引">21. 页码索引</a></li><li><a href="#22-我提炼的十条用自己的话">22. 我提炼的十条（用自己的话）</a></li><li><a href="#23-自测先答再对要点">23. 自测（先答，再对要点）</a></li><li><a href="#24-动手计划尚未执行">24. 动手计划（尚未执行）</a></li><li><a href="#25-待办与疑问">25. 待办与疑问</a></li><li><a href="#26-资料出处与引用声明">26. 资料出处与引用声明</a></li></ol></nav><article class="article-body"><blockquote>
+<p>精读版：<a href="task3-illustrated.html">图文笔记</a> · <a href="https://github.com/biociao/panshi-ai4s-practice/blob/study/learning/notes/task3/task3-illustrated-notes.pdf" rel="noopener" target="_blank">PDF</a>（叙述式，含 19 张课件图与逐节批注）</p>
+</blockquote>
+<ul>
+<li>任务：Task3（科学模型训练、评估与可解释设计）</li>
+<li>覆盖课件：01《深入理解神经网络原理与模型训练》（李文毅，27 页）＋ 02《面向科学场景的数据理解与模型选型》（李文毅，42 页）＋ 05《AI 嵌入的可解释模型设计》（巩泽钊、高翔，36 页）</li>
+<li>状态：三讲课件已通读并整理；配套三节线上实训、录播未看（见「待办」）</li>
+<li>页码写法：<code>01-P13</code> = 01 讲第 13 页；<code>02-P05</code> = 02 讲第 5 页；<code>05-P14</code> = 05 讲第 14 页</li>
+</ul>
+<hr/>
+<h2 id="0-主线一句话">0. 主线一句话<a aria-label="链接到本节" class="heading-anchor" href="#0-主线一句话">#</a></h2>
+<p>Task3 的三讲在回答同一个问题的三个尺度：<strong>「模型能学到什么，取决于你在看到数据之前替它决定了什么。」</strong></p>
+<ul>
+<li>01 讲定的是「<strong>参数怎么被调</strong>」：一组参数、一个 loss、一条梯度、一次划分。</li>
+<li>02 讲定的是「<strong>结构怎么被选</strong>」：数据表示保留哪条关系，架构就把哪条关系写进连接。</li>
+<li>05 讲定的是「<strong>它站在流程的哪一格</strong>」：插入点越靠近理论，保留的中间量越多，可解释性越强。</li>
+</ul>
+<p>三讲的连接词是「归纳偏置」：01 给出定义（数据之外的默认偏好），02 给出操作（表示 + 结构 + 损失），05 把它推到流程尺度（插入点 = 你决定保留多少机理）。</p>
+<p>反过来读也成立：一个漂亮的 R² 之所以不能直接采信，正因为它同时缺这三层——没说是哪个集合上的（01）、没说任务定义对不对（02）、没说是替代还是加速（05）。</p>
+<hr/>
+<h2 id="1-三讲的分工一张表">1. 三讲的分工：一张表<a aria-label="链接到本节" class="heading-anchor" href="#1-三讲的分工一张表">#</a></h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th></th>
+<th>01 讲</th>
+<th>02 讲</th>
+<th>05 讲</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>一句话</td>
+<td>参数怎样学</td>
+<td>模型怎样选</td>
+<td>AI 该插在哪</td>
+</tr>
+<tr>
+<td>视角</td>
+<td>一个模型内部</td>
+<td>模型之间</td>
+<td>模型与理论之间</td>
+</tr>
+<tr>
+<td>核心概念</td>
+<td>参数、loss、梯度、学习率、划分、归纳偏置</td>
+<td>信息通路、六类数据、表示说明书、选型六问</td>
+<td>计算流程、插入点、过程建模 vs 结果建模</td>
+</tr>
+<tr>
+<td>典型失败</td>
+<td>测试集泄漏、容量/学习率乱选</td>
+<td>同源样本当独立样本、把筛选做成回归</td>
+<td>用结果建模冒充机理理解</td>
+</tr>
+<tr>
+<td>交付物</td>
+<td>一个训好的参数集</td>
+<td>一份建模需求说明书</td>
+<td>一张标好插入点的流程图</td>
+</tr>
+<tr>
+<td>关键页</td>
+<td>01-P10、P16、P23、P25</td>
+<td>02-P05、P30、P32、P39</td>
+<td>05-P13、P14、P28、P30</td>
+</tr>
+</tbody>
+</table></div>
+<hr/>
+<h2 id="2-01-讲学习的本质是一组参数">2. 01 讲：学习的本质是一组参数<a aria-label="链接到本节" class="heading-anchor" href="#2-01-讲学习的本质是一组参数">#</a></h2>
+<h3 id="21-先把现实变成模型能比较的数字01-p09p10">2.1 先把现实变成模型能比较的数字（01-P09、P10）<a aria-label="链接到本节" class="heading-anchor" href="#21-先把现实变成模型能比较的数字01-p09p10">#</a></h3>
+<p>课件用一张房价表引入（01-P09），三个术语要分清：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>术语</th>
+<th>定义</th>
+<th>房价例子里是什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sample 样本</td>
+<td>一行 = 一个完整研究对象</td>
+<td>一套房</td>
+</tr>
+<tr>
+<td>Feature 特征</td>
+<td>描述对象的信息</td>
+<td>面积、楼层、朝向、房龄、距地铁</td>
+</tr>
+<tr>
+<td>Label 标签</td>
+<td>模型希望回答的结果</td>
+<td>成交价</td>
+</tr>
+</tbody>
+</table></div>
+<p>课件特意标注：这是抽象案例，在生物、化学、材料领域可以有不同的变体。</p>
+<p>数据处理六步（01-P10），每一步配一个真实问题：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>步</th>
+<th>动作</th>
+<th>配套问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>原始表格，认样本与字段</td>
+<td>一行到底代表什么？</td>
+</tr>
+<tr>
+<td>2</td>
+<td>检查缺失 / 异常并记录</td>
+<td>朝向缺失怎么办？</td>
+</tr>
+<tr>
+<td>3</td>
+<td>去重 / 统一单位</td>
+<td>重复记录会不会被误以为更重要？</td>
+</tr>
+<tr>
+<td>4</td>
+<td>类别编码</td>
+<td>南和南北怎样编码？</td>
+</tr>
+<tr>
+<td>5</td>
+<td>缩放数值</td>
+<td>面积和楼层能直接比吗？</td>
+</tr>
+<tr>
+<td>6</td>
+<td>输入矩阵 X</td>
+<td>交给模型</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="22-三集划分学习之前先留出没看过的房子01-p10">2.2 三集划分：学习之前先留出没看过的房子（01-P10）<a aria-label="链接到本节" class="heading-anchor" href="#22-三集划分学习之前先留出没看过的房子01-p10">#</a></h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>集合</th>
+<th>比喻</th>
+<th>用途</th>
+<th>纪律</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>训练集</td>
+<td>练习题</td>
+<td>调整参数，可以反复查看</td>
+<td>参数在这里学</td>
+</tr>
+<tr>
+<td>验证集</td>
+<td>模拟考试</td>
+<td>选结构和设置</td>
+<td>超参在这里选</td>
+</tr>
+<tr>
+<td>测试集</td>
+<td>期末考试</td>
+<td>方案确定后的最后一次评价</td>
+<td><strong>不能边看边改模型</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>课件原话两条：<strong>训练集不是全部数据；测试集不能边看边改模型。</strong> 以及那条最容易被违反的原则：<strong>数据处理规则从训练数据确定，再应用到验证集和测试集</strong>（缩放参数、填充值、编码表都只能在训练集上拟合）。</p>
+<h3 id="23-模型-一组可调参数01-p11p12">2.3 模型 = 一组可调参数（01-P11、P12）<a aria-label="链接到本节" class="heading-anchor" href="#23-模型-一组可调参数01-p11p12">#</a></h3>
+<p>线性回归就是给点集找一条直线：<code>ŷ = wx + b</code>。w 控制斜率（线旋转），b 控制截距（线上下移动）。训练前机器不知道哪组 (w,b) 最好。</p>
+<p>课件给的定义是全讲的地基：<strong>一个模型，就是一组可以调节的参数；训练和「学习」就是从所有参数中选出最优的一组参数</strong>（01-P12）。线性回归是两个参数，Qwen3-8B 是 80 亿个（01-P18）——同一个定义。</p>
+<h3 id="24-最优-把很多个错压成一个数01-p13p14">2.4 最优 = 把很多个错压成一个数（01-P13、P14）<a aria-label="链接到本节" class="heading-anchor" href="#24-最优-把很多个错压成一个数01-p13p14">#</a></h3>
+<p>每个样本都有一条垂直的误差线，叫残差 <code>eᵢ = yᵢ − ŷᵢ</code>。一条线会产生很多个残差，损失函数回答的是：<strong>怎样把「很多个错」压成一个数字，告诉机器这条线到底好不好？</strong></p>
+<p>MSE（均方误差）：<code>L(w,b) = (1/n)Σᵢ(yᵢ − ŷᵢ)²</code>。平方让大错罚得更重，均值让样本数不影响量级（01-P13）。</p>
+<p>三条候选线的对比（01-P14）：MSE = 10.60 / 1.29 / 0.12。<strong>MSE 越小 → 拟合误差越小 → 这组参数越好。</strong></p>
+<h3 id="25-训练-在-loss-landscape-上往低处走01-p15p17">2.5 训练 = 在 loss landscape 上往低处走（01-P15~P17）<a aria-label="链接到本节" class="heading-anchor" href="#25-训练-在-loss-landscape-上往低处走01-p15p17">#</a></h3>
+<p>换个视角：每一组 (w,b) 对应一条线，也对应一个 loss。于是「选直线」变成「在参数空间的地形上找最低点」（01-P15）。梯度告诉你「哪边上升最快」，取反方向就能让 loss 下降：</p>
+<pre><code class="language-text">θ ← θ − η·∇L(θ)        新参数 = 旧参数 − 学习率 × 梯度
+</code></pre>
+<p>学习率 η 三档（01-P17）：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>η</th>
+<th>表现</th>
+<th>后果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>太小</td>
+<td>稳定，但要走很多步</td>
+<td>慢</td>
+</tr>
+<tr>
+<td>合适</td>
+<td>较快接近最低点</td>
+<td>收敛</td>
+</tr>
+<tr>
+<td>太大</td>
+<td>震荡，甚至发散</td>
+<td>失败</td>
+</tr>
+</tbody>
+</table></div>
+<p>课件的总结：<strong>「学习」不仅取决于模型和数据，也取决于优化过程本身。</strong></p>
+<h3 id="26-一个闭环01-p18">2.6 一个闭环（01-P18）<a aria-label="链接到本节" class="heading-anchor" href="#26-一个闭环01-p18">#</a></h3>
+<pre><code class="language-text">数据 (x,y) → 模型 f → 预测 ŷ → Loss「错多少？」→ 梯度 → 更新参数 → 更好的模型
+                ↑___________________________________________|
+</code></pre>
+<p>训练就是反复执行这个闭环。对线性回归是两个参数，对 LLM 是几百亿个，骨架不变。</p>
+<hr/>
+<h2 id="3-01-讲从直线到深网01-p19p22">3. 01 讲：从直线到深网（01-P19~P22）<a aria-label="链接到本节" class="heading-anchor" href="#3-01-讲从直线到深网01-p19p22">#</a></h2>
+<p>线性模型不够用的三个理由（01-P19）：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>现象</th>
+<th>例子</th>
+<th>直线为什么不行</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>非线性</td>
+<td>房龄 0→5 与 30→35 的影响不同</td>
+<td>斜率恒定</td>
+</tr>
+<tr>
+<td>交互</td>
+<td>同样 10 ㎡，地段不同增量不同</td>
+<td>只做加法</td>
+</tr>
+<tr>
+<td>阈值</td>
+<td>距地铁影响在某个距离后突变</td>
+<td>画不出台阶</td>
+</tr>
+</tbody>
+</table></div>
+<p>结论：<strong>非线性 + 交互 + 阈值 → 需要更有表达力的结构 → 多层神经网络。</strong> 世界不总是「简单相加」。</p>
+<p>MLP 的结构（01-P20、P21）：输入特征 → 隐藏层 1 → 隐藏层 2 → 输出。深度、宽度、连接方式决定表达能力，也带来参数成本；「特征之间怎样组合」从人的工作变成了训练问题。手写数字识别是最小例子：输入一张图，输出一个数字。</p>
+<p>三者的对比（01-P22）：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th></th>
+<th>线性回归</th>
+<th>浅层神经网络</th>
+<th>深层神经网络</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>形式</td>
+<td><code>ŷ = wᵀx + b</code></td>
+<td><code>F(x) = w₂ᵀσ(w₁ᵀx + b₁) + b₂</code></td>
+<td><code>F(x) = w₃ᵀσ(w₂ᵀσ(w₁ᵀx+b₁)+b₂)+b₃</code></td>
+</tr>
+<tr>
+<td>参数</td>
+<td>2 个</td>
+<td>少量</td>
+<td>几十亿个</td>
+</tr>
+<tr>
+<td>骨架</td>
+<td>参数化模型 → Loss → 梯度 → 更新</td>
+<td>同左</td>
+<td>同左</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>复杂度增加几个数量级，骨架一步没变。</strong> 这是 01 讲最省力的记忆点。</p>
+<hr/>
+<h2 id="4-01-讲归纳偏置与模型族01-p23p25">4. 01 讲：归纳偏置与模型族（01-P23~P25）<a aria-label="链接到本节" class="heading-anchor" href="#4-01-讲归纳偏置与模型族01-p23p25">#</a></h2>
+<h3 id="41-定义01-p23">4.1 定义（01-P23）<a aria-label="链接到本节" class="heading-anchor" href="#41-定义01-p23">#</a></h3>
+<p>只见过少量样本时，许多不同规律都能解释已知数据；模型必须依赖某种默认偏好去回答未见输入。课件摆了三条都「合理」的延伸：偏好直线（已知点外按相近斜率延伸）、偏好平滑（允许弯曲但相邻位置连续）、允许突变（边界前后规律可突变）。</p>
+<p><strong>归纳偏置 = 数据之外的默认偏好，它决定模型更容易学到哪一种解释。</strong></p>
+<h3 id="42-先验怎样变成偏置01-p24">4.2 先验怎样变成偏置（01-P24）<a aria-label="链接到本节" class="heading-anchor" href="#42-先验怎样变成偏置01-p24">#</a></h3>
+<pre><code class="language-text">先验（科学知识：规律与不变量）
+  → 表示（数据表示：网格 / 序列 / 图）
+  → 约束（结构 / Loss：共享 / 对称 / 守恒）
+  → 偏好（归纳偏置：更容易学什么）
+  → 验证（未见样本：是否真的泛化）
+</code></pre>
+<p>三个课件给的先验例子：相邻像素通常更相关；原子编号不应改变分子性质；守恒量应满足方程。</p>
+<p>关键句：<strong>先验不会自动生效——写进数据表示、网络结构、Loss 或数据增强后，才成为归纳偏置。</strong></p>
+<h3 id="43-模型族对照01-p25">4.3 模型族对照（01-P25）<a aria-label="链接到本节" class="heading-anchor" href="#43-模型族对照01-p25">#</a></h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>模型族</th>
+<th>默认假设</th>
+<th>写进系统的方式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>线性回归</td>
+<td>关系近似线性、可加</td>
+<td>线性函数</td>
+</tr>
+<tr>
+<td>MLP</td>
+<td>固定长度向量；特征可全局交互</td>
+<td>全连接 + 非线性</td>
+</tr>
+<tr>
+<td>CNN</td>
+<td>局部模式可复用；卷积层平移等变</td>
+<td>局部感受野 + 权重共享</td>
+</tr>
+<tr>
+<td>RNN / LSTM</td>
+<td>顺序重要；状态转移规则沿时间复用</td>
+<td>递归状态 + 时间共享</td>
+</tr>
+<tr>
+<td>GNN</td>
+<td>连接关系重要；节点编号不重要</td>
+<td>消息传递 + 对称聚合</td>
+</tr>
+<tr>
+<td>等变网络</td>
+<td>旋转/平移时输出按规律变化</td>
+<td>等变表示</td>
+</tr>
+<tr>
+<td>Transformer</td>
+<td>token 两两交互；顺序由位置注入</td>
+<td>注意力 + 位置编码</td>
+</tr>
+</tbody>
+</table></div>
+<p>右侧的「价格标签」：先验越强 → 需要的数据越少，但先验错了就全错；先验越弱 → 越灵活，但所需数据量指数上升。<strong>多数科学问题落在 N = 10² ~ 10⁴。</strong> 课件自己注明这是概念示意，不是严格排行榜——关键是先验是否匹配任务。</p>
+<hr/>
+<h2 id="5-01-讲一个-agent-时代的真实案例01-p07">5. 01 讲：一个 Agent 时代的真实案例（01-P07）<a aria-label="链接到本节" class="heading-anchor" href="#5-01-讲一个-agent-时代的真实案例01-p07">#</a></h2>
+<p>Prompt：「请你搭建一个 GNN，帮我拟合 @data/ 下的分子数据」。Agent 交回三项打勾：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>打勾项</th>
+<th>证明力</th>
+<th>缺什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>代码能跑</td>
+<td>工程链路通了</td>
+<td>不证明科学问题对</td>
+</tr>
+<tr>
+<td>R² = 0.94</td>
+<td>某个集合上的拟合程度</td>
+<td>没说是哪个集合；没和 baseline 比</td>
+</tr>
+<tr>
+<td>图很好看</td>
+<td>散点贴着对角线</td>
+<td>画的就是参与拟合的点</td>
+</tr>
+</tbody>
+</table></div>
+<p>三个追问：这三项里有几项是真的？GNN 是什么网络？为什么选择 GNN？</p>
+<p>结论（01-P07）：<strong>Agent 时代，代码应该是在知道原理的情况下全权交给 Agent。</strong> 02 讲把同一案例诊断为「信息不足；还没理解数据，就先指定了模型」（02-P02）。</p>
+<hr/>
+<h2 id="6-02-讲架构的本质是谁和谁交换信息02-p05">6. 02 讲：架构的本质是「谁和谁交换信息」（02-P05）<a aria-label="链接到本节" class="heading-anchor" href="#6-02-讲架构的本质是谁和谁交换信息02-p05">#</a></h2>
+<p><strong>同一份数据，换一种连接方式，模型就会相信不同的关系。</strong> 课件给了一个可复用的三问：</p>
+<ol>
+<li>输入单元是什么？</li>
+<li>连接由谁定义？</li>
+<li>权重在哪里共享？</li>
+</ol>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>架构</th>
+<th>输入单元</th>
+<th>怎样交流</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MLP</td>
+<td>全部特征</td>
+<td>全连接</td>
+<td>弱结构先验</td>
+</tr>
+<tr>
+<td>CNN</td>
+<td>局部网格</td>
+<td>共享卷积核</td>
+<td>局部性 + 平移共享</td>
+</tr>
+<tr>
+<td>RNN</td>
+<td>前后位置</td>
+<td>循环状态</td>
+<td>顺序 + 因果</td>
+</tr>
+<tr>
+<td>Transformer</td>
+<td>任意 token</td>
+<td>注意力权重</td>
+<td>数据依赖的全局连接</td>
+</tr>
+<tr>
+<td>GNN</td>
+<td>相邻节点</td>
+<td>沿边聚合</td>
+<td>显式拓扑 + 置换不变</td>
+</tr>
+</tbody>
+</table></div>
+<hr/>
+<h2 id="7-02-讲五个家族的动机02-p08p20">7. 02 讲：五个家族的动机（02-P08~P20）<a aria-label="链接到本节" class="heading-anchor" href="#7-02-讲五个家族的动机02-p08p20">#</a></h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>家族</th>
+<th>为什么出现（课件动机）</th>
+<th>关键机制</th>
+<th>一句话判据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CNN</td>
+<td>拍平丢邻域，且第一层参数量随像素数膨胀（1024×1024 接 4096 隐单元 ≈ 4.3×10⁹）</td>
+<td>局部连接 + 权重共享；感受野随深度扩大</td>
+<td>空间坐标、局部邻域、多尺度是否有意义</td>
+</tr>
+<tr>
+<td>RNN / LSTM</td>
+<td>序列的核心是元素有顺序，当前判断依赖过去</td>
+<td>状态沿时间传递；门控（遗忘/输入/输出、更新/重置）解决梯度链过长</td>
+<td>顺序与因果是不是真的</td>
+</tr>
+<tr>
+<td>Seq2Seq + Attention</td>
+<td>固定长度 context 装不下整段输入</td>
+<td>每步重新选择上下文；Q/K/V + multi-head</td>
+<td>长输入的「该听谁」是否随位置变</td>
+</tr>
+<tr>
+<td>Transformer</td>
+<td>长距离依赖从链式传播改成内容相关的全局连接，同时训练可并行</td>
+<td>自注意力 + FFN + 残差/归一化；因果掩码</td>
+<td>token 之间是否需要两两交互</td>
+</tr>
+<tr>
+<td>GNN</td>
+<td>对象之间的关系本身就是数据的一部分</td>
+<td>message → aggregate → update；节点/边/整图预测</td>
+<td>不沿边的对象是否应当隔离</td>
+</tr>
+<tr>
+<td>PINN</td>
+<td>物理约束可以写进训练目标</td>
+<td><code>L = L_data + λ·L_PDE + μ·L_boundary</code></td>
+<td>有没有可微、可信的方程</td>
+</tr>
+</tbody>
+</table></div>
+<p>三条提醒：</p>
+<ul>
+<li>注意力公式 <code>Attention(Q,K,V) = softmax(QKᵀ/√d_k)V</code>：Q 是「我在找什么」，K 是「我如何被匹配」，V 是「被选中后贡献什么」（02-P15）。</li>
+<li>Transformer 的「全局」不是平均混合，而是<strong>由内容决定的加权连接</strong>（02-P15）。</li>
+<li>PINN 的选择依据是「有可微、可信的物理约束」，不是数据看起来像图或像序列；<strong>没有可靠方程时，先验可能变成错误约束</strong>（02-P20）。</li>
+</ul>
+<hr/>
+<h2 id="8-02-讲六类数据与三问02-p23p29">8. 02 讲：六类数据与三问（02-P23~P29）<a aria-label="链接到本节" class="heading-anchor" href="#8-02-讲六类数据与三问02-p23p29">#</a></h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>形状</th>
+<th>必须保留什么</th>
+<th>一个样本是什么</th>
+<th>怎样划分</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>表格 / 矩阵</td>
+<td>N × d</td>
+<td>行列语义、单位、稀疏性、批次、缺失</td>
+<td>一株植物还是一次测量</td>
+<td>重复测量与同源不能跨集</td>
+</tr>
+<tr>
+<td>图像 / 规则网格</td>
+<td>H × W × C</td>
+<td>邻域、坐标、尺度、边界</td>
+<td>一幅显微图、一个 3D 体、一组输入—输出场</td>
+<td>按样品/区域/实验条件</td>
+</tr>
+<tr>
+<td>序列 / 光谱</td>
+<td>L × d</td>
+<td>顺序、motif、长程关系、采样率、mask</td>
+<td>一条序列、一段轨迹、一个固定窗口</td>
+<td>按家族/时间/批次</td>
+</tr>
+<tr>
+<td>关系图</td>
+<td>V / E / 属性</td>
+<td>节点属性、边属性、周期边界、邻域半径</td>
+<td>一张图、一个节点、一条边</td>
+<td>按体系/结构族分组</td>
+</tr>
+<tr>
+<td>3D / 点云</td>
+<td>坐标 + 类型</td>
+<td>距离、角度、方向、周期边界、元素类型</td>
+<td>一个结构、一个构型、一段轨迹</td>
+<td>按结构家族/时间/体系</td>
+</tr>
+<tr>
+<td>时空场</td>
+<td>X × Y × T × 变量</td>
+<td>站点/网格邻接、采样周期、预测窗口、外生变量</td>
+<td>一个时刻、一段窗口、一次完整事件</td>
+<td>时间滚动 + 空间外推</td>
+</tr>
+</tbody>
+</table></div>
+<p>每类的判决句（课件原话的转述）：</p>
+<ul>
+<li>表格：矩阵形状相同，不代表科学含义相同（02-P24）。</li>
+<li>图像：关键不是「长得像图片」，而是空间坐标、局部邻域与多尺度是否有意义（02-P25）。</li>
+<li>序列：不能只看长度 L；token 的含义、顺序与采样机制共同决定表示（02-P26）。</li>
+<li>图：图不是天然真理；邻居怎么连、边表示什么，本身就是需要领域确认的假设（02-P27）。</li>
+<li>3D：核心是对称性；标量常要求不变，方向量可能需要等变（02-P28）。</li>
+<li>时空：至少两种结构；验证必须同时回答「新时间」和「新地点」（02-P29）。</li>
+</ul>
+<hr/>
+<h2 id="9-02-讲数据表示说明书02-p30">9. 02 讲：数据表示说明书（02-P30）<a aria-label="链接到本节" class="heading-anchor" href="#9-02-讲数据表示说明书02-p30">#</a></h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>栏目</th>
+<th>要回答什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01</td>
+<td>样本单位</td>
+<td>一条样本对应个体、实验、结构，还是时间窗口？</td>
+</tr>
+<tr>
+<td>02</td>
+<td>数据结构</td>
+<td>向量、网格、序列、图、3D，还是多模态组合？</td>
+</tr>
+<tr>
+<td>03</td>
+<td>必须保留</td>
+<td>局部邻域、顺序、拓扑、坐标、周期中哪些不能丢？</td>
+</tr>
+<tr>
+<td>04</td>
+<td>对称与变换</td>
+<td>平移、旋转、排列、尺度变化后答案如何变化？</td>
+</tr>
+<tr>
+<td>05</td>
+<td>标签与质量</td>
+<td>标签怎样得到？缺失、批次、单位、测量误差怎么处理？</td>
+</tr>
+</tbody>
+</table></div>
+<p>课件的定位：<strong>说明书写清楚，后续的模型选型才有可检查的依据。</strong> 最后还有一个「领域确认」的出口——这五栏不是填给 AI 看的，是填给同行看的。</p>
+<hr/>
+<h2 id="10-02-讲模型选型六问02-p03p32p38">10. 02 讲：模型选型六问（02-P03、P32~P38）<a aria-label="链接到本节" class="heading-anchor" href="#10-02-讲模型选型六问02-p03p32p38">#</a></h2>
+<p>先说流程（02-P32）：<strong>不要让 Agent 直接写训练代码</strong>；先完成六问得到建模需求说明书，再进入「候选 → 训练 → 验证 → 诊断 → 再选择」的循环，最终交付报告、代码、不确定性与复现实验。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>问</th>
+<th>写进 Prompt 的内容</th>
+<th>决定模型选型的哪些方面</th>
+<th>常见错误</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Q1 目标</td>
+<td>目标变量、科学用途、回归/分类/排序/生成/聚类/异常检测</td>
+<td>输出层、损失函数、指标；标签构造与成功的科学含义</td>
+<td>把「筛选优先级」当「数值回归」做</td>
+</tr>
+<tr>
+<td>Q2 样本</td>
+<td>一个分子/构型/病人/样品/实验/时间窗口；哪些对象必须分组</td>
+<td>有效独立样本数；划分是否真正独立</td>
+<td>把同体系 1000 个构型当 1000 个独立样本</td>
+</tr>
+<tr>
+<td>Q3 模态</td>
+<td>表格/图像/时序/图/序列/谱/场；邻接、顺序、坐标、多模态关系</td>
+<td>候选架构族；token/节点/像素定义；哪些关系必须保留</td>
+<td>把有结构的数据拍平成表格</td>
+</tr>
+<tr>
+<td>Q4 规模</td>
+<td>独立样本数、标签比例、缺失、重复、测量误差、类别不平衡、预训练资源</td>
+<td>容量、正则化、是否需要预训练；负担多弱的先验</td>
+<td>N = 200 时从头训练大型 Transformer</td>
+</tr>
+<tr>
+<td>Q5 先验</td>
+<td>对称性、守恒量、单调性、局域性、周期边界、机理方程、已知不可行区域</td>
+<td>是否等变、约束损失、机理耦合；数据效率与外推可信度</td>
+<td>明知旋转/置换规律，却让 MLP 重新猜</td>
+</tr>
+<tr>
+<td>Q6 交付</td>
+<td>可解释性、不确定性、推理成本、内插/外推、部署延迟、失败报警</td>
+<td>黑箱能否接受；是否需要 GP/集成/校准；验证集模拟哪种场景</td>
+<td>需要机理解释时只交付黑箱分数</td>
+</tr>
+</tbody>
+</table></div>
+<p>每问的金句（我的摘录）：</p>
+<ul>
+<li>Q1：<strong>任务不是数据集自带的标签名，而是你准备怎样使用答案。</strong></li>
+<li>Q2：<strong>不先定义科学独立性，再统计 N；否则漂亮指标可能只是同源泄漏。</strong></li>
+<li>Q3：<strong>数据模态不是文件格式；真正重要的是内部关系怎样进入计算。</strong></li>
+<li>Q4：<strong>样本少时，正确先验与可靠验证通常比增加参数更值钱。</strong></li>
+<li>Q5：<strong>科学家相对纯 AI 工程师的优势，不只是数据，而是知道哪些规律绝不该被违反。</strong></li>
+<li>Q6：<strong>模型选型的终点不是排行榜第一，而是得到一个在目标场景中可用、可信的答案。</strong></li>
+</ul>
+<hr/>
+<h2 id="11-02-讲决策卡与-prompt-骨架02-p39p40">11. 02 讲：决策卡与 Prompt 骨架（02-P39、P40）<a aria-label="链接到本节" class="heading-anchor" href="#11-02-讲决策卡与-prompt-骨架02-p39p40">#</a></h2>
+<p>决策卡（02-P39）就是上面六问的压缩版，打印出来逐项打勾即可：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>必答问题</th>
+<th>常见错误</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>科学目标与任务类型？</td>
+<td>把筛选（排序）当预测（回归）做</td>
+</tr>
+<tr>
+<td>2</td>
+<td>「一个样本」是什么？</td>
+<td>把同体系 1000 个构型当独立样本</td>
+</tr>
+<tr>
+<td>3</td>
+<td>数据模态与内在结构？</td>
+<td>把有结构的数据拍平成表格</td>
+</tr>
+<tr>
+<td>4</td>
+<td>多少数据、多少标签？</td>
+<td>N=200 上从头训练大型 Transformer</td>
+</tr>
+<tr>
+<td>5</td>
+<td>你知道哪些科学先验？</td>
+<td>已知规律不写入模型，白花数据</td>
+</tr>
+<tr>
+<td>6</td>
+<td>答案要长什么样？</td>
+<td>需要机理解释时只交付黑箱</td>
+</tr>
+</tbody>
+</table></div>
+<p>Prompt 骨架（02-P40，课件给的是可填空版）：</p>
+<pre><code class="language-text">请先不要直接写训练代码；若信息不足，先列出需要我或领域专家确认的问题。
+Q1 目标：预测［具体性质］，属于［回归/分类/排序］；科学用途是［筛选/定量/解释］。
+Q2 样本：确认一行对应分子还是构型；同一实体必须分组划分。
+Q3 模态：比较描述符、SMILES、2D 图、3D 坐标各自保留/丢失的信息。
+Q4 规模：报告有效独立 N、标签数、缺失、噪声与重复；不要把同源记录当独立样本。
+Q5 先验：确认置换、旋转/平移不变或等变、局域性与其他机理约束。
+Q6 交付：除精度外报告不确定性、外推、可解释性与推理成本。
+请输出：数据审计 → baseline → 候选模型族与理由 → 划分/指标 → 风险与复现实验。
+</code></pre>
+<h3 id="111-一份填写好的任务书02-p32-右侧示例">11.1 一份填写好的任务书（02-P32 右侧示例）<a aria-label="链接到本节" class="heading-anchor" href="#111-一份填写好的任务书02-p32-右侧示例">#</a></h3>
+<p>课件在「六问」旁边放了一份真实示例：高熵合金组分 → 析氢过电位，从 5000 个候选里挑 20 个做实验。它把六问落到了可执行的程度：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>栏目</th>
+<th>示例内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>科学目标</td>
+<td>从合金组分预测析氢反应过电位，用于从 5000 个候选组分中挑 20 个做实验</td>
+</tr>
+<tr>
+<td>任务类型</td>
+<td>回归，但<strong>真实用途是排序</strong>（Top-20 命中率优先于 RMSE）</td>
+</tr>
+<tr>
+<td>一个样本</td>
+<td>一条「组分配比 + 制备条件」记录；同一组分的重复实验属于同一组</td>
+</tr>
+<tr>
+<td>数据结构</td>
+<td>定长表格，13 维数值特征，无空间/时序/图结构 → <strong>不需要 CNN / RNN / GNN</strong></td>
+</tr>
+<tr>
+<td>数据</td>
+<td><code>data/hea.csv</code>，N = 312；标签来自实验，重复性误差约 ±15 mV</td>
+</tr>
+<tr>
+<td>先验</td>
+<td>组分之和为 1（约束）；无旋转对称性问题</td>
+</tr>
+<tr>
+<td>划分</td>
+<td>按「组分族」分组划分（同族不得跨集合），5 折交叉验证，报告 mean±std</td>
+</tr>
+<tr>
+<td>baseline</td>
+<td>① 全局均值 ② 岭回归 ③ XGBoost ④ TabPFN</td>
+</tr>
+<tr>
+<td>指标</td>
+<td>主指标 Spearman ρ 与 Top-20 EF；辅助报 RMSE(mV)，并与 ±15 mV 实验误差对比</td>
+</tr>
+<tr>
+<td>交付</td>
+<td>指标对照表 + 误差分析 + 特征重要性 + 明确说明结论属内插还是外推</td>
+</tr>
+<tr>
+<td>禁止</td>
+<td>不得使用随机划分；不得在全量数据上做标准化或特征选择</td>
+</tr>
+</tbody>
+</table></div>
+<p>这张表值得当成模板：它把「目标—样本—结构—先验—划分—baseline—指标—交付—禁止」写在同一页里，任何一项被改动，其他项都要跟着改。尤其是最后两条「禁止」，其实是 01-P10 那条纪律的工程写法——<strong>规则只能从训练集拟合，划分必须尊重科学独立性</strong>。</p>
+<blockquote>
+<p><strong>我的批注</strong>：这份示例最容易被忽略的是「辅助 RMSE 与 ±15 mV 实验误差对比」这一句。它给出了判断模型是否「够用」的天然标尺：如果模型的 RMSE 已经小于实验重复性误差，再往下压精度对科学决策没有增量。</p>
+</blockquote>
+<p>02-P41 的课堂实训是「5 分钟把自己的数据写成建模任务书」，汇报只说三句话：</p>
+<ol>
+<li>我的数据最像 <strong><em>_</em>_，必须保留 </strong>____。</li>
+<li>我的最小 baseline 是 <strong><em>_</em>_；第一候选模型族是 </strong>____。</li>
+<li>验证必须按 <strong><em>_</em>_ 切分；若 </strong>____，我才升级模型。</li>
+</ol>
+<blockquote>
+<p><strong>我的批注</strong>：第三句里的「若…才升级」是这套方法最有用的部分。它把「换更大的模型」从直觉决策变成了带条件的决策，先写清楚升级的触发条件，就不会一上来就上大模型。</p>
+</blockquote>
+<hr/>
+<h2 id="12-05-讲可解释性缺口05-p02p10">12. 05 讲：可解释性缺口（05-P02~P10）<a aria-label="链接到本节" class="heading-anchor" href="#12-05-讲可解释性缺口05-p02p10">#</a></h2>
+<h3 id="121-起点科学是什么05-p02p05">12.1 起点：科学是什么（05-P02~P05）<a aria-label="链接到本节" class="heading-anchor" href="#121-起点科学是什么05-p02p05">#</a></h3>
+<ul>
+<li>庞加莱：科学是由恒常关系构成的体系。</li>
+<li>爱因斯坦：科学的目的，是用尽可能少的基本概念和关系，理解全部感觉经验之间的联系。</li>
+<li>苹果落地与月球绕地是同一套关系（万有引力）；但<strong>知道方程不等于算得出结果</strong>（Navier–Stokes），困难来自计算代价。</li>
+</ul>
+<p>于是 AI 的位置是「替代求解」，不是「替代理论」。05-P05 用 CFD 画了原型：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th></th>
+<th>传统 CFD</th>
+<th>AI 结果代理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>流程</td>
+<td>几何与网格 → 控制方程 → 离散化 → 迭代求解 → 场 → 后处理</td>
+<td>输入 X → 网络 → 输出 Y</td>
+</tr>
+<tr>
+<td>代价</td>
+<td>高，耗时长</td>
+<td>低，速度快</td>
+</tr>
+<tr>
+<td>保留</td>
+<td>每一步都有物理含义</td>
+<td>隐式学习物理规律与耦合</td>
+</tr>
+<tr>
+<td>风险</td>
+<td>算不动</td>
+<td>机制缺失</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="122-alphafold2预测成功机理未定05-p07p09">12.2 AlphaFold2：预测成功，机理未定（05-P07~P09）<a aria-label="链接到本节" class="heading-anchor" href="#122-alphafold2预测成功机理未定05-p07p09">#</a></h3>
+<p>AF2 从序列位置信息得到蛋白质三维结构（05-P8）；按 01-P6 的介绍，它在 CASP14 上预测精度达原子级，被认为是解决了困扰生物学界 50 年的「蛋白质折叠问题」。</p>
+<p>但 2017 年诺贝尔化学奖得主 Richard Henderson 在 <em>Science</em> 的评论里说：</p>
+<blockquote>
+<p>"solving the protein-folding problem means making accurate predictions of structures from amino acid sequences starting from first principles based on the underlying physics and chemistry."</p>
+</blockquote>
+<p>课件在「预测结构」周围标了四个问号：折叠机制？化学精度？动态构象？实验验证？结论：<strong>科学机理的可解释性，依旧未确定。</strong></p>
+<p>问题于是变成（05-P10、P11）：<strong>能否让模型既有 AI 的效率，又有理论的可解释性？AI 在科研流程的哪些部分可以嵌入？如何嵌入？</strong></p>
+<hr/>
+<h2 id="13-05-讲拆解-dft-计算流程05-p12p13">13. 05 讲：拆解 DFT 计算流程（05-P12、P13）<a aria-label="链接到本节" class="heading-anchor" href="#13-05-讲拆解-dft-计算流程05-p12p13">#</a></h2>
+<p>课件先列三种计算化学方法（05-P12）：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>基本变量</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DFT</td>
+<td>电子密度</td>
+<td>避免直接处理多电子波函数，成本较低，精度受泛函近似限制</td>
+</tr>
+<tr>
+<td>Hartree–Fock</td>
+<td>多电子波函数（Slater 行列式）</td>
+<td>变分求近似基态</td>
+</tr>
+<tr>
+<td>分子动力学</td>
+<td>原子坐标与速度</td>
+<td>经典力学近似，数值积分牛顿方程</td>
+</tr>
+</tbody>
+</table></div>
+<p>然后把 DFT 完全展开成 7 个节点（05-P13）：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>节点</th>
+<th>做什么</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>体系与计算参数</td>
+<td>原子坐标、电荷、自旋、泛函、积分网格、收敛阈值</td>
+<td>分子或周期体系</td>
+</tr>
+<tr>
+<td>2</td>
+<td>初始电子密度</td>
+<td>原子密度叠加，或读已有电子态</td>
+<td>作为 SCF 初猜</td>
+</tr>
+<tr>
+<td>3</td>
+<td>构建 Kohn–Sham 矩阵</td>
+<td>T、V^ne、J、V^xc 四项积分</td>
+<td>固定几何时 T、V^ne 不变；J、V^xc 随密度更新</td>
+</tr>
+<tr>
+<td>4</td>
+<td>求解 KS 方程</td>
+<td><code>H^KS C = S C ε</code>，得轨道系数与轨道能</td>
+<td>反复求解耗时</td>
+</tr>
+<tr>
+<td>5</td>
+<td>更新电子密度</td>
+<td>按电子数与自旋占据，再做密度混合</td>
+<td>生成下一轮输入</td>
+</tr>
+<tr>
+<td>6</td>
+<td>电子自洽检查</td>
+<td>计算总能量，看 ΔE、Δρ 与残差</td>
+<td>未达阈值则回 3</td>
+</tr>
+<tr>
+<td>7</td>
+<td>结构优化与性质</td>
+<td>几何优化（可选）、振动频率、电荷分布、DOS</td>
+<td>更新坐标回 1，或输出性质</td>
+</tr>
+</tbody>
+</table></div>
+<p>两个循环：内圈 SCF（3→4→5→6→3），外圈几何优化（7→1→…）。<strong>理解这张图的关键，是知道哪些量在循环内变、哪些不变</strong>（固定几何时 T 与 V^ne 不变，J 与 V^xc 随密度更新）。</p>
+<hr/>
+<h2 id="14-05-讲七个插入点05-p14p21">14. 05 讲：七个插入点（05-P14~P21）<a aria-label="链接到本节" class="heading-anchor" href="#14-05-讲七个插入点05-p14p21">#</a></h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>标记</th>
+<th>插入点</th>
+<th>这一格的难处</th>
+<th>AI 能做什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>初始电子分布</td>
+<td>起点猜得不够好</td>
+<td>提供更好的初值</td>
+</tr>
+<tr>
+<td>B</td>
+<td>构建矩阵</td>
+<td>每轮计算量大</td>
+<td>直接预测矩阵</td>
+</tr>
+<tr>
+<td>C</td>
+<td>求解方程</td>
+<td>反复求解耗时</td>
+<td>改进求解方法</td>
+</tr>
+<tr>
+<td>D</td>
+<td>交换关联部分</td>
+<td>近似带来误差</td>
+<td>学习更准确的泛函</td>
+</tr>
+<tr>
+<td>E</td>
+<td>能量结果</td>
+<td>与高精度结果有差距</td>
+<td>学习能量修正量</td>
+</tr>
+<tr>
+<td>F</td>
+<td>自洽循环</td>
+<td>反复更新，可能难收敛</td>
+<td>学习电子分布的更新</td>
+</tr>
+<tr>
+<td>G</td>
+<td>从结构到性质</td>
+<td>整条流程成本高</td>
+<td>直接预测能量和性质</td>
+</tr>
+</tbody>
+</table></div>
+<p>我把它们按「保留多少机理」重新排成梯子（我的整理）：</p>
+<pre><code class="language-text">保留机理多  A 初值 → C 求解 → B 矩阵 → D 泛函 → E 修正 → F 密度更新 → G 全替代  保留机理少
+            加速器 ←──────────────────────────────────────────→ 替代品
+</code></pre>
+<ul>
+<li>越靠左，越像加速器：理论没变，结果可解释，风险主要在精度与稳定性。</li>
+<li>越靠右，越像替代品：速度快，但机制缺失、外推风险大。</li>
+<li><strong>可解释性不是模型的属性，而是插入点位置的函数。</strong></li>
+</ul>
+<hr/>
+<h2 id="15-05-讲四个代表工作05-p22p28">15. 05 讲：四个代表工作（05-P22~P28）<a aria-label="链接到本节" class="heading-anchor" href="#15-05-讲四个代表工作05-p22p28">#</a></h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>工作</th>
+<th>主要目的</th>
+<th>落在哪一格</th>
+<th>模型方法</th>
+<th>页码</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SchNOrb</td>
+<td>预测哈密顿量矩阵与重叠矩阵，获得分子轨道信息，加速自洽计算</td>
+<td>B（构建矩阵）</td>
+<td>基于 SchNet 的消息传递 GNN</td>
+<td>05-P22</td>
+</tr>
+<tr>
+<td>NeuralXC</td>
+<td>学基准 DFT 的能量泛函修正，提高精度并提供势修正</td>
+<td>D/E（泛函/能量修正）</td>
+<td>Behler–Parrinello 型原子网络（MLP）</td>
+<td>05-P23、P24</td>
+</tr>
+<tr>
+<td>NequIP</td>
+<td>从原子结构预测能量和力，构建机器学习势，加速 MD</td>
+<td>G（结构→性质）</td>
+<td>E(3) 等变 GNN</td>
+<td>05-P25、P28</td>
+</tr>
+<tr>
+<td>FermiNet</td>
+<td>用满足反对称性的网络表示多电子波函数，VMC 求基态能量</td>
+<td>另一条线（替代波函数表示）</td>
+<td>置换等变全连接网络</td>
+<td>05-P26、P27</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p><strong>核对提示（我的批注）</strong>：05-P28 的表格用「A：SchNOrb / E：NeuralXC / G：NequIP」标注，但按 05-P14 的定义，SchNOrb 实际落在 B（构建矩阵），NeuralXC 落在 D/E（泛函/能量修正），NequIP 落在 G。字母与位置不完全一致，读的时候以「它替换了流程里的哪一格」为准。</p>
+</blockquote>
+<h3 id="151-neuralxc-的-δ-学习05-p23p24">15.1 NeuralXC 的 Δ 学习（05-P23、P24）<a aria-label="链接到本节" class="heading-anchor" href="#151-neuralxc-的-δ-学习05-p23p24">#</a></h3>
+<pre><code class="language-text">分子 → PBE（便宜、精度受限）→ E_PBE ┐
+     → CCSD(T)（昂贵、准确）  → E_ref ┴→ ΔE_ref = E_ref − E_PBE  ← 网络只学这个差
+</code></pre>
+<p>网络不学「能量是多少」，只学「便宜方法和贵方法差多少」。差值通常更小、更平滑，同样数据量能学得更准。</p>
+<blockquote>
+<p><strong>我的批注</strong>：这与 01-P13 的「残差」是同一个东西的两种用法——在 01 里残差是 loss 的原料，在 05 里残差成了<strong>学习目标</strong>。从「预测答案」改成「预测答案与已知解的差」，是 AI4S 里性价比最高的做法：已知的先验留在模型外面，网络只补那一小块。</p>
+</blockquote>
+<hr/>
+<h2 id="16-05-讲方法论四步与天平原型05-p29p34">16. 05 讲：方法论四步与天平原型（05-P29~P34）<a aria-label="链接到本节" class="heading-anchor" href="#16-05-讲方法论四步与天平原型05-p29p34">#</a></h2>
+<h3 id="161-四步方法论05-p29">16.1 四步方法论（05-P29）<a aria-label="链接到本节" class="heading-anchor" href="#161-四步方法论05-p29">#</a></h3>
+<ol>
+<li>传统科学计算流程完全展开。</li>
+<li>对每一个任务节点做界定，判断完成什么任务。</li>
+<li>猜想哪些环节适合使用 AI 进行替代和优化；<strong>整个流程有没有可能被 AI 优化</strong>。</li>
+<li>试验和验证。</li>
+</ol>
+<h3 id="162-过程建模-vs-结果建模05-p30">16.2 过程建模 vs 结果建模（05-P30）<a aria-label="链接到本节" class="heading-anchor" href="#162-过程建模-vs-结果建模05-p30">#</a></h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th></th>
+<th>过程建模</th>
+<th>结果建模</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>形态</td>
+<td>规律 → 中间状态 → 结果</td>
+<td>输入 → 模型 → 输出</td>
+</tr>
+<tr>
+<td>优点</td>
+<td>可解释、可检查</td>
+<td>快、便宜</td>
+</tr>
+<tr>
+<td>代价</td>
+<td>计算昂贵、难以健全</td>
+<td>机制缺失、外推风险</td>
+</tr>
+<tr>
+<td>典型</td>
+<td>DFT、MD、CFD 求解</td>
+<td>代理模型、全流程替代</td>
+</tr>
+</tbody>
+</table></div>
+<p>课件的话：<strong>现代科学模型的发展，本质上是在可解释的过程与高效的结果预测之间寻找平衡；如何解决这个二元矛盾，可以成为一个值得研究的方向。</strong></p>
+<h3 id="163-三个例子天平的三个位置">16.3 三个例子：天平的三个位置<a aria-label="链接到本节" class="heading-anchor" href="#163-三个例子天平的三个位置">#</a></h3>
+<p><strong>Pitzer 模型</strong>（05-P32）靠左：溶液自由能修正 ≈ 长程静电项 + <code>B c²</code> + <code>C c³</code>。第一项是确定已知项（整体电荷环境），第二、三项是展开项（两两相互作用、三体共同影响）。</p>
+<p><strong>多层模型展开法</strong>（05-P33）也靠左：用展开逼近难以计算的形式，课件自己标注「适用范围尚未确认」。</p>
+<p><strong>全流程替代</strong>（05-P34）站在最右端：网络直接从分子坐标给能量，利用函数拟合能力给出可能表示局部与全局的形状。</p>
+<blockquote>
+<p><strong>我的批注</strong>：前两个例子的共同点是「把已知项固定，只让模型补未知项」——可解释性不是靠事后解释黑箱，而是靠<strong>把模型限制在已知项之外的那一小块</strong>，这与 NeuralXC 的 Δ 学习同构。第三个例子则给出这条原则的价格：把整条链换掉，换来速度，失去机制。</p>
+</blockquote>
+<hr/>
+<h2 id="17-三讲合起来参数-结构-插入点我的整合">17. 三讲合起来：参数 / 结构 / 插入点（我的整合）<a aria-label="链接到本节" class="heading-anchor" href="#17-三讲合起来参数-结构-插入点我的整合">#</a></h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>尺度</th>
+<th>01 讲</th>
+<th>02 讲</th>
+<th>05 讲</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>被决定的东西</td>
+<td>参数与超参</td>
+<td>表示与架构</td>
+<td>流程中的位置</td>
+</tr>
+<tr>
+<td>决定发生在</td>
+<td>训练循环内</td>
+<td>训练开始前</td>
+<td>建模开始前</td>
+</tr>
+<tr>
+<td>靠什么检查</td>
+<td>独立测试集</td>
+<td>六问 + 表示说明书</td>
+<td>中间量能否被独立检验</td>
+</tr>
+<tr>
+<td>错了的表现</td>
+<td>过拟合/泄漏/不收敛</td>
+<td>指标漂亮但科学无用</td>
+<td>准确但无法解释</td>
+</tr>
+<tr>
+<td>一句话</td>
+<td>参数选得对不对</td>
+<td>任务定义得对不对</td>
+<td>该不该用 AI 替这一格</td>
+</tr>
+</tbody>
+</table></div>
+<p>我把它读成一句：<strong>先验在三讲里逐步「外移」</strong>——01 在 loss 与正则里，02 在网络连接与数据表示里，05 在流程结构与已知项里。位置越外，能约束的东西越多，也越需要领域知识。</p>
+<hr/>
+<h2 id="18-评估清单训练前-训练中-训练后">18. 评估清单：训练前 / 训练中 / 训练后<a aria-label="链接到本节" class="heading-anchor" href="#18-评估清单训练前-训练中-训练后">#</a></h2>
+<p><strong>训练前（定上限）</strong></p>
+<ul>
+<li>[ ] 六问是否逐项有答案（02-P39）</li>
+<li>[ ] 数据表示说明书五栏是否填完（02-P30）</li>
+<li>[ ] 划分单位是否等于科学独立性（02-P24~P29）</li>
+<li>[ ] 训练/验证/测试是否真的分开，规则是否只在训练集拟合（01-P10）</li>
+</ul>
+<p><strong>训练中（能不能到上限）</strong></p>
+<ul>
+<li>[ ] baseline 是什么（均值 / 线性 / 树模型；02-P32）</li>
+<li>[ ] loss 是否对应 Q1（01-P13、02-P33）</li>
+<li>[ ] 学习率、容量是否只用验证集选（01-P17）</li>
+<li>[ ] 训练曲线是否出现「训练降、验证升」（过拟合信号）</li>
+</ul>
+<p><strong>训练后（敢不敢用）</strong></p>
+<ul>
+<li>[ ] 测试集是否一次都没参与选择（01-P10）</li>
+<li>[ ] 指标是否对应科学用途（02-P33）</li>
+<li>[ ] 有没有不确定性、外推边界与失败报警（02-P38）</li>
+<li>[ ] 需要机理解释时，插入点选在哪一级（05-P14）</li>
+<li>[ ] 中间量能否被独立测量或独立计算检验（05-P09）</li>
+</ul>
+<hr/>
+<h2 id="19-预测-vs-机理解释三个判据我的整理">19. 预测 vs 机理解释：三个判据（我的整理）<a aria-label="链接到本节" class="heading-anchor" href="#19-预测-vs-机理解释三个判据我的整理">#</a></h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>判据</th>
+<th>问题</th>
+<th>不满足时的典型症状</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 预测</td>
+<td>指标是否来自一个从未参与任何选择的集合？</td>
+<td>训练集 R²、边看边调的测试集</td>
+</tr>
+<tr>
+<td>2 定义</td>
+<td>指标对应的是科学上真正要用的那件事吗？</td>
+<td>把筛选做成回归、只看 RMSE 不看 Top-K</td>
+</tr>
+<tr>
+<td>3 机理</td>
+<td>模型的中间量能否被独立测量或独立计算检验？</td>
+<td>只能给出「特征重要性」这类事后归因</td>
+</tr>
+</tbody>
+</table></div>
+<p>AF2 是判据 1 基本成立、判据 2 也说得通、判据 3 仍悬着的例子（05-P09）。<strong>两件事要分开评</strong>：模型准，不等于我们理解了；我们理解了，也不保证某个具体模型准。</p>
+<p>对「可解释模型设计」的启示：想让判据 3 成立，最稳的办法不是给黑箱配一个解释器，而是<strong>把插入点选得足够靠左</strong>（A–D），让中间量本来就是理论里有的量（矩阵、泛函、密度）。</p>
+<hr/>
+<h2 id="20-术语表">20. 术语表<a aria-label="链接到本节" class="heading-anchor" href="#20-术语表">#</a></h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>术语</th>
+<th>含义</th>
+<th>出处</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sample / Feature / Label</td>
+<td>一行样本 / 描述对象的信息 / 要回答的结果</td>
+<td>01-P09</td>
+</tr>
+<tr>
+<td>Residual 残差</td>
+<td>观测值与预测值之差 <code>eᵢ = yᵢ − ŷᵢ</code></td>
+<td>01-P13</td>
+</tr>
+<tr>
+<td>MSE</td>
+<td>均方误差，把多个残差压成一个数</td>
+<td>01-P13</td>
+</tr>
+<tr>
+<td>Loss landscape</td>
+<td>参数空间到 loss 的映射，训练 = 找最低点</td>
+<td>01-P15</td>
+</tr>
+<tr>
+<td>Learning rate η</td>
+<td>每步更新的幅度</td>
+<td>01-P17</td>
+</tr>
+<tr>
+<td>Inductive bias 归纳偏置</td>
+<td>数据之外的默认偏好</td>
+<td>01-P23</td>
+</tr>
+<tr>
+<td>Equivariance 等变</td>
+<td>输入变换后输出按规律变换</td>
+<td>01-P25、02-P28</td>
+</tr>
+<tr>
+<td>Receptive field 感受野</td>
+<td>深层单元能看到的输入范围</td>
+<td>02-P09</td>
+</tr>
+<tr>
+<td>Attention Q/K/V</td>
+<td>查询 / 键 / 值，内容决定的加权聚合</td>
+<td>02-P15</td>
+</tr>
+<tr>
+<td>Message passing</td>
+<td>GNN 的「消息 → 聚合 → 更新」</td>
+<td>02-P19</td>
+</tr>
+<tr>
+<td>PINN</td>
+<td>把 PDE/守恒残差写进 loss</td>
+<td>02-P20</td>
+</tr>
+<tr>
+<td>SCF</td>
+<td>自洽场循环，反复更新电子密度直到收敛</td>
+<td>05-P13</td>
+</tr>
+<tr>
+<td>Insertion point 插入点</td>
+<td>AI 替换流程中的某一格</td>
+<td>05-P14</td>
+</tr>
+<tr>
+<td>Δ 学习</td>
+<td>学「便宜方法 vs 贵方法」的差值</td>
+<td>05-P23</td>
+</tr>
+<tr>
+<td>Process / Result modeling</td>
+<td>过程建模 / 结果建模</td>
+<td>05-P30</td>
+</tr>
+</tbody>
+</table></div>
+<hr/>
+<h2 id="21-页码索引">21. 页码索引<a aria-label="链接到本节" class="heading-anchor" href="#21-页码索引">#</a></h2>
+<p><strong>01 讲（27 页）</strong></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>页</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P2</td>
+<td>神经网络四步：样本 → 训练 → 使用 → 验证</td>
+</tr>
+<tr>
+<td>P3~P4</td>
+<td>Agent vs 神经网络；LLM / Agent / Harness 定义</td>
+</tr>
+<tr>
+<td>P5</td>
+<td>Agent 时代的科研流程：研究者 → Agent → 神经网络</td>
+</tr>
+<tr>
+<td>P6</td>
+<td>AlphaFold2：真正承载预测能力的是专门训练过的模型</td>
+</tr>
+<tr>
+<td>P7</td>
+<td>真实案例：代码能跑 / R²=0.94 / 图好看</td>
+</tr>
+<tr>
+<td>P9~P10</td>
+<td>样本/特征/标签；数据处理六步与三集划分</td>
+</tr>
+<tr>
+<td>P11~P14</td>
+<td>什么是线性回归；模型 = 参数；MSE 与候选线比较</td>
+</tr>
+<tr>
+<td>P15~P17</td>
+<td>loss landscape；梯度下降；学习率</td>
+</tr>
+<tr>
+<td>P18</td>
+<td>训练闭环；Qwen3-8B 的 80 亿参数</td>
+</tr>
+<tr>
+<td>P19~P22</td>
+<td>非线性/交互/阈值；MLP；线性→浅层→DNN</td>
+</tr>
+<tr>
+<td>P23~P25</td>
+<td>归纳偏置；先验→表示→约束→偏好→验证；模型族表</td>
+</tr>
+<tr>
+<td>P26~P27</td>
+<td>本章小结；下节预告</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>02 讲（42 页）</strong></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>页</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P2~P3</td>
+<td>回顾：一句 Prompt 替你做了哪些未验证的决定；六项缺失</td>
+</tr>
+<tr>
+<td>P5</td>
+<td>架构本质：谁和谁交换信息（三问）</td>
+</tr>
+<tr>
+<td>P8~P11</td>
+<td>CNN：动机、流水线、演进、输出形态</td>
+</tr>
+<tr>
+<td>P12~P14</td>
+<td>RNN、LSTM/GRU、Seq2Seq 与 Attention</td>
+</tr>
+<tr>
+<td>P15~P17</td>
+<td>Q/K/V；Transformer 堆叠；从深度学习到大模型</td>
+</tr>
+<tr>
+<td>P18~P20</td>
+<td>ViT/CLIP/BLIP-2；GNN；PINN</td>
+</tr>
+<tr>
+<td>P21</td>
+<td>第一章小结表</td>
+</tr>
+<tr>
+<td>P23~P29</td>
+<td>六类科学数据与三问</td>
+</tr>
+<tr>
+<td>P30</td>
+<td>数据表示说明书五栏</td>
+</tr>
+<tr>
+<td>P32~P38</td>
+<td>六问：目标、样本、模态、规模、先验、交付</td>
+</tr>
+<tr>
+<td>P39~P41</td>
+<td>决策卡；Prompt 骨架；课堂实训</td>
+</tr>
+<tr>
+<td>P42</td>
+<td>总结</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>05 讲（36 页）</strong></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>页</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P2~P5</td>
+<td>科学=关系体系；理论≠答案；CFD 流程 vs AI 代理</td>
+</tr>
+<tr>
+<td>P7~P10</td>
+<td>AlphaFold2；Henderson 引文；四个问号；效率与可解释性能否兼得</td>
+</tr>
+<tr>
+<td>P11~P13</td>
+<td>可介入位置；三种计算化学方法；DFT 七节点两循环</td>
+</tr>
+<tr>
+<td>P14~P21</td>
+<td>七个插入点 A–G（动画逐格展示）</td>
+</tr>
+<tr>
+<td>P22~P28</td>
+<td>SchNOrb、NeuralXC、NequIP、FermiNet 与方法表</td>
+</tr>
+<tr>
+<td>P29</td>
+<td>四步方法论</td>
+</tr>
+<tr>
+<td>P30~P34</td>
+<td>过程/结果天平；AlphaFold2 的「结构决定性质」；Pitzer；多层展开；全流程替代</td>
+</tr>
+<tr>
+<td>P35~P36</td>
+<td>团队联系方式；致谢</td>
+</tr>
+</tbody>
+</table></div>
+<hr/>
+<h2 id="22-我提炼的十条用自己的话">22. 我提炼的十条（用自己的话）<a aria-label="链接到本节" class="heading-anchor" href="#22-我提炼的十条用自己的话">#</a></h2>
+<ol>
+<li><strong>训练就是选参数</strong>；loss 是「什么算好」的数学化，选错 loss 等于选错任务。</li>
+<li><strong>三集划分是评估的地基</strong>：测试集一旦被看过，就不再是测试集。</li>
+<li><strong>数据处理规则只能从训练集拟合</strong>，否则指标是自欺。</li>
+<li><strong>先验不会自动生效</strong>：不写进表示、结构或 loss，等于没有。</li>
+<li><strong>先验越强数据越省，先验错了全错</strong>；科学问题的 N 常在 10²~10⁴，选对先验比堆参数值钱。</li>
+<li><strong>架构的本质是信息通路</strong>：输入单元、连接定义者、权重共享处，三问定生死。</li>
+<li><strong>数据表示是关系取舍</strong>，不是格式转换；拍平就是把先验丢掉。</li>
+<li><strong>六问的顺序是收紧的</strong>：目标 → 样本 → 表示 → 规模 → 先验 → 交付；Q2 必须在 Q4 之前。</li>
+<li><strong>AI4S 的插入点是一条可解释性梯子</strong>：越靠左越像加速器，越靠右越像替代品。</li>
+<li><strong>准确不等于理解</strong>：预测、任务定义、机理三层要分别评价，AF2 是最清楚的例子。</li>
+</ol>
+<hr/>
+<h2 id="23-自测先答再对要点">23. 自测（先答，再对要点）<a aria-label="链接到本节" class="heading-anchor" href="#23-自测先答再对要点">#</a></h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>问题</th>
+<th>要点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>一个模型「学」到的是什么？</td>
+<td>一组参数；线性回归 2 个，LLM 几十亿个（01-P12、P18）</td>
+</tr>
+<tr>
+<td>2</td>
+<td>损失函数解决什么问题？</td>
+<td>把很多个残差压成一个可比较的数字（01-P13）</td>
+</tr>
+<tr>
+<td>3</td>
+<td>梯度下降的一句话公式？</td>
+<td>θ ← θ − η·∇L(θ)；梯度指上升最快方向（01-P16）</td>
+</tr>
+<tr>
+<td>4</td>
+<td>学习率三档各是什么现象？</td>
+<td>太小慢、合适收敛、太大震荡发散（01-P17）</td>
+</tr>
+<tr>
+<td>5</td>
+<td>训练/验证/测试各用来做什么？</td>
+<td>调参 / 选结构与设置 / 最后评价（01-P10）</td>
+</tr>
+<tr>
+<td>6</td>
+<td>数据处理规则的拟合边界？</td>
+<td>只在训练集上拟合，再应用到验证/测试（01-P10）</td>
+</tr>
+<tr>
+<td>7</td>
+<td>归纳偏置的定义？</td>
+<td>数据之外的默认偏好，模型在见数据前就相信的东西（01-P23）</td>
+</tr>
+<tr>
+<td>8</td>
+<td>先验怎样才生效？</td>
+<td>写进数据表示、网络结构、Loss 或数据增强（01-P24）</td>
+</tr>
+<tr>
+<td>9</td>
+<td>先验强度与数据量的关系？</td>
+<td>强先验省数据但错了全错；弱先验灵活但数据量指数上升（01-P25）</td>
+</tr>
+<tr>
+<td>10</td>
+<td>读新架构的三问？</td>
+<td>输入单元？连接由谁定义？权重在哪共享？（02-P05）</td>
+</tr>
+<tr>
+<td>11</td>
+<td>CNN 的两个关键先验？</td>
+<td>局部连接 + 权重共享（02-P08）</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Attention 解决了什么瓶颈？</td>
+<td>固定长度 context 装不下长输入（02-P14）</td>
+</tr>
+<tr>
+<td>13</td>
+<td>PINN 的关键变化在哪？</td>
+<td>不在连接，在 loss：加 PDE 与边界残差（02-P20）</td>
+</tr>
+<tr>
+<td>14</td>
+<td>六类科学数据？</td>
+<td>表格、图像/网格、序列/光谱、图、3D/点云、时空场（02-P23）</td>
+</tr>
+<tr>
+<td>15</td>
+<td>表示说明书五栏？</td>
+<td>样本单位、数据结构、必须保留、对称与变换、标签与质量（02-P30）</td>
+</tr>
+<tr>
+<td>16</td>
+<td>六问的顺序与理由？</td>
+<td>目标→样本→模态→规模→先验→交付；Q2 先于 Q4 因为独立性决定有效 N（02-P32~P38）</td>
+</tr>
+<tr>
+<td>17</td>
+<td>Q1 的典型错误？</td>
+<td>把筛选（排序）当预测（回归）（02-P33）</td>
+</tr>
+<tr>
+<td>18</td>
+<td>Q6 的典型错误？</td>
+<td>需要机理解释时只交付黑箱分数（02-P38）</td>
+</tr>
+<tr>
+<td>19</td>
+<td>DFT 的两个循环？</td>
+<td>内圈 SCF，外圈几何优化（05-P13）</td>
+</tr>
+<tr>
+<td>20</td>
+<td>七个插入点？</td>
+<td>A 初值、B 矩阵、C 求解、D 泛函、E 能量修正、F 密度更新、G 结构→性质（05-P14）</td>
+</tr>
+<tr>
+<td>21</td>
+<td>NeuralXC 学的是什么？</td>
+<td>ΔE = E_ref − E_PBE，两种方法的能量差（05-P23）</td>
+</tr>
+<tr>
+<td>22</td>
+<td>过程建模与结果建模的取舍？</td>
+<td>可解释/昂贵 vs 快速/机制缺失（05-P30）</td>
+</tr>
+<tr>
+<td>23</td>
+<td>为什么 AF2 是「准确≠理解」的例子？</td>
+<td>结构预测原子级准确，但折叠机制仍未被 first principles 解释（05-P9）</td>
+</tr>
+<tr>
+<td>24</td>
+<td>Pitzer 模型的可解释性来自哪里？</td>
+<td>第一项已知固定，只让展开项（2 体、3 体）待定（05-P32）</td>
+</tr>
+</tbody>
+</table></div>
+<hr/>
+<h2 id="24-动手计划尚未执行">24. 动手计划（尚未执行）<a aria-label="链接到本节" class="heading-anchor" href="#24-动手计划尚未执行">#</a></h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>来源</th>
+<th>任务</th>
+<th>预计</th>
+<th>状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01-P10、P17</td>
+<td>60 行小表格跑线性回归/两层 MLP，学习率 0.001/0.1/10 三档对照，画 loss 曲线</td>
+<td>40 分钟</td>
+<td>未开始</td>
+</tr>
+<tr>
+<td>01-P10、02-P34</td>
+<td>正确划分 vs 同源泄漏划分的对照实验，记录测试指标差</td>
+<td>30 分钟</td>
+<td>未开始</td>
+</tr>
+<tr>
+<td>02-P40</td>
+<td>按六问骨架写一份自己的建模任务书（Prompt + 数据审计 + baseline）</td>
+<td>1 小时</td>
+<td>未开始</td>
+</tr>
+<tr>
+<td>02-P39</td>
+<td>用决策卡审一遍手头已有项目，找出被违反的项</td>
+<td>20 分钟</td>
+<td>未开始</td>
+</tr>
+<tr>
+<td>05-P29</td>
+<td>画出自己领域的计算流程（5~9 节点、标出循环），逐格判断 A–G</td>
+<td>1.5 小时</td>
+<td>未开始</td>
+</tr>
+<tr>
+<td>05-P23</td>
+<td>找一个「Δ 学习」案例，写清它把哪部分先验留在模型外</td>
+<td>30 分钟</td>
+<td>未开始</td>
+</tr>
+<tr>
+<td>01-P25</td>
+<td>给自己的数据选一个先验强度匹配的模型族，并写升级触发条件</td>
+<td>20 分钟</td>
+<td>未开始</td>
+</tr>
+</tbody>
+</table></div>
+<p>配套三节线上实训的对应关系（待看完录播后校正）：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>实训</th>
+<th>对应讲次</th>
+<th>我预期要练的事</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>第一节</td>
+<td>01</td>
+<td>从数据到模型跑通一次完整训练；观察 loss/学习率/划分</td>
+</tr>
+<tr>
+<td>第二节</td>
+<td>02</td>
+<td>用六问写任务书，做 baseline 与候选族对比</td>
+</tr>
+<tr>
+<td>第三节</td>
+<td>05</td>
+<td>拆解一个真实计算流程，标插入点并设计验证方案</td>
+</tr>
+</tbody>
+</table></div>
+<hr/>
+<h2 id="25-待办与疑问">25. 待办与疑问<a aria-label="链接到本节" class="heading-anchor" href="#25-待办与疑问">#</a></h2>
+<ul>
+<li>[ ] 看配套三节线上实训录播（本笔记只覆盖 01、02、05 三讲课件）</li>
+<li>[ ] 完成「24」里的前三项动手任务，代码与图放 <code>learning/exercises/</code></li>
+<li>[ ] 把「18」的检查表压成一页纸，下次开新课题直接用</li>
+</ul>
+<p>疑问：</p>
+<ol>
+<li><strong>01-P25 的「N = 10²~10⁴」是经验值还是统计？</strong> 课件标的是概念示意，实际课题里有效 N 往往比样本行数小一个量级，怎么估没有展开。</li>
+<li><strong>02-Q2 的「分组划分」在图上怎么自动发现？</strong> 同一体系/同一病人的分组依据往往要领域专家给，Agent 很难自己判断。</li>
+<li><strong>05-P28 的字母与插入点不一致</strong>（见 15 节核对提示），是课件笔误还是另有分组逻辑？</li>
+<li><strong>PINN 与「插入点」的关系</strong>：PINN 把方程写进 loss，算不算在流程里的某一格？课件没把它放进 A–G 的梯子里。</li>
+<li><strong>可解释性的检验标准</strong>：05 讲提出「机理未定」，但没说一个插入点方案要满足什么条件才算「可解释」。我用「中间量能否被独立检验」作判据（第 19 节），这是自己的整理，需要再找文献确认。</li>
+</ol>
+<hr/>
+<h2 id="26-资料出处与引用声明">26. 资料出处与引用声明<a aria-label="链接到本节" class="heading-anchor" href="#26-资料出处与引用声明">#</a></h2>
+<ul>
+<li>01 讲：《深入理解神经网络原理与模型训练》，李文毅（中国科学院软件研究所），27 页。官方课件：<a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/01_%E7%A7%91%E5%AD%A6%E6%A8%A1%E5%9E%8B%E5%AE%9E%E8%AE%AD%EF%BC%88%E4%B8%80%EF%BC%89_%E6%9D%8E%E6%96%87%E6%AF%85.pdf" rel="noopener" target="_blank">01_科学模型实训（一）_李文毅.pdf</a></li>
+<li>02 讲：《面向科学场景的数据理解与模型选型》，李文毅（中国科学院软件研究所），42 页。官方课件：<a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/02_%E7%A7%91%E5%AD%A6%E6%A8%A1%E5%9E%8B%E5%AE%9E%E8%AE%AD%EF%BC%88%E4%BA%8C%EF%BC%89_%E6%9D%8E%E6%96%87%E6%AF%85.pdf" rel="noopener" target="_blank">02_科学模型实训（二）_李文毅.pdf</a></li>
+<li>05 讲：《AI 嵌入的可解释模型设计》，巩泽钊（中国科学院大学化学科学学院）、高翔（中国科学院地理科学与资源研究所），36 页。官方课件：<a href="https://github.com/TashanGKD/panshi-ai4s-practice/blob/main/pdf/05_%E7%A7%91%E7%A0%94%E6%99%BA%E8%83%BD%E4%BD%93%E5%AE%9E%E8%AE%AD%EF%BC%88%E4%B8%89%EF%BC%89_%E5%B7%A9%E6%B3%BD%E9%92%8A.pdf" rel="noopener" target="_blank">05_科研智能体实训（三）_巩泽钊.pdf</a></li>
+<li>文中页码引用（<code>01-P10</code>、<code>02-P32</code>、<code>05-P13</code>）指上述官方课件的对应页；本笔记只做个人理解与摘述，引用的图见<a href="task3-illustrated.html">精读版</a>。</li>
+<li>课件提到的外部工作与原话：AlphaFold2（Jumper et al., <em>Nature</em> 2021）；Richard Henderson 在 <em>Science</em> 的评论（转引自 05-P9）；SchNOrb（Qiao et al., <em>Nature Communications</em> 2019）；NeuralXC、NequIP（Batzner et al., <em>Nature Communications</em> 2022，见 05-P25）、FermiNet、Pitzer 活度模型。引文以课件呈现为准，本笔记未另行核校原文。</li>
+</ul></article></div><nav class="article-nav" aria-label="笔记翻页"><a class="prev" href="task3-illustrated.html"><span class="label">上一篇</span>Task3 图文</a><a class="next" href="11.html"><span class="label">下一篇</span>第 11 讲</a></nav>
+    </div>
+  </main>
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <div class="footer-brand">
+        <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
+          <defs>
+            <linearGradient id="footGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#d9b28c"/><stop offset="1" stop-color="#b08463"/>
+            </linearGradient>
+          </defs>
+          <rect width="64" height="64" rx="12" fill="#231f1a"/>
+          <rect x="1" y="1" width="62" height="62" rx="11" fill="none" stroke="url(#footGrad)" stroke-opacity=".55"/>
+          <circle cx="32" cy="32" r="14.5" fill="none" stroke="url(#footGrad)" stroke-width="2.5"/>
+          <circle cx="32" cy="32" r="4" fill="#f6f1e7"/>
+          <circle cx="46" cy="18" r="3.2" fill="url(#footGrad)"/>
+        </svg>
+        <div>
+          <strong>磐石 AI4S · 学习笔记</strong>
+          <span>个人学习记录与课程引用</span>
+        </div>
+      </div>
+      <nav class="footer-links" aria-label="页脚链接">
+        <a href="index.html">笔记</a>
+        <a href="../index.html#progress">进度</a>
+        <a href="../index.html#sources">课程来源</a>
+        <a href="https://github.com/biociao/panshi-ai4s-practice" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+    <div class="wrap footer-bottom">
+      <span>整理 biociao · 更新于 2026 年 11 月 24 日 · 个人学习记录</span>
+      <span>排版 原生 HTML / CSS · 无第三方依赖</span>
+    </div>
+  </footer>
+  <button class="to-top" type="button" data-to-top aria-label="回到页面顶部">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <script src="../assets/app.js" defer></script>
+</body>
+</html>
